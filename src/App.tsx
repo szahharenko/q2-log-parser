@@ -17,7 +17,7 @@ const LogParser: React.FC = () => {
   const [logContent, setLogContent] = useState<string>('');
   const [message, setMessage] = useState<string>('Please select a log file to view its content.');
   const [playerStats, setPlayerStats] = useState<AllPlayerStats>({});
-
+  console.log({logContent})
   // This function remains the same
   const parseGameEvents = (lines: string[]): AllPlayerStats => {
     const stats: AllPlayerStats = {};
