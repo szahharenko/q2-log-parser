@@ -110,7 +110,7 @@ const LogParser: React.FC = () => {
                 .sort(([, a], [, b]) => b.kills - a.kills)
                 .map(([player, stats]) => (
                     <div key={player} style={{ marginBottom: '15px' }}>
-                        <h4 style={{ margin: '0 0 5px 0' }}>{player} ({stats.kills} total kills)</h4>
+                        <h4 style={{ margin: '0 0 5px 0' }}>{player}</h4>
                         <ul style={{ margin: 0, paddingLeft: '20px' }}>
                             {Object.entries(stats.killBreakdown)
                                 .sort(([, a], [, b]) => b - a)

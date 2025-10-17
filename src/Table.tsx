@@ -36,6 +36,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                     <th style={styles.th}>Player</th>
                     <th style={styles.thCenter}>Kills</th>
                     <th style={styles.thCenter}>Deaths</th>
+                    <th style={styles.thCenter}>KDR</th>
                     <th style={styles.thCenter}>Suicides</th>
                     <th style={styles.thCenter}>Telefrags</th>
                     <th style={styles.thCenter}>Grenade Kills</th>
@@ -47,6 +48,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                         <td style={styles.td}>{player}</td>
                         <td style={styles.tdCenter}>{stats.kills}</td>
                         <td style={styles.tdCenter}>{stats.deaths}</td>
+                        <td style={styles.tdCenter}>{ parseFloat(`${stats.kills/stats.deaths}`).toFixed(2) }</td>
                         <td style={styles.tdCenter}>{stats.suicides}</td>
                         <td style={styles.tdCenter}>{stats.telefrags}</td>
                         <td style={styles.tdCenter}>{stats.grenadeKills}</td>
