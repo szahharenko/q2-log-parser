@@ -1,45 +1,8 @@
+import { calculateHeadHunter, calculateMostGrenadeKills, calculateMostTelefrags, calculateWrongTurn, parseGameEvents } from './functions';
+import type { AllPlayerStats, HeadHunterAchievement, TelefragAchievement, WrongTurnAchievement, GrenadeAchievement } from './types';
 import React, { useState } from 'react';
 
-// Type definitions (unchanged from previous version)
-interface KillBreakdown {
-  [victimName: string]: number;
-}
-interface PlayerStats {
-  kills: number;
-  deaths: number;
-  suicides: number;
-  killBreakdown: KillBreakdown;
-  grenadeKills: number;
-  telefrags: number;
-}
-type AllPlayerStats = {
-  [playerName: string]: PlayerStats;
-};
-
-interface HeadHunterAchievement {
-  hunter: string;
-  killsOnLeader: number;
-  leader: string; // Can be a single name or comma-separated for ties
-}
-
-interface TelefragAchievement {
-  achievers: string[]; // Array to handle ties
-  count: number;
-}
-
-interface WrongTurnAchievement {
-  achievers: string[];
-  count: number;
-}
-
-interface GrenadeAchievement {
-  achievers: string[];
-  count: number;
-}
-
-
 const LogParser: React.FC = () => {
-  const [logContent, setLogContent] = useState<string>('');
   const [message, setMessage] = useState<string>('Please select a log file to view its content.');
   const [playerStats, setPlayerStats] = useState<AllPlayerStats>({});
   const [headHunter, setHeadHunter] = useState<HeadHunterAchievement | null>(null);
@@ -47,89 +10,10 @@ const LogParser: React.FC = () => {
   const [wrongTurn, setWrongTurn] = useState<WrongTurnAchievement | null>(null);
   const [mostGrenades, setMostGrenades] = useState<GrenadeAchievement | null>(null);
 
-  console.log({logContent})
-  // This function remains the same
-  const parseGameEvents = (lines: string[]): AllPlayerStats => {
-    const stats: AllPlayerStats = {};
-    const ensurePlayer = (name: string) => {
-      if (!stats[name]) {
-        stats[name] = { kills: 0, deaths: 0, suicides: 0,  telefrags: 0, killBreakdown: {}, grenadeKills: 0 };
-      }
-    };
-    const killPatterns = [
-      /(.+) was railed by (.+)/,
-      /(.+) ate (.+?)'s rocket/,
-      /(.+) was machinegunned by (.+)/,
-      /(.+) was cut in half by (.+?)'s chaingun/,
-      /(.+) almost dodged (.+?)'s rocket/,
-      /(.+) was blown away by (.+?)'s super shotgun/,
-      /(.+) was melted by (.+?)'s hyperblaster/,
-      /(.+) saw the pretty lights from (.+?)'s BFG/,
-      /(.+) was disintegrated by (.+?)'s BFG blast/,
-      /(.+) was blasted by (.+)/,
-      /(.+) was gunned down by (.+)/,
-      /(.+) was popped by (.+?)'s grenade/,
-      /(.+) was shredded by (.+?)'s shrapnel/,
-      /(.+) caught (.+?)'s handgrenade/,
-      /(.+) didn't see (.+?)'s handgrenade/,
-      /(.+) feels (.+?)'s pain/,
-      /(.+) tried to invade (.+?)'s personal space/,
-      /(.+) couldn't hide from (.+?)'s BFG/
-    ];
-    const suicidePatterns = [
-      /(.+) does a back flip into the lava/,
-      // Add acid suicide messages here, e.g., /(.+) cratered/
-    ];
-    lines.forEach(line => {
-      let eventFound = false;
-
-      // 1. Check for kill events first
-      for (const pattern of killPatterns) {
-          const match = line.match(pattern);
-          if (match) {
-              const victim = match[1].trim();
-              const killer = match[2].trim();
-              ensurePlayer(victim);
-              ensurePlayer(killer);
-
-              stats[killer].kills += 1;
-              stats[victim].deaths += 1;
-              stats[killer].killBreakdown[victim] = (stats[killer].killBreakdown[victim] || 0) + 1;
-
-              const patternSource = pattern.source;
-              if (pattern.source.includes("invade")) {
-                  stats[killer].telefrags += 1;
-              } else if (patternSource.includes("grenade") || patternSource.includes("shrapnel")) {
-                  stats[killer].grenadeKills += 1;
-              }
-
-              eventFound = true;
-              break;
-          }
-      }
-
-      // 2. If it wasn't a kill, check for a suicide
-      if (!eventFound) {
-          for (const pattern of suicidePatterns) {
-              const match = line.match(pattern);
-              if (match) {
-                  const player = match[1].trim();
-                  ensurePlayer(player);
-                  stats[player].suicides += 1;
-                  stats[player].deaths += 1; // A suicide still counts as a death
-                  break;
-              }
-          }
-      }
-    });
-    return stats;
-  };
-
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLogContent('');
     setMessage('');
     setPlayerStats({});
-    setHeadHunter(null); // Reset achievement
+    setHeadHunter(null);
     setWrongTurn(null);
 
     const file = event.target.files?.[0];
@@ -141,132 +25,26 @@ const LogParser: React.FC = () => {
       if (!fullContent) { setMessage('Error: Could not read file content.'); return; }
 
       const initialLines = fullContent.split('\n');
-
-      // --- KEY CHANGE IS HERE ---
       // Create a regex to find timestamps like [YYYY-MM-DD HH:MM] at the start of a line
       const timestampRegex = /^\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}\] /;
-      // Use map() to create a new array with the timestamps removed from each line
       const allLines = initialLines.map(line => line.replace(timestampRegex, ''));
-      // --- END OF CHANGE ---
+      const calculatedStats = parseGameEvents(allLines);
 
-      //const startIndex = allLines.findIndex(line => line.includes('Match has started!'));
+      setPlayerStats(calculatedStats);
+      setMessage(`Successfully parsed the log.`);
 
-      //if (startIndex !== -1) {
-        const relevantLines = allLines; //.slice(startIndex + 1);
-
-        // We now pass the CLEANED lines to the display and the parser
-        setLogContent(relevantLines.join('\n'));
-        const calculatedStats = parseGameEvents(relevantLines);
-        setPlayerStats(calculatedStats);
-        setMessage(`Successfully parsed the log.`);
-
-        // Achievements
-        setHeadHunter(calculateHeadHunter(calculatedStats));
-        setMostTelefrags(calculateMostTelefrags(calculatedStats));
-        setWrongTurn(calculateWrongTurn(calculatedStats));
-        setMostGrenades(calculateMostGrenadeKills(calculatedStats));
+      // Achievements
+      setHeadHunter(calculateHeadHunter(calculatedStats));
+      setMostTelefrags(calculateMostTelefrags(calculatedStats));
+      setWrongTurn(calculateWrongTurn(calculatedStats));
+      setMostGrenades(calculateMostGrenadeKills(calculatedStats));
 
     };
     reader.onerror = () => { setMessage('An error occurred while reading the file.'); };
     reader.readAsText(file);
   };
 
-  const calculateHeadHunter = (stats: AllPlayerStats): HeadHunterAchievement | null => {
-    const players = Object.keys(stats);
-    if (players.length < 2) return null; // Not enough players for an achievement
 
-    // 1. Find the leader(s) by finding the max kill count
-    let maxKills = 0;
-    for (const playerName in stats) {
-      if (stats[playerName].kills > maxKills) {
-        maxKills = stats[playerName].kills;
-      }
-    }
-
-    // If no one has kills, no leader, so no achievement
-    if (maxKills === 0) return null;
-
-    // Get an array of all players who are tied for the lead
-    const leaders = players.filter(p => stats[p].kills === maxKills);
-
-    // 2. Find who killed the leader(s) the most
-    let bestHunter = { name: '', kills: 0 };
-
-    for (const playerName in stats) {
-      // A player cannot be a head hunter for killing themselves
-      if (leaders.includes(playerName)) continue;
-
-      let killsOnLeaders = 0;
-      // Sum up this player's kills on all leaders
-      for (const leader of leaders) {
-        killsOnLeaders += stats[playerName].killBreakdown[leader] || 0;
-      }
-
-      if (killsOnLeaders > bestHunter.kills) {
-        bestHunter = { name: playerName, kills: killsOnLeaders };
-      }
-    }
-
-    // 3. Return the achievement object if a hunter was found
-    if (bestHunter.kills > 0) {
-      return {
-        hunter: bestHunter.name,
-        killsOnLeader: bestHunter.kills,
-        leader: leaders.join(', '), // Handles ties gracefully
-      };
-    }
-
-    return null;
-  };
-
-  const calculateMostTelefrags = (stats: AllPlayerStats): TelefragAchievement | null => {
-    let maxTelefrags = 0;
-    for (const playerName in stats) {
-      if (stats[playerName].telefrags > maxTelefrags) {
-        maxTelefrags = stats[playerName].telefrags;
-      }
-    }
-
-    // If no one got a telefrag, no award
-    if (maxTelefrags === 0) {
-      return null;
-    }
-
-    const achievers = Object.keys(stats).filter(
-      p => stats[p].telefrags === maxTelefrags
-    );
-
-    return { achievers, count: maxTelefrags };
-  };
-
-  const calculateWrongTurn = (stats: AllPlayerStats): WrongTurnAchievement | null => {
-    let maxSuicides = 0;
-    for (const playerName in stats) {
-        if (stats[playerName].suicides > maxSuicides) {
-            maxSuicides = stats[playerName].suicides;
-        }
-    }
-
-    if (maxSuicides === 0) return null;
-
-    const achievers = Object.keys(stats).filter(p => stats[p].suicides === maxSuicides);
-    return { achievers, count: maxSuicides };
-  };
-
-  // NEW: Function to find the player(s) with the most grenade kills
-  const calculateMostGrenadeKills = (stats: AllPlayerStats): GrenadeAchievement | null => {
-    let maxGrenadeKills = 0;
-    for (const playerName in stats) {
-        if (stats[playerName].grenadeKills > maxGrenadeKills) {
-            maxGrenadeKills = stats[playerName].grenadeKills;
-        }
-    }
-
-    if (maxGrenadeKills === 0) return null;
-
-    const achievers = Object.keys(stats).filter(p => stats[p].grenadeKills === maxGrenadeKills);
-    return { achievers, count: maxGrenadeKills };
-  };
 
   // The JSX for rendering the component remains completely unchanged
   return (
@@ -282,15 +60,6 @@ const LogParser: React.FC = () => {
       />
 
       {message && <p><em>{message}</em></p>}
-      {
-        /*
-          6. Head Hunter - Убить Group Leader-а больше всех раз.
-          7. Respawn Hero - Person who has most telefrag kills.
-          8. Wrong turn - most deaths in lava/acid
-          9. Grenadier - больше всего фрагов сделаных гранатами.
-          10.Troublemaker - самая длиная серия упоминания игрока в консольном логе. (сообщения подряд).
-         */
-      }
 
       {Object.keys(playerStats).length > 0 && (
         <div style={{ marginBottom: '20px' }}>
