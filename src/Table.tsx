@@ -6,7 +6,7 @@ interface PlayerTableProps {
 }
 
 export const PlayerTable = ({playerStats}: PlayerTableProps) => {
-    const [orderBy, setOrderBy] = useState< 'kills' | 'deaths' | 'suicides' | 'grenadeKills' | 'telefrags' | 'kdr'>('kills');
+    const [orderBy, setOrderBy] = useState< 'kills' | 'deaths' | 'suicides' | 'grenadeKills' | 'telefrags' | 'kdr' | 'eventStreak'>('kills');
 
     let data = Object.entries(playerStats).sort(([, a], [, b]) => b.kills - a.kills || a.deaths - b.deaths)
     if (data.length === 0) return null;
@@ -39,6 +39,11 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
     const maxTelefrags = Math.max(...data.map(([, stats]) => stats.telefrags));
     const secondMaxTelefrags = Math.max(...data.filter(([, stats]) => stats.telefrags < maxTelefrags).map(([, stats]) => stats.telefrags));
     const thirdMaxTelefrags = Math.max(...data.filter(([, stats]) => stats.telefrags < secondMaxTelefrags).map(([, stats]) => stats.telefrags));
+
+    //eventStreak
+     const maxEventStreak = Math.max(...data.map(([, stats]) => stats.eventStreak));
+     const secondMaxEventStreak = Math.max(...data.filter(([, stats]) => stats.eventStreak < maxEventStreak).map(([, stats]) => stats.eventStreak));
+     const thirdMaxEventStreak = Math.max(...data.filter(([, stats]) => stats.eventStreak < secondMaxEventStreak).map(([, stats]) => stats.eventStreak));
 
     const getLeadClass = (value: number, max: number, secondmax: number, thirdmax: number) => {
         if (value === max && max !== secondmax) {
@@ -76,6 +81,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                     <th className='sortable' onClick={() => setOrderBy('suicides')}>Wrong turn {orderBy === 'suicides' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('telefrags')}>Respawn Hero {orderBy === 'telefrags' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('grenadeKills')}>Grenadier {orderBy === 'grenadeKills' ? '▼' : ''}</th>
+                    <th className='sortable' onClick={() => setOrderBy('eventStreak')}>Troublemaker {orderBy === 'eventStreak' ? '▼' : ''}</th>
                 </tr>
             </thead>
             <tbody>
@@ -88,6 +94,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                         <td className={getLeadClass(stats.suicides, maxSuicides, secondMaxSuicides, thirdMaxSuicides)}>{stats.suicides}</td>
                         <td className={getLeadClass(stats.telefrags, maxTelefrags, secondMaxTelefrags, thirdMaxTelefrags)}>{stats.telefrags}</td>
                         <td className={getLeadClass(stats.grenadeKills, maxGrenadeKills, secondMaxGrenadeKills, thirdMaxGrenadeKills)}>{stats.grenadeKills}</td>
+                        <td className={getLeadClass(stats.eventStreak, maxEventStreak, secondMaxEventStreak, thirdMaxEventStreak)}>{stats.eventStreak}</td>
                     </tr>
                 ))}
             </tbody>

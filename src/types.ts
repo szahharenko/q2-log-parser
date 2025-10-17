@@ -11,6 +11,7 @@ export interface PlayerStats {
     grenadeKills: number;
     telefrags: number;
     kdr?: number;
+    eventStreak: number
 }
 export type AllPlayerStats = {
     [playerName: string]: PlayerStats;
@@ -33,6 +34,10 @@ export interface WrongTurnAchievement {
 }
 
 export interface GrenadeAchievement {
+    achievers: string[];
+    count: number;
+}
+export interface EventStreakAchievement {
     achievers: string[];
     count: number;
 }

@@ -1,5 +1,5 @@
 import { killPatterns, suicidePatterns } from "./patterns";
-import { AllPlayerStats, GrenadeAchievement, HeadHunterAchievement, TelefragAchievement, WrongTurnAchievement } from "./types";
+import { AllPlayerStats, EventStreakAchievement, GrenadeAchievement, HeadHunterAchievement, TelefragAchievement, WrongTurnAchievement } from "./types";
 
 export const calculateHeadHunter = (stats: AllPlayerStats): HeadHunterAchievement | null => {
     const players = Object.keys(stats);
@@ -97,13 +97,48 @@ export const calculateHeadHunter = (stats: AllPlayerStats): HeadHunterAchievemen
     return { achievers, count: maxGrenadeKills };
   };
 
+  export const calculateMostEventStreak = (stats: AllPlayerStats): EventStreakAchievement | null => {
+    let maxEventStreak = 0;
+    for (const playerName in stats) {
+        if (stats[playerName].eventStreak > maxEventStreak) {
+            maxEventStreak = stats[playerName].eventStreak;
+        }
+    }
+
+    if (maxEventStreak === 0) return null;
+
+    const achievers = Object.keys(stats).filter(p => stats[p].eventStreak === maxEventStreak);
+    return { achievers, count: maxEventStreak };
+  };
+
+export const filterGameLines = (lines: string[]): string[] => {
+  return lines.filter(line => {
+    // Check if line matches any kill pattern
+    for (const pattern of killPatterns) {
+        if (pattern.test(line)) {
+            return true;
+        }
+    }
+    // Check if line matches any
+    for (const pattern of suicidePatterns) {
+        if (pattern.test(line)) {
+            return true;
+        }
+    }
+    return false;
+  });
+};
+
+
 export const parseGameEvents = (lines: string[]): AllPlayerStats => {
     const stats: AllPlayerStats = {};
     const ensurePlayer = (name: string) => {
       if (!stats[name]) {
-        stats[name] = { kills: 0, deaths: 0, suicides: 0,  telefrags: 0, killBreakdown: {}, grenadeKills: 0 };
+        stats[name] = { kills: 0, deaths: 0, suicides: 0,  telefrags: 0, eventStreak: 0, killBreakdown: {}, grenadeKills: 0 };
       }
     };
+    let currentStreakPlayer: string | null = null;
+    let currentStreakCount = 0;
 
     lines.forEach(line => {
       let eventFound = false;
@@ -114,9 +149,18 @@ export const parseGameEvents = (lines: string[]): AllPlayerStats => {
           if (match) {
               const victim = match[1].trim();
               const killer = match[2].trim();
+
               ensurePlayer(victim);
               ensurePlayer(killer);
 
+              if (currentStreakPlayer === killer) {
+                  currentStreakCount += 1;
+              } else {
+                  currentStreakPlayer = killer;
+                  currentStreakCount = 1;
+              }
+
+              stats[killer].eventStreak = Math.max(stats[killer].eventStreak, currentStreakCount);
               stats[killer].kills += 1;
               stats[victim].deaths += 1;
               stats[killer].killBreakdown[victim] = (stats[killer].killBreakdown[victim] || 0) + 1;
@@ -140,6 +184,13 @@ export const parseGameEvents = (lines: string[]): AllPlayerStats => {
               if (match) {
                   const player = match[1].trim();
                   ensurePlayer(player);
+                  if (currentStreakPlayer === player) {
+                      currentStreakCount += 1;
+                  } else {
+                      currentStreakPlayer = player;
+                      currentStreakCount = 1;
+                  }
+                  stats[player].eventStreak = Math.max(stats[player].eventStreak, currentStreakCount);
                   stats[player].suicides += 1;
                   stats[player].deaths += 1; // A suicide still counts as a death
                   break;
@@ -147,5 +198,45 @@ export const parseGameEvents = (lines: string[]): AllPlayerStats => {
           }
       }
     });
+    console.log({stats})
     return stats;
   };
+
+  export function findLongestNameStreak(lines: string[], names: string[]) {
+  // Use an object to store the final max streak for each name.
+  // e.g., { Bob: 0, Any: 0 }
+  const maxStreaks : Record<string, number> = {} ;
+
+  // Use another object to track the current running streak for each name.
+  const currentStreaks : Record<string, number> = {};
+
+  // Initialize both objects with all names, setting streaks to 0.
+  for (const name of names) {
+    maxStreaks[name] = 0
+    currentStreaks[name] = 0;
+  }
+
+  // Go through each line of text
+  for (const name of names) {
+    // For each line, we must check every name.
+    for (const line of lines) {
+      for (const pattern of [...suicidePatterns, ...killPatterns]) {
+          const match = line.match(pattern);
+          if (match) {
+              console.log({match, name, line});
+              const player = match[1].trim();
+              if (player === name) {
+                currentStreaks[name]++;
+              }
+          } else {
+              currentStreaks[name] = 0;
+          }
+      }
+      if (currentStreaks[name] > maxStreaks[name]) {
+        maxStreaks[name] = currentStreaks[name];
+      }
+    }
+  }
+
+  return maxStreaks;
+}

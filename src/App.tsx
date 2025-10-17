@@ -1,5 +1,5 @@
 import { PlayerTable } from './Table';
-import { calculateHeadHunter, calculateMostGrenadeKills, calculateMostTelefrags, calculateWrongTurn, parseGameEvents } from './functions';
+import { calculateHeadHunter, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostTelefrags, calculateWrongTurn, filterGameLines, findLongestNameStreak, parseGameEvents } from './functions';
 import type { AllPlayerStats, HeadHunterAchievement, TelefragAchievement, WrongTurnAchievement, GrenadeAchievement } from './types';
 import React, { useState } from 'react';
 
@@ -10,6 +10,7 @@ const LogParser: React.FC = () => {
   const [mostTelefrags, setMostTelefrags] = useState<TelefragAchievement | null>(null);
   const [wrongTurn, setWrongTurn] = useState<WrongTurnAchievement | null>(null);
   const [mostGrenades, setMostGrenades] = useState<GrenadeAchievement | null>(null);
+  const [mostEventStreak, setMostEventStreak] = useState<WrongTurnAchievement | null>(null);
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setPlayerStats({});
@@ -55,7 +56,8 @@ const LogParser: React.FC = () => {
 
       // Assign achievements...
       // ... (same achievement assignment logic as before) ...
-      const calculatedStats = parseGameEvents(allLines);
+      const onlyGameEvents = filterGameLines(allLines);
+      const calculatedStats = parseGameEvents(onlyGameEvents);
 
       setPlayerStats(calculatedStats);
       setMessage(`Successfully parsed the log.`);
@@ -65,36 +67,12 @@ const LogParser: React.FC = () => {
       setMostTelefrags(calculateMostTelefrags(calculatedStats));
       setWrongTurn(calculateWrongTurn(calculatedStats));
       setMostGrenades(calculateMostGrenadeKills(calculatedStats));
+      setMostEventStreak(calculateMostEventStreak(calculatedStats));
 
     } catch (error) {
       setMessage(`An error occurred: ${error}`);
       setPlayerStats({});
     }
-    /*
-    const reader = new FileReader();
-    reader.onload = (e: ProgressEvent<FileReader>) => {
-      const fullContent = e.target?.result as string;
-      if (!fullContent) { setMessage('Error: Could not read file content.'); return; }
-
-      const initialLines = fullContent.split('\n');
-      // Create a regex to find timestamps like [YYYY-MM-DD HH:MM] at the start of a line
-      const timestampRegex = /^\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}\] /;
-      const allLines = initialLines.map(line => line.replace(timestampRegex, ''));
-      const calculatedStats = parseGameEvents(allLines);
-
-      setPlayerStats(calculatedStats);
-      setMessage(`Successfully parsed the log.`);
-
-      // Achievements
-      setHeadHunter(calculateHeadHunter(calculatedStats));
-      setMostTelefrags(calculateMostTelefrags(calculatedStats));
-      setWrongTurn(calculateWrongTurn(calculatedStats));
-      setMostGrenades(calculateMostGrenadeKills(calculatedStats));
-
-    };
-    reader.onerror = () => { setMessage('An error occurred while reading the file.'); };
-    reader.readAsText(file);
-    */
   };
 
 
@@ -146,12 +124,21 @@ const LogParser: React.FC = () => {
       )}
 
       {mostGrenades && (
-          <div style={{ padding: '10px 15px', border: '1px solid #28a745', backgroundColor: '#e9f7ec', borderRadius: '5px' }}>
+          <div style={{ padding: '10px 15px', border: '1px solid #28a745', backgroundColor: '#e9f7ec', borderRadius: '5px', marginBottom: '20px' }}>
             <h3 style={{ marginTop: 0 }}>💣 Grenadier</h3>
             <p style={{ margin: 0 }}>
               <strong>{mostGrenades.achievers.join(' & ')}</strong> earned the top spot with <strong>{mostGrenades.count}</strong> grenade kills!
             </p>
           </div>
+      )}
+
+      {mostEventStreak && (
+        <div style={{ padding: '10px 15px', border: '1px solid #aea601ff', backgroundColor: '#feffadff', borderRadius: '5px', marginBottom: '20px' }}>
+          <h3 style={{ marginTop: 0 }}>🔥 Troublemaker</h3>
+          <p style={{ margin: 0 }}>
+            <strong>{mostEventStreak.achievers.join(' & ')}</strong> caused chaos with an event streak of <strong>{mostEventStreak.count}</strong>!
+          </p>
+        </div>
       )}
 
       {/* Detailed stats */}
