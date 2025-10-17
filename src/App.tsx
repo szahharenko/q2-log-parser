@@ -1,3 +1,4 @@
+import { PlayerTable } from './Table';
 import { calculateHeadHunter, calculateMostGrenadeKills, calculateMostTelefrags, calculateWrongTurn, parseGameEvents } from './functions';
 import type { AllPlayerStats, HeadHunterAchievement, TelefragAchievement, WrongTurnAchievement, GrenadeAchievement } from './types';
 import React, { useState } from 'react';
@@ -61,31 +62,7 @@ const LogParser: React.FC = () => {
 
       {message && <p><em>{message}</em></p>}
 
-      {Object.keys(playerStats).length > 0 && (
-        <div style={{ marginBottom: '20px' }}>
-          <h3>Match Leaderboard 🏆</h3>
-          <table style={{ borderCollapse: 'collapse', width: '400px' }}>
-            <thead>
-              <tr style={{ backgroundColor: '#eee' }}>
-                <th style={{ border: '1px solid #ccc', padding: '8px' }}>Player</th>
-                <th style={{ border: '1px solid #ccc', padding: '8px' }}>Kills</th>
-                <th style={{ border: '1px solid #ccc', padding: '8px' }}>Deaths</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.entries(playerStats)
-                .sort(([, a], [, b]) => b.kills - a.kills || a.deaths - b.deaths)
-                .map(([player, stats]) => (
-                  <tr key={player}>
-                    <td style={{ border: '1px solid #ccc', padding: '8px' }}>{player}</td>
-                    <td style={{ border: '1px solid #ccc', padding: '8px', textAlign: 'center' }}>{stats.kills}</td>
-                    <td style={{ border: '1px solid #ccc', padding: '8px', textAlign: 'center' }}>{stats.deaths}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+      <PlayerTable playerStats={playerStats}/>
 
       {/* Achievements */}
       {headHunter && (
