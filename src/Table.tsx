@@ -70,12 +70,12 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
             <thead>
                 <tr style={{ backgroundColor: '#eee' }}>
                     <th>Player</th>
-                    <th className='sortable' onClick={() => setOrderBy('kills')}>Kills</th>
-                    <th className='sortable' onClick={() => setOrderBy('deaths')}>Deaths</th>
-                    <th className='sortable' onClick={() => setOrderBy('kdr')}>KDR</th>
-                    <th className='sortable' onClick={() => setOrderBy('suicides')}>Suicides</th>
-                    <th className='sortable' onClick={() => setOrderBy('telefrags')}>Telefrags</th>
-                    <th className='sortable' onClick={() => setOrderBy('grenadeKills')}>Grenade Kills</th>
+                    <th className='sortable' onClick={() => setOrderBy('kills')}>Kills {orderBy === 'kills' ? '▼' : ''}</th>
+                    <th className='sortable' onClick={() => setOrderBy('deaths')}>Deaths {orderBy === 'deaths' ? '▼' : ''}</th>
+                    <th className='sortable' onClick={() => setOrderBy('kdr')}>KDR {orderBy === 'kdr' ? '▼' : ''}</th>
+                    <th className='sortable' onClick={() => setOrderBy('suicides')}>Suicides {orderBy === 'suicides' ? '▼' : ''}</th>
+                    <th className='sortable' onClick={() => setOrderBy('telefrags')}>Telefrags {orderBy === 'telefrags' ? '▼' : ''}</th>
+                    <th className='sortable' onClick={() => setOrderBy('grenadeKills')}>Grenade Kills {orderBy === 'grenadeKills' ? '▼' : ''}</th>
                 </tr>
             </thead>
             <tbody>
