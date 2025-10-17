@@ -120,7 +120,7 @@ const LogParser: React.FC = () => {
       {/* Achievements */}
       {headHunter && (
         <div style={{ padding: '10px 15px', border: '1px solid #e0c200', backgroundColor: '#fffbe6', borderRadius: '5px', marginBottom: '20px' }}>
-          <h3 style={{ marginTop: 0 }}>🏆 Head Hunter Achievement</h3>
+          <h3 style={{ marginTop: 0 }}>🏆 Head Hunter</h3>
           <p style={{ margin: 0 }}>
             <strong>{headHunter.hunter}</strong> is the Head Hunter for killing the leader (<strong>{headHunter.leader}</strong>) {headHunter.killsOnLeader} {headHunter.killsOnLeader > 1 ? 'times' : 'time'}!
           </p>
@@ -129,7 +129,7 @@ const LogParser: React.FC = () => {
 
       {mostTelefrags && (
           <div style={{ padding: '10px 15px', border: '1px solid #6f42c1', backgroundColor: '#f3eefc', borderRadius: '5px', marginBottom: '20px' }}>
-            <h3 style={{ marginTop: 0 }}>🏅 Most Telefrags</h3>
+            <h3 style={{ marginTop: 0 }}>🏅 Respawn Hero</h3>
             <p style={{ margin: 0 }}>
               <strong>{mostTelefrags.achievers.join(' & ')}</strong> {mostTelefrags.achievers.length > 1 ? 'share the award' : 'gets the award'} with <strong>{mostTelefrags.count}</strong> telefrags!
             </p>
