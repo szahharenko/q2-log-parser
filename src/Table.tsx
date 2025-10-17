@@ -60,6 +60,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                 if (typeof a[orderBy] === 'number' && typeof b[orderBy] === 'number')
                 return b[orderBy] - a[orderBy];
             }
+            return 0;
         });
     }
 
