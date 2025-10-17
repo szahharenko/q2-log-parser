@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { PlayerStats } from './types';
 
 interface PlayerTableProps {
@@ -5,6 +6,8 @@ interface PlayerTableProps {
 }
 
 export const PlayerTable = ({playerStats}: PlayerTableProps) => {
+    const [orderBy, setOrderBy] = useState< 'kills' | 'deaths' | 'suicides' | 'grenadeKills' | 'telefrags' | 'kdr'>('kills');
+
     let data = Object.entries(playerStats).sort(([, a], [, b]) => b.kills - a.kills || a.deaths - b.deaths)
     if (data.length === 0) return null;
     data = data.map(([player, stats]) => [player, {
@@ -48,22 +51,34 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
         return '';
     }
 
+    const getDataInOrder = () => {
+        // @ts-ignore
+        return data.sort(([, a], [, b]) => {
+            if (orderBy === 'kdr') {
+                return (b.kdr || 0) - (a.kdr || 0);
+            } else {
+                if (typeof a[orderBy] === 'number' && typeof b[orderBy] === 'number')
+                return b[orderBy] - a[orderBy];
+            }
+        });
+    }
+
     return (<div style={{ marginBottom: '20px' }}>
         <h3>Comprehensive Leaderboard 🏆</h3>
         <table style={{ borderCollapse: 'collapse', width: 'auto', fontSize: '14px' }}>
             <thead>
                 <tr style={{ backgroundColor: '#eee' }}>
                     <th>Player</th>
-                    <th>Kills</th>
-                    <th>Deaths</th>
-                    <th>KDR</th>
-                    <th>Suicides</th>
-                    <th>Telefrags</th>
-                    <th>Grenade Kills</th>
+                    <th className='sortable' onClick={() => setOrderBy('kills')}>Kills</th>
+                    <th className='sortable' onClick={() => setOrderBy('deaths')}>Deaths</th>
+                    <th className='sortable' onClick={() => setOrderBy('kdr')}>KDR</th>
+                    <th className='sortable' onClick={() => setOrderBy('suicides')}>Suicides</th>
+                    <th className='sortable' onClick={() => setOrderBy('telefrags')}>Telefrags</th>
+                    <th className='sortable' onClick={() => setOrderBy('grenadeKills')}>Grenade Kills</th>
                 </tr>
             </thead>
             <tbody>
-                {data.map(([player, stats]) => (
+                {getDataInOrder().map(([player, stats]) => (
                     <tr key={player}>
                         <td>{player}</td>
                         <td className={getLeadClass(stats.kills, maxKills, secondMaxKills, thirdMaxKills)}>{stats.kills}</td>
