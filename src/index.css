@@ -12,3 +12,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.lead-highest {
+  background-color: #ffd70033; /* Gold with transparency */
+  font-weight: bold;
+}
+.lead-secondhighest {
+  background-color: #c0c0c033; /* Silver with transparency */
+  font-weight: bold;
+}
+.lead-thirdhighest {
+  background-color: #cd7f3233; /* Bronze with transparency */
+  font-weight: bold;
+}

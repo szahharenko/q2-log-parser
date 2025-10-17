@@ -22,7 +22,6 @@ export const suicidePatterns = [
     /(.+) does a back flip into the lava/,
     /(.+) blew up/,
     /(.+) cratered/,
-    /(.+) does a back flip into the lava/,
     /(.+) found a way out/,
     /(.+) got blasted/,
     /(.+) melted/,
