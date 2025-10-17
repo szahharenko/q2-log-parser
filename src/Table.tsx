@@ -1,4 +1,3 @@
-import { stat } from 'fs';
 import { PlayerStats } from './types';
 
 interface PlayerTableProps {
@@ -6,27 +5,6 @@ interface PlayerTableProps {
 }
 
 export const PlayerTable = ({playerStats}: PlayerTableProps) => {
-    const styles = {
-        th: {
-            border: '1px solid #ccc',
-            padding: '8px',
-            textAlign: 'left' as const,
-        },
-        thCenter: {
-            border: '1px solid #ccc',
-            padding: '8px',
-            textAlign: 'center' as const,
-        },
-        td: {
-            border: '1px solid #ccc',
-            padding: '8px',
-        },
-        tdCenter: {
-            border: '1px solid #ccc',
-            padding: '8px',
-            textAlign: 'center' as const,
-        },
-    };
     let data = Object.entries(playerStats).sort(([, a], [, b]) => b.kills - a.kills || a.deaths - b.deaths)
     if (data.length === 0) return null;
     data = data.map(([player, stats]) => [player, {
@@ -67,9 +45,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
         } else if (value === thirdmax && secondmax !== thirdmax) {
             return 'lead-thirdhighest';
         }
-        else {
-            return '';
-        }
+        return '';
     }
 
     return (<div style={{ marginBottom: '20px' }}>
@@ -77,25 +53,25 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
         <table style={{ borderCollapse: 'collapse', width: 'auto', fontSize: '14px' }}>
             <thead>
                 <tr style={{ backgroundColor: '#eee' }}>
-                    <th style={styles.th}>Player</th>
-                    <th style={styles.thCenter}>Kills</th>
-                    <th style={styles.thCenter}>Deaths</th>
-                    <th style={styles.thCenter}>KDR</th>
-                    <th style={styles.thCenter}>Suicides</th>
-                    <th style={styles.thCenter}>Telefrags</th>
-                    <th style={styles.thCenter}>Grenade Kills</th>
+                    <th>Player</th>
+                    <th>Kills</th>
+                    <th>Deaths</th>
+                    <th>KDR</th>
+                    <th>Suicides</th>
+                    <th>Telefrags</th>
+                    <th>Grenade Kills</th>
                 </tr>
             </thead>
             <tbody>
                 {data.map(([player, stats]) => (
                     <tr key={player}>
-                        <td style={styles.td}>{player}</td>
-                        <td style={styles.tdCenter} className={getLeadClass(stats.kills, maxKills, secondMaxKills, thirdMaxKills)}>{stats.kills}</td>
-                        <td style={styles.tdCenter}>{stats.deaths}</td>
-                        <td style={styles.tdCenter} className={getLeadClass(stats.kdr || 0, maxKDR, secondMaxKDR, thirdMaxKDR)}>{stats.kdr}</td>
-                        <td style={styles.tdCenter} className={getLeadClass(stats.suicides, maxSuicides, secondMaxSuicides, thirdMaxSuicides)}>{stats.suicides}</td>
-                        <td style={styles.tdCenter} className={getLeadClass(stats.telefrags, maxTelefrags, secondMaxTelefrags, thirdMaxTelefrags)}>{stats.telefrags}</td>
-                        <td style={styles.tdCenter} className={getLeadClass(stats.grenadeKills, maxGrenadeKills, secondMaxGrenadeKills, thirdMaxGrenadeKills)}>{stats.grenadeKills}</td>
+                        <td>{player}</td>
+                        <td className={getLeadClass(stats.kills, maxKills, secondMaxKills, thirdMaxKills)}>{stats.kills}</td>
+                        <td>{stats.deaths}</td>
+                        <td className={getLeadClass(stats.kdr || 0, maxKDR, secondMaxKDR, thirdMaxKDR)}>{stats.kdr}</td>
+                        <td className={getLeadClass(stats.suicides, maxSuicides, secondMaxSuicides, thirdMaxSuicides)}>{stats.suicides}</td>
+                        <td className={getLeadClass(stats.telefrags, maxTelefrags, secondMaxTelefrags, thirdMaxTelefrags)}>{stats.telefrags}</td>
+                        <td className={getLeadClass(stats.grenadeKills, maxGrenadeKills, secondMaxGrenadeKills, thirdMaxGrenadeKills)}>{stats.grenadeKills}</td>
                     </tr>
                 ))}
             </tbody>
