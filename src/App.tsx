@@ -302,16 +302,12 @@ const LogParser: React.FC = () => {
         </div>
       )}
 
-      {mostTelefrags ? (
+      {mostTelefrags && (
           <div style={{ padding: '10px 15px', border: '1px solid #6f42c1', backgroundColor: '#f3eefc', borderRadius: '5px', marginBottom: '20px' }}>
             <h3 style={{ marginTop: 0 }}>🏅 Most Telefrags</h3>
             <p style={{ margin: 0 }}>
               <strong>{mostTelefrags.achievers.join(' & ')}</strong> {mostTelefrags.achievers.length > 1 ? 'share the award' : 'gets the award'} with <strong>{mostTelefrags.count}</strong> telefrags!
             </p>
-          </div>
-      ): (
-        <div style={{ padding: '10px 15px', border: '1px solid #6f42c1', backgroundColor: '#f3eefc', borderRadius: '5px', marginBottom: '20px' }}>
-            <h3 style={{ margin: 0 }}>🏅 No Telefrags</h3>
           </div>
       )}
 
