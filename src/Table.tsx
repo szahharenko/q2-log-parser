@@ -27,7 +27,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
         },
     };
     const data = Object.entries(playerStats).sort(([, a], [, b]) => b.kills - a.kills || a.deaths - b.deaths)
-
+    if (data.length === 0) return null;
     return (<div style={{ marginBottom: '20px' }}>
         <h3>Comprehensive Leaderboard 🏆</h3>
         <table style={{ borderCollapse: 'collapse', width: 'auto', fontSize: '14px' }}>
