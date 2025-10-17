@@ -9,6 +9,7 @@ interface PlayerStats {
   deaths: number;
   suicides: number;
   killBreakdown: KillBreakdown;
+  grenadeKills: number;
   telefrags: number;
 }
 type AllPlayerStats = {
@@ -31,6 +32,11 @@ interface WrongTurnAchievement {
   count: number;
 }
 
+interface GrenadeAchievement {
+  achievers: string[];
+  count: number;
+}
+
 
 const LogParser: React.FC = () => {
   const [logContent, setLogContent] = useState<string>('');
@@ -39,7 +45,7 @@ const LogParser: React.FC = () => {
   const [headHunter, setHeadHunter] = useState<HeadHunterAchievement | null>(null);
   const [mostTelefrags, setMostTelefrags] = useState<TelefragAchievement | null>(null);
   const [wrongTurn, setWrongTurn] = useState<WrongTurnAchievement | null>(null);
-
+  const [mostGrenades, setMostGrenades] = useState<GrenadeAchievement | null>(null);
 
   console.log({logContent})
   // This function remains the same
@@ -47,7 +53,7 @@ const LogParser: React.FC = () => {
     const stats: AllPlayerStats = {};
     const ensurePlayer = (name: string) => {
       if (!stats[name]) {
-        stats[name] = { kills: 0, deaths: 0, suicides: 0,  telefrags: 0, killBreakdown: {} };
+        stats[name] = { kills: 0, deaths: 0, suicides: 0,  telefrags: 0, killBreakdown: {}, grenadeKills: 0 };
       }
     };
     const killPatterns = [
@@ -90,9 +96,13 @@ const LogParser: React.FC = () => {
               stats[victim].deaths += 1;
               stats[killer].killBreakdown[victim] = (stats[killer].killBreakdown[victim] || 0) + 1;
 
+              const patternSource = pattern.source;
               if (pattern.source.includes("invade")) {
                   stats[killer].telefrags += 1;
+              } else if (patternSource.includes("grenade") || patternSource.includes("shrapnel")) {
+                  stats[killer].grenadeKills += 1;
               }
+
               eventFound = true;
               break;
           }
@@ -154,6 +164,7 @@ const LogParser: React.FC = () => {
         setHeadHunter(calculateHeadHunter(calculatedStats));
         setMostTelefrags(calculateMostTelefrags(calculatedStats));
         setWrongTurn(calculateWrongTurn(calculatedStats));
+        setMostGrenades(calculateMostGrenadeKills(calculatedStats));
 
     };
     reader.onerror = () => { setMessage('An error occurred while reading the file.'); };
@@ -242,6 +253,21 @@ const LogParser: React.FC = () => {
     return { achievers, count: maxSuicides };
   };
 
+  // NEW: Function to find the player(s) with the most grenade kills
+  const calculateMostGrenadeKills = (stats: AllPlayerStats): GrenadeAchievement | null => {
+    let maxGrenadeKills = 0;
+    for (const playerName in stats) {
+        if (stats[playerName].grenadeKills > maxGrenadeKills) {
+            maxGrenadeKills = stats[playerName].grenadeKills;
+        }
+    }
+
+    if (maxGrenadeKills === 0) return null;
+
+    const achievers = Object.keys(stats).filter(p => stats[p].grenadeKills === maxGrenadeKills);
+    return { achievers, count: maxGrenadeKills };
+  };
+
   // The JSX for rendering the component remains completely unchanged
   return (
     <div>
@@ -318,6 +344,15 @@ const LogParser: React.FC = () => {
             <strong>{wrongTurn.achievers.join(' & ')}</strong> took a wrong turn {wrongTurn.count} {wrongTurn.count > 1 ? 'times' : 'time'} to earn this award.
           </p>
         </div>
+      )}
+
+      {mostGrenades && (
+          <div style={{ padding: '10px 15px', border: '1px solid #28a745', backgroundColor: '#e9f7ec', borderRadius: '5px' }}>
+            <h3 style={{ marginTop: 0 }}>💣 Grenadier</h3>
+            <p style={{ margin: 0 }}>
+              <strong>{mostGrenades.achievers.join(' & ')}</strong> earned the top spot with <strong>{mostGrenades.count}</strong> grenade kills!
+            </p>
+          </div>
       )}
 
       {/* Detailed stats */}
