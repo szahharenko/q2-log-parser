@@ -1,0 +1,265 @@
+[2025-10-16 01:43] [dem0] -=- Loading maps/q2dm6.bsp...
+[2025-10-16 01:43] Changing map...
+[2025-10-16 01:43] Reconnecting...
+[2025-10-16 01:43] Match has started!
+[2025-10-16 01:43] Lava Tomb
+[2025-10-16 01:43] Spacer entered the game (1 player)
+[2025-10-16 01:43] slonik entered the game (2 players)
+[2025-10-16 01:43] ...Serj... entered the game (3 players)
+[2025-10-16 01:43] q entered the game (4 players)
+[2025-10-16 01:43] Pitfall.MasK entered the game (5 players)
+[2025-10-16 01:43] WerWolF entered the game (6 players)
+[2025-10-16 01:43] ly[ADMIN]: gl 
+[2025-10-16 01:43] Pitfall.MasK was railed by Spacer
+[2025-10-16 01:43] WerWolF ate slonik's rocket
+[2025-10-16 01:43] WerWolF: :-)) 
+[2025-10-16 01:43] WerWolF: :-)) 
+[2025-10-16 01:43] q was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] Spacer almost dodged slonik's rocket
+[2025-10-16 01:43] ...Serj... was railed by q
+[2025-10-16 01:43] Spacer almost dodged ...Serj...'s rocket
+[2025-10-16 01:43] slonik saw the pretty lights from WerWolF's BFG
+[2025-10-16 01:43] slonik does a back flip into the lava.
+[2025-10-16 01:43] Pitfall.MasK ate ...Serj...'s rocket
+[2025-10-16 01:43] ...Serj... was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] Spacer was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] q was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] slonik was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] ...Serj... was blown away by Pitfall.MasK's super shotgun
+[2025-10-16 01:43] WerWolF was machinegunned by Spacer
+[2025-10-16 01:43] WerWolF: :-(( 
+[2025-10-16 01:43] Spacer almost dodged slonik's rocket
+[2025-10-16 01:43] WerWolF does a back flip into the lava.
+[2025-10-16 01:43] Spacer couldn't hide from ...Serj...'s BFG
+[2025-10-16 01:43] ...Serj... was blown away by Spacer's super shotgun
+[2025-10-16 01:43] Spacer couldn't hide from slonik's BFG
+[2025-10-16 01:43] slonik does a back flip into the lava.
+[2025-10-16 01:43] Pitfall.MasK was railed by WerWolF
+[2025-10-16 01:43] ...Serj... was blown away by q's super shotgun
+[2025-10-16 01:43] WerWolF was blown away by q's super shotgun
+[2025-10-16 01:43] WerWolF: :-)) 
+[2025-10-16 01:43] WerWolF: :-)) 
+[2025-10-16 01:43] slonik was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] Pitfall.MasK blew himself up.
+[2025-10-16 01:43] Spacer almost dodged Pitfall.MasK's rocket
+[2025-10-16 01:43] Pitfall.MasK was machinegunned by q
+[2025-10-16 01:43] slonik was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] ...Serj... does a back flip into the lava.
+[2025-10-16 01:43] Pitfall.MasK was machinegunned by q
+[2025-10-16 01:43] Spacer does a back flip into the lava.
+[2025-10-16 01:43] Pitfall.MasK was railed by slonik
+[2025-10-16 01:43] Spacer was machinegunned by q
+[2025-10-16 01:43] Spacer was cut in half by ...Serj...'s chaingun
+[2025-10-16 01:43] q was cut in half by ...Serj...'s chaingun
+[2025-10-16 01:43] Pitfall.MasK was railed by slonik
+[2025-10-16 01:43] q was railed by slonik
+[2025-10-16 01:43] ...Serj... almost dodged Pitfall.MasK's rocket
+[2025-10-16 01:43] Spacer was railed by WerWolF
+[2025-10-16 01:43] slonik was railed by WerWolF
+[2025-10-16 01:43] Pitfall.MasK was machinegunned by q
+[2025-10-16 01:43] slonik tried to invade Pitfall.MasK's personal space
+[2025-10-16 01:43] ...Serj... almost dodged q's rocket
+[2025-10-16 01:43] q was machinegunned by ...Serj...
+[2025-10-16 01:43] WerWolF was machinegunned by ...Serj...
+[2025-10-16 01:43] ...Serj... was blown away by Spacer's super shotgun
+[2025-10-16 01:43] q was gunned down by slonik
+[2025-10-16 01:43] ...Serj... couldn't hide from Pitfall.MasK's BFG
+[2025-10-16 01:43] Pitfall.MasK was blown away by q's super shotgun
+[2025-10-16 01:43] q was railed by Spacer
+[2025-10-16 01:43] ...Serj... was gunned down by slonik
+[2025-10-16 01:43] Pitfall.MasK was gunned down by slonik
+[2025-10-16 01:43] slonik almost dodged WerWolF's rocket
+[2025-10-16 01:43] slonik was railed by Spacer
+[2025-10-16 01:43] slonik couldn't hide from ...Serj...'s BFG
+[2025-10-16 01:43] Spacer was disintegrated by q's BFG blast
+[2025-10-16 01:43] q should have used a smaller gun.
+[2025-10-16 01:43] WerWolF almost dodged Pitfall.MasK's rocket
+[2025-10-16 01:43] Pitfall.MasK was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] slonik was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] ...Serj... was machinegunned by Spacer
+[2025-10-16 01:43] WerWolF was railed by q
+[2025-10-16 01:43] WerWolF: :-)) 
+[2025-10-16 01:43] slonik was railed by q
+[2025-10-16 01:43] Spacer ate Pitfall.MasK's rocket
+[2025-10-16 01:43] ...Serj... was railed by q
+[2025-10-16 01:43] ...Serj... was railed by q
+[2025-10-16 01:43] WerWolF was railed by q
+[2025-10-16 01:43] q was railed by slonik
+[2025-10-16 01:43] slonik was blown away by Spacer's super shotgun
+[2025-10-16 01:43] slonik was machinegunned by q
+[2025-10-16 01:43] ...Serj... was machinegunned by q
+[2025-10-16 01:43] slonik tried to invade ...Serj...'s personal space
+[2025-10-16 01:43] WerWolF was railed by Spacer
+[2025-10-16 01:43] ...Serj... was blown away by q's super shotgun
+[2025-10-16 01:43] WerWolF does a back flip into the lava.
+[2025-10-16 01:43] Spacer was blown away by Pitfall.MasK's super shotgun
+[2025-10-16 01:43] Spacer was blown away by q's super shotgun
+[2025-10-16 01:43] Pitfall.MasK was blown away by q's super shotgun
+[2025-10-16 01:43] q does a back flip into the lava.
+[2025-10-16 01:43] Pitfall.MasK was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] Spacer was railed by Pitfall.MasK
+[2025-10-16 01:43] Spacer was railed by WerWolF
+[2025-10-16 01:43] Pitfall.MasK was disintegrated by q's BFG blast
+[2025-10-16 01:43] q was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] q was disintegrated by slonik's BFG blast
+[2025-10-16 01:43] ...Serj... couldn't hide from slonik's BFG
+[2025-10-16 01:43] Spacer was railed by WerWolF
+[2025-10-16 01:43] Pitfall.MasK almost dodged Spacer's rocket
+[2025-10-16 01:43] WerWolF was railed by ...Serj...
+[2025-10-16 01:43] q was blown away by slonik's super shotgun
+[2025-10-16 01:43] WerWolF was blown away by slonik's super shotgun
+[2025-10-16 01:43] q was blown away by slonik's super shotgun
+[2025-10-16 01:43] Spacer almost dodged ...Serj...'s rocket
+[2025-10-16 01:43] Spacer was railed by q
+[2025-10-16 01:43] WerWolF was railed by q
+[2025-10-16 01:43] WerWolF: :-(( 
+[2025-10-16 01:43] Pitfall.MasK was railed by q
+[2025-10-16 01:43] Spacer was railed by q
+[2025-10-16 01:43] slonik was railed by q
+[2025-10-16 01:43] slonik was machinegunned by Spacer
+[2025-10-16 01:43] ...Serj... almost dodged Spacer's rocket
+[2025-10-16 01:43] Spacer couldn't hide from Pitfall.MasK's BFG
+[2025-10-16 01:43] WerWolF was railed by q
+[2025-10-16 01:43] q was cut in half by Pitfall.MasK's chaingun
+[2025-10-16 01:43] Pitfall.MasK was cut in half by WerWolF's chaingun
+[2025-10-16 01:43] Spacer was blasted by ...Serj...
+[2025-10-16 01:43] Pitfall.MasK was railed by WerWolF
+[2025-10-16 01:43] Spacer was railed by slonik
+[2025-10-16 01:43] ...Serj... was railed by q
+[2025-10-16 01:43] Spacer was railed by slonik
+[2025-10-16 01:43] Spacer almost dodged ...Serj...'s rocket
+[2025-10-16 01:43] WerWolF almost dodged ...Serj...'s rocket
+[2025-10-16 01:43] Pitfall.MasK was railed by slonik
+[2025-10-16 01:43] ...Serj... was railed by slonik
+[2025-10-16 01:43] Spacer was railed by slonik
+[2025-10-16 01:43] 10 minutes remaining in match.
+[2025-10-16 01:43] Spacer was railed by q
+[2025-10-16 01:43] WerWolF couldn't hide from Spacer's BFG
+[2025-10-16 01:43] WerWolF was railed by q
+[2025-10-16 01:43] Pitfall.MasK was railed by q
+[2025-10-16 01:43] Pitfall.MasK was disintegrated by q's BFG blast
+[2025-10-16 01:43] WerWolF was railed by ...Serj...
+[2025-10-16 01:43] ...Serj... was railed by Spacer
+[2025-10-16 01:43] q was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] ...Serj... does a back flip into the lava.
+[2025-10-16 01:43] Spacer almost dodged slonik's rocket
+[2025-10-16 01:43] Pitfall.MasK was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] q was blown away by slonik's super shotgun
+[2025-10-16 01:43] slonik ate WerWolF's rocket
+[2025-10-16 01:43] Spacer almost dodged WerWolF's rocket
+[2025-10-16 01:43] ...Serj... was blown away by q's super shotgun
+[2025-10-16 01:43] q couldn't hide from ...Serj...'s BFG
+[2025-10-16 01:43] q almost dodged WerWolF's rocket
+[2025-10-16 01:43] Spacer almost dodged WerWolF's rocket
+[2025-10-16 01:43] slonik does a back flip into the lava.
+[2025-10-16 01:43] ...Serj... was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] WerWolF does a back flip into the lava.
+[2025-10-16 01:43] WerWolF: :-)) 
+[2025-10-16 01:43] q: .) 
+[2025-10-16 01:43] WerWolF was machinegunned by q
+[2025-10-16 01:43] Pitfall.MasK couldn't hide from Spacer's BFG
+[2025-10-16 01:43] Spacer ate ...Serj...'s rocket
+[2025-10-16 01:43] ...Serj... couldn't hide from WerWolF's BFG
+[2025-10-16 01:43] Spacer couldn't hide from WerWolF's BFG
+[2025-10-16 01:43] WerWolF was disintegrated by q's BFG blast
+[2025-10-16 01:43] q was railed by slonik
+[2025-10-16 01:43] q almost dodged ...Serj...'s rocket
+[2025-10-16 01:43] ...Serj... was cut in half by Spacer's chaingun
+[2025-10-16 01:43] q ate Pitfall.MasK's rocket
+[2025-10-16 01:43] ...Serj... was cut in half by Spacer's chaingun
+[2025-10-16 01:43] slonik was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] WerWolF was railed by q
+[2025-10-16 01:43] q was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] WerWolF: :-)) 
+[2025-10-16 01:43] WerWolF tried to invade q's personal space
+[2025-10-16 01:43] q: .) 
+[2025-10-16 01:43] slonik was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] ...Serj... almost dodged slonik's rocket
+[2025-10-16 01:43] WerWolF does a back flip into the lava.
+[2025-10-16 01:43] WerWolF: :-(( 
+[2025-10-16 01:43] ...Serj... was cut in half by Spacer's chaingun
+[2025-10-16 01:43] q was blown away by Spacer's super shotgun
+[2025-10-16 01:43] slonik was blown away by Spacer's super shotgun
+[2025-10-16 01:43] slonik was blown away by Spacer's super shotgun
+[2025-10-16 01:43] Spacer was blown away by Pitfall.MasK's super shotgun
+[2025-10-16 01:43] WerWolF does a back flip into the lava.
+[2025-10-16 01:43] Pitfall.MasK was blown away by slonik's super shotgun
+[2025-10-16 01:43] q was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] ...Serj... was railed by WerWolF
+[2025-10-16 01:43] ...Serj... was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] Pitfall.MasK does a back flip into the lava.
+[2025-10-16 01:43] WerWolF was blown away by q's super shotgun
+[2025-10-16 01:43] WerWolF ate Pitfall.MasK's rocket
+[2025-10-16 01:43] Spacer was blown away by slonik's super shotgun
+[2025-10-16 01:43] slonik saw the pretty lights from ...Serj...'s BFG
+[2025-10-16 01:43] q couldn't hide from ...Serj...'s BFG
+[2025-10-16 01:43] WerWolF couldn't hide from Spacer's BFG
+[2025-10-16 01:43] Pitfall.MasK blew himself up.
+[2025-10-16 01:43] slonik almost dodged Pitfall.MasK's rocket
+[2025-10-16 01:43] slonik does a back flip into the lava.
+[2025-10-16 01:43] Pitfall.MasK was disintegrated by Spacer's BFG blast
+[2025-10-16 01:43] Spacer was cut in half by q's chaingun
+[2025-10-16 01:43] slonik does a back flip into the lava.
+[2025-10-16 01:43] WerWolF ate slonik's rocket
+[2025-10-16 01:43] WerWolF: Nice shot!!! 
+[2025-10-16 01:43] WerWolF couldn't hide from Spacer's BFG
+[2025-10-16 01:43] slonik was blown away by q's super shotgun
+[2025-10-16 01:43] Pitfall.MasK does a back flip into the lava.
+[2025-10-16 01:43] Spacer does a back flip into the lava.
+[2025-10-16 01:43] WerWolF: :-)) 
+[2025-10-16 01:43] WerWolF: :-)) 
+[2025-10-16 01:43] WerWolF does a back flip into the lava.
+[2025-10-16 01:43] Spacer almost dodged ...Serj...'s rocket
+[2025-10-16 01:43] WerWolF ate ...Serj...'s rocket
+[2025-10-16 01:43] Pitfall.MasK almost dodged ...Serj...'s rocket
+[2025-10-16 01:43] Pitfall.MasK ate ...Serj...'s rocket
+[2025-10-16 01:43] ...Serj... blew himself up.
+[2025-10-16 01:43] WerWolF was railed by q
+[2025-10-16 01:43] ...Serj... was machinegunned by Spacer
+[2025-10-16 01:43] WerWolF was railed by q
+[2025-10-16 01:43] ...Serj... was railed by q
+[2025-10-16 01:43] ...Serj... was railed by Pitfall.MasK
+[2025-10-16 01:43] q was blown away by slonik's super shotgun
+[2025-10-16 01:43] slonik was machinegunned by Spacer
+[2025-10-16 01:43] WerWolF was disintegrated by ...Serj...'s BFG blast
+[2025-10-16 01:43] Spacer almost dodged slonik's rocket
+[2025-10-16 01:43] Spacer was railed by Pitfall.MasK
+[2025-10-16 01:43] WerWolF almost dodged slonik's rocket
+[2025-10-16 01:43] slonik was railed by Pitfall.MasK
+[2025-10-16 01:43] ...Serj... was disintegrated by q's BFG blast
+[2025-10-16 01:43] q does a back flip into the lava.
+[2025-10-16 01:43] ...Serj... was blown away by q's super shotgun
+[2025-10-16 01:43] slonik was machinegunned by Spacer
+[2025-10-16 01:43] Spacer was railed by Pitfall.MasK
+[2025-10-16 01:43] q couldn't hide from WerWolF's BFG
+[2025-10-16 01:43] Spacer tried to invade q's personal space
+[2025-10-16 01:43] WerWolF was railed by ...Serj...
+[2025-10-16 01:43] q: .) 
+[2025-10-16 01:43] ...Serj... was blown away by Spacer's super shotgun
+[2025-10-16 01:43] WerWolF couldn't hide from q's BFG
+[2025-10-16 01:43] WerWolF was railed by Spacer
+[2025-10-16 01:43] ...Serj... blew himself up.
+[2025-10-16 01:43] Pitfall.MasK saw the pretty lights from q's BFG
+[2025-10-16 01:43] Pitfall.MasK was railed by Spacer
+[2025-10-16 01:43] ...Serj... was railed by Spacer
+[2025-10-16 01:43] WerWolF was railed by Spacer
+[2025-10-16 01:43] Spacer was blown away by slonik's super shotgun
+[2025-10-16 01:43] WerWolF was railed by slonik
+[2025-10-16 01:43] WerWolF was railed by slonik
+[2025-10-16 01:43] WerWolF couldn't hide from ...Serj...'s BFG
+[2025-10-16 01:43] slonik was blown away by Pitfall.MasK's super shotgun
+[2025-10-16 01:43] Pitfall.MasK was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] WerWolF does a back flip into the lava.
+[2025-10-16 01:43] ...Serj... was blown away by q's super shotgun
+[2025-10-16 01:43] ...Serj... was disintegrated by slonik's BFG blast
+[2025-10-16 01:43] slonik does a back flip into the lava.
+[2025-10-16 01:43] Spacer was blown away by q's super shotgun
+[2025-10-16 01:43] Spacer was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] WerWolF was blown away by q's super shotgun
+[2025-10-16 01:43] Pitfall.MasK was blown away by q's super shotgun
+[2025-10-16 01:43] Pitfall.MasK was blown away by q's super shotgun
+[2025-10-16 01:43] Fraglimit hit.
+[2025-10-16 01:43] (k1ru): rape 
+[2025-10-16 01:43] Spacer: eshe ochko 
+[2025-10-16 01:43] q: .) 
+[2025-10-16 01:43] Spacer: mojno pereriv 5 min? 

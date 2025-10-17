@@ -1,0 +1,248 @@
+[2025-10-16 01:43] [dem0] -=- Loading maps/q2dm5.bsp...
+[2025-10-16 01:43] Changing map...
+[2025-10-16 01:43] Reconnecting...
+[2025-10-16 01:43] The Pits
+[2025-10-16 01:43] Match has started!
+[2025-10-16 01:43] slonik entered the game (1 player)
+[2025-10-16 01:43] ...Serj... entered the game (2 players)
+[2025-10-16 01:43] ly[ADMIN]: go 
+[2025-10-16 01:43] q entered the game (3 players)
+[2025-10-16 01:43] Spacer entered the game (4 players)
+[2025-10-16 01:43] Pitfall.MasK entered the game (5 players)
+[2025-10-16 01:43] k1ru entered the game (6 players)
+[2025-10-16 01:43] WerWolF entered the game (7 players)
+[2025-10-16 01:43] k1ru moved to the sidelines (6 players)
+[2025-10-16 01:43] Spacer was popped by ...Serj...'s grenade
+[2025-10-16 01:43] Pitfall.MasK was cut in half by slonik's chaingun
+[2025-10-16 01:43] WerWolF was railed by ...Serj...
+[2025-10-16 01:43] Spacer was cut in half by slonik's chaingun
+[2025-10-16 01:43] WerWolF was railed by ...Serj...
+[2025-10-16 01:43] q was cut in half by slonik's chaingun
+[2025-10-16 01:43] Spacer ate q's rocket
+[2025-10-16 01:43] q blew herself up.
+[2025-10-16 01:43] (k1ru): chut ne sigral ranshe vremeni)) 
+[2025-10-16 01:43] WerWolF was blown away by slonik's super shotgun
+[2025-10-16 01:43] Spacer was blown away by slonik's super shotgun
+[2025-10-16 01:43] Spacer ate Pitfall.MasK's rocket
+[2025-10-16 01:43] (k1ru): lex go voice? 
+[2025-10-16 01:43] WerWolF was railed by ...Serj...
+[2025-10-16 01:43] (ly[ADMIN]): )) 
+[2025-10-16 01:43] Pitfall.MasK was cut in half by slonik's chaingun
+[2025-10-16 01:43] slonik was blasted by Pitfall.MasK
+[2025-10-16 01:43] ...Serj... was railed by q
+[2025-10-16 01:43] (k1ru): mojem postrimit 
+[2025-10-16 01:43] Pitfall.MasK was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] Spacer was popped by slonik's grenade
+[2025-10-16 01:43] WerWolF was popped by slonik's grenade
+[2025-10-16 01:43] slonik: :) 
+[2025-10-16 01:43] WerWolF: :-)) 
+[2025-10-16 01:43] (ly[ADMIN]): seichas nastrou mic 
+[2025-10-16 01:43] slonik was popped by Spacer's grenade
+[2025-10-16 01:43] Spacer was blown away by q's super shotgun
+[2025-10-16 01:43] WerWolF was blown away by q's super shotgun
+[2025-10-16 01:43] ...Serj... ate Spacer's rocket
+[2025-10-16 01:43] slonik was blown away by q's super shotgun
+[2025-10-16 01:43] slonik was blown away by q's super shotgun
+[2025-10-16 01:43] Pitfall.MasK was blown away by q's super shotgun
+[2025-10-16 01:43] q almost dodged Spacer's rocket
+[2025-10-16 01:43] WerWolF was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] Pitfall.MasK almost dodged q's rocket
+[2025-10-16 01:43] Pitfall.MasK was cut in half by Spacer's chaingun
+[2025-10-16 01:43] WerWolF tripped on her own grenade.
+[2025-10-16 01:43] WerWolF: :-)) 
+[2025-10-16 01:43] q was cut in half by Spacer's chaingun
+[2025-10-16 01:43] Pitfall.MasK was blown away by slonik's super shotgun
+[2025-10-16 01:43] ...Serj... was blown away by slonik's super shotgun
+[2025-10-16 01:43] WerWolF was cut in half by Spacer's chaingun
+[2025-10-16 01:43] ...Serj... ate Pitfall.MasK's rocket
+[2025-10-16 01:43] Spacer was railed by q
+[2025-10-16 01:43] Pitfall.MasK was cut in half by Spacer's chaingun
+[2025-10-16 01:43] slonik was blown away by q's super shotgun
+[2025-10-16 01:43] Pitfall.MasK ate Spacer's rocket
+[2025-10-16 01:43] Pitfall.MasK was blown away by q's super shotgun
+[2025-10-16 01:43] ...Serj... was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] WerWolF ate ...Serj...'s rocket
+[2025-10-16 01:43] WerWolF was blown away by q's super shotgun
+[2025-10-16 01:43] ...Serj... almost dodged Spacer's rocket
+[2025-10-16 01:43] ...Serj... was blown away by q's super shotgun
+[2025-10-16 01:43] Spacer almost dodged slonik's rocket
+[2025-10-16 01:43] Spacer was popped by Pitfall.MasK's grenade
+[2025-10-16 01:43] WerWolF was railed by ...Serj...
+[2025-10-16 01:43] Spacer ate slonik's rocket
+[2025-10-16 01:43] Pitfall.MasK was railed by q
+[2025-10-16 01:43] q was railed by ...Serj...
+[2025-10-16 01:43] Pitfall.MasK almost dodged WerWolF's rocket
+[2025-10-16 01:43] Spacer was squished.
+[2025-10-16 01:43] ...Serj... ate slonik's rocket
+[2025-10-16 01:43] Spacer was popped by q's grenade
+[2025-10-16 01:43] WerWolF was blown away by slonik's super shotgun
+[2025-10-16 01:43] ...Serj... was railed by q
+[2025-10-16 01:43] Pitfall.MasK was blown away by slonik's super shotgun
+[2025-10-16 01:43] ...Serj... was blown away by slonik's super shotgun
+[2025-10-16 01:43] WerWolF was blown away by slonik's super shotgun
+[2025-10-16 01:43] WerWolF ate ...Serj...'s rocket
+[2025-10-16 01:43] Spacer was railed by q
+[2025-10-16 01:43] q was blown away by Pitfall.MasK's super shotgun
+[2025-10-16 01:43] Pitfall.MasK was railed by Spacer
+[2025-10-16 01:43] WerWolF was squished.
+[2025-10-16 01:43] WerWolF: :-)) 
+[2025-10-16 01:43] q ate ...Serj...'s rocket
+[2025-10-16 01:43] WerWolF ate ...Serj...'s rocket
+[2025-10-16 01:43] WerWolF was railed by Spacer
+[2025-10-16 01:43] ...Serj... blew himself up.
+[2025-10-16 01:43] q almost dodged ...Serj...'s rocket
+[2025-10-16 01:43] Spacer was blown away by slonik's super shotgun
+[2025-10-16 01:43] q was blown away by slonik's super shotgun
+[2025-10-16 01:43] Spacer was popped by WerWolF's grenade
+[2025-10-16 01:43] WerWolF almost dodged q's rocket
+[2025-10-16 01:43] WerWolF was railed by Pitfall.MasK
+[2025-10-16 01:43] ...Serj... was blown away by slonik's super shotgun
+[2025-10-16 01:43] Pitfall.MasK was popped by Spacer's grenade
+[2025-10-16 01:43] Spacer tripped on his own grenade.
+[2025-10-16 01:43] Spacer ate slonik's rocket
+[2025-10-16 01:43] ...Serj... was cut in half by slonik's chaingun
+[2025-10-16 01:43] 10 minutes remaining in match.
+[2025-10-16 01:43] WerWolF was cut in half by slonik's chaingun
+[2025-10-16 01:43] Spacer was railed by q
+[2025-10-16 01:43] WerWolF ate Pitfall.MasK's rocket
+[2025-10-16 01:43] Pitfall.MasK was railed by q
+[2025-10-16 01:43] Pitfall.MasK caught WerWolF's handgrenade
+[2025-10-16 01:43] WerWolF was railed by q
+[2025-10-16 01:43] Pitfall.MasK was blown away by slonik's super shotgun
+[2025-10-16 01:43] ...Serj... was railed by WerWolF
+[2025-10-16 01:43] q was blown away by Spacer's super shotgun
+[2025-10-16 01:43] Pitfall.MasK was blown away by slonik's super shotgun
+[2025-10-16 01:43] WerWolF was railed by Spacer
+[2025-10-16 01:43] Pitfall.MasK was blown away by slonik's super shotgun
+[2025-10-16 01:43] q was popped by ...Serj...'s grenade
+[2025-10-16 01:43] Spacer was blown away by slonik's super shotgun
+[2025-10-16 01:43] Pitfall.MasK was blown away by slonik's super shotgun
+[2025-10-16 01:43] ...Serj... ate WerWolF's rocket
+[2025-10-16 01:43] slonik was blown away by Spacer's super shotgun
+[2025-10-16 01:43] q was blown away by slonik's super shotgun
+[2025-10-16 01:43] WerWolF was railed by slonik
+[2025-10-16 01:43] q was railed by Spacer
+[2025-10-16 01:43] WerWolF was railed by ...Serj...
+[2025-10-16 01:43] slonik was popped by q's grenade
+[2025-10-16 01:43] Pitfall.MasK was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] WerWolF was railed by q
+[2025-10-16 01:43] ...Serj... was railed by q
+[2025-10-16 01:43] Spacer was blown away by q's super shotgun
+[2025-10-16 01:43] ...Serj... was popped by WerWolF's grenade
+[2025-10-16 01:43] WerWolF tripped on her own grenade.
+[2025-10-16 01:43] WerWolF: :-)) 
+[2025-10-16 01:43] ...Serj... tried to invade WerWolF's personal space
+[2025-10-16 01:43] WerWolF was popped by Spacer's grenade
+[2025-10-16 01:43] WerWolF was railed by slonik
+[2025-10-16 01:43] slonik was blown away by q's super shotgun
+[2025-10-16 01:43] q was railed by Spacer
+[2025-10-16 01:43] Pitfall.MasK was railed by Spacer
+[2025-10-16 01:43] slonik was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] WerWolF was railed by Spacer
+[2025-10-16 01:43] Pitfall.MasK almost dodged q's rocket
+[2025-10-16 01:43] q almost dodged slonik's rocket
+[2025-10-16 01:43] slonik almost dodged q's rocket
+[2025-10-16 01:43] Pitfall.MasK was cut in half by ...Serj...'s chaingun
+[2025-10-16 01:43] WerWolF was blown away by Spacer's super shotgun
+[2025-10-16 01:43] Spacer was popped by slonik's grenade
+[2025-10-16 01:43] Spacer was cut in half by ...Serj...'s chaingun
+[2025-10-16 01:43] ...Serj... was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] WerWolF was shredded by Pitfall.MasK's shrapnel
+[2025-10-16 01:43] ...Serj... tried to invade WerWolF's personal space
+[2025-10-16 01:43] Pitfall.MasK was railed by slonik
+[2025-10-16 01:43] WerWolF was blown away by q's super shotgun
+[2025-10-16 01:43] Pitfall.MasK was blown away by q's super shotgun
+[2025-10-16 01:43] ...Serj... was railed by q
+[2025-10-16 01:43] slonik was railed by q
+[2025-10-16 01:43] WerWolF ate Pitfall.MasK's rocket
+[2025-10-16 01:43] slonik was railed by q
+[2025-10-16 01:43] slonik almost dodged Spacer's rocket
+[2025-10-16 01:43] ...Serj... was machinegunned by q
+[2025-10-16 01:43] WerWolF almost dodged Pitfall.MasK's rocket
+[2025-10-16 01:43] Spacer was cut in half by WerWolF's chaingun
+[2025-10-16 01:43] [MVD] pruzhinkin: use machinegun
+[2025-10-16 01:43] q was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] slonik ate Spacer's rocket
+[2025-10-16 01:43] Pitfall.MasK was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] ...Serj... was railed by WerWolF
+[2025-10-16 01:43] Pitfall.MasK was cut in half by Spacer's chaingun
+[2025-10-16 01:43] Spacer was blown away by q's super shotgun
+[2025-10-16 01:43] q was blown away by slonik's super shotgun
+[2025-10-16 01:43] Spacer almost dodged ...Serj...'s rocket
+[2025-10-16 01:43] Spacer was railed by q
+[2025-10-16 01:43] ...Serj... was blown away by slonik's super shotgun
+[2025-10-16 01:43] ...Serj... ate Spacer's rocket
+[2025-10-16 01:43] Spacer was railed by q
+[2025-10-16 01:43] q almost dodged slonik's rocket
+[2025-10-16 01:43] Pitfall.MasK was railed by ...Serj...
+[2025-10-16 01:43] ...Serj... was popped by q's grenade
+[2025-10-16 01:43] slonik was railed by q
+[2025-10-16 01:43] Pitfall.MasK was cut in half by Spacer's chaingun
+[2025-10-16 01:43] q was railed by WerWolF
+[2025-10-16 01:43] Spacer was blown away by slonik's super shotgun
+[2025-10-16 01:43] ...Serj... was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] q was blown away by slonik's super shotgun
+[2025-10-16 01:43] slonik was machinegunned by Spacer
+[2025-10-16 01:43] Pitfall.MasK was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] slonik was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] Spacer almost dodged q's rocket
+[2025-10-16 01:43] Spacer ate q's rocket
+[2025-10-16 01:43] ...Serj... was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] slonik was blown away by WerWolF's super shotgun
+[2025-10-16 01:43] slonik was squished.
+[2025-10-16 01:43] Pitfall.MasK was shredded by ...Serj...'s shrapnel
+[2025-10-16 01:43] WerWolF was blown away by Pitfall.MasK's super shotgun
+[2025-10-16 01:43] WerWolF: :-)) 
+[2025-10-16 01:43] q was railed by ...Serj...
+[2025-10-16 01:43] 5 minutes remaining in match.
+[2025-10-16 01:43] WerWolF was blown away by Pitfall.MasK's super shotgun
+[2025-10-16 01:43] WerWolF was railed by ...Serj...
+[2025-10-16 01:43] Pitfall.MasK almost dodged Spacer's rocket
+[2025-10-16 01:43] WerWolF was machinegunned by q
+[2025-10-16 01:43] q was railed by slonik
+[2025-10-16 01:43] slonik was popped by WerWolF's grenade
+[2025-10-16 01:43] Spacer was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] q was railed by WerWolF
+[2025-10-16 01:43] WerWolF was blown away by Spacer's super shotgun
+[2025-10-16 01:43] Pitfall.MasK ate q's rocket
+[2025-10-16 01:43] slonik was blown away by Spacer's super shotgun
+[2025-10-16 01:43] q was blown away by Spacer's super shotgun
+[2025-10-16 01:43] q was railed by Spacer
+[2025-10-16 01:43] slonik was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] slonik ate WerWolF's rocket
+[2025-10-16 01:43] q was blasted by Pitfall.MasK
+[2025-10-16 01:43] ...Serj... was railed by Pitfall.MasK
+[2025-10-16 01:43] slonik was railed by Spacer
+[2025-10-16 01:43] q was railed by ...Serj...
+[2025-10-16 01:43] WerWolF was railed by Pitfall.MasK
+[2025-10-16 01:43] q was popped by slonik's grenade
+[2025-10-16 01:43] WerWolF was railed by Spacer
+[2025-10-16 01:43] slonik was railed by ...Serj...
+[2025-10-16 01:43] ...Serj... was shredded by slonik's shrapnel
+[2025-10-16 01:43] Pitfall.MasK was railed by q
+[2025-10-16 01:43] Spacer was cut in half by q's chaingun
+[2025-10-16 01:43] slonik was cut in half by q's chaingun
+[2025-10-16 01:43] WerWolF was railed by ...Serj...
+[2025-10-16 01:43] Spacer was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] Pitfall.MasK was railed by q
+[2025-10-16 01:43] Pitfall.MasK ate slonik's rocket
+[2025-10-16 01:43] slonik ate WerWolF's rocket
+[2025-10-16 01:43] Spacer was cut in half by q's chaingun
+[2025-10-16 01:43] slonik was cut in half by q's chaingun
+[2025-10-16 01:43] Pitfall.MasK was cut in half by q's chaingun
+[2025-10-16 01:43] Spacer ate WerWolF's rocket
+[2025-10-16 01:43] WerWolF was popped by Pitfall.MasK's grenade
+[2025-10-16 01:43] slonik was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] WerWolF: :-)) 
+[2025-10-16 01:43] Spacer was popped by Pitfall.MasK's grenade
+[2025-10-16 01:43] Spacer almost dodged WerWolF's rocket
+[2025-10-16 01:43] slonik was blown away by ...Serj...'s super shotgun
+[2025-10-16 01:43] Pitfall.MasK was railed by q
+[2025-10-16 01:43] Fraglimit hit.
+[2025-10-16 01:43] k1ru: gg 
+[2025-10-16 01:43] WerWolF: gg 
+[2025-10-16 01:43] q: eli eli 
+[2025-10-16 01:43] Spacer: virval ochko 
+[2025-10-16 01:43] ly[ADMIN]: gg 
+[2025-10-16 01:43] slonik: :) 
+[2025-10-16 01:43] k1ru: haha 
