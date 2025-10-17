@@ -11,15 +11,66 @@ const LogParser: React.FC = () => {
   const [wrongTurn, setWrongTurn] = useState<WrongTurnAchievement | null>(null);
   const [mostGrenades, setMostGrenades] = useState<GrenadeAchievement | null>(null);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setMessage('');
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setPlayerStats({});
     setHeadHunter(null);
     setWrongTurn(null);
 
-    const file = event.target.files?.[0];
-    if (!file) { setMessage('No file selected.'); return; }
+    const files = event.target.files;
+    if (!files || files.length === 0) {
+      setMessage('No files selected.');
+      return;
+    }
 
+    setMessage(`Reading ${files.length} log file(s)...`);
+    try {
+      // Create an array of Promises, one for each file
+      const readPromises = Array.from(files).map(file => {
+        return new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = (e: ProgressEvent<FileReader>) => {
+            resolve(e.target?.result as string);
+          };
+          reader.onerror = () => {
+            reject(`Error reading ${file.name}`);
+          };
+          reader.readAsText(file);
+        });
+      });
+
+      // Wait for all files to be read
+      const allFileContents = await Promise.all(readPromises);
+
+      // Join the content of all files into a single string
+      const fullContent = allFileContents.join('\n');
+
+      // --- The rest of the processing is the same ---
+      const timestampRegex = /^\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}\] /;
+      const allLines = fullContent.split('\n').map(line => line.replace(timestampRegex, ''));
+
+      // You might have multiple "Match has started!" lines. We'll just process everything.
+      // Or, if you want to be more specific, you could process logs between the first
+      // "Match started" and the last "Match ended" line, but for simplicity, we process all.
+
+
+      // Assign achievements...
+      // ... (same achievement assignment logic as before) ...
+      const calculatedStats = parseGameEvents(allLines);
+
+      setPlayerStats(calculatedStats);
+      setMessage(`Successfully parsed the log.`);
+
+      // Achievements
+      setHeadHunter(calculateHeadHunter(calculatedStats));
+      setMostTelefrags(calculateMostTelefrags(calculatedStats));
+      setWrongTurn(calculateWrongTurn(calculatedStats));
+      setMostGrenades(calculateMostGrenadeKills(calculatedStats));
+
+    } catch (error) {
+      setMessage(`An error occurred: ${error}`);
+      setPlayerStats({});
+    }
+    /*
     const reader = new FileReader();
     reader.onload = (e: ProgressEvent<FileReader>) => {
       const fullContent = e.target?.result as string;
@@ -43,6 +94,7 @@ const LogParser: React.FC = () => {
     };
     reader.onerror = () => { setMessage('An error occurred while reading the file.'); };
     reader.readAsText(file);
+    */
   };
 
 
@@ -58,6 +110,7 @@ const LogParser: React.FC = () => {
         accept=".txt,.log"
         onChange={handleFileChange}
         style={{ margin: '20px 0' }}
+        multiple
       />
 
       {message && <p><em>{message}</em></p>}

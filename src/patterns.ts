@@ -20,5 +20,26 @@ export const killPatterns = [
 ];
 export const suicidePatterns = [
     /(.+) does a back flip into the lava/,
-    // Add acid suicide messages here, e.g., /(.+) cratered/
+    /(.+) blew up/,
+    /(.+) cratered/,
+    /(.+) does a back flip into the lava/,
+    /(.+) found a way out/,
+    /(.+) got blasted/,
+    /(.+) melted/,
+    /(.+) sank like a rock/,
+    /(.+) saw the light/,
+    /(.+) suicides/,
+    /(.+) was in the wrong place/,
+    /(.+) was squished/,
+    /(.+) blew herself up/,
+    /(.+) blew himself up/,
+    /(.+) blew itself up/,
+    /(.+) killed herself/,
+    /(.+) killed himself/,
+    /(.+) killed itself/,
+    /(.+) should have used a smaller gun/,
+    /(.+) tried to put the pin back in/,
+    /(.+) tripped on her own grenade/,
+    /(.+) tripped on his own grenade/,
+    /(.+) tripped on its own grenade/
 ];
