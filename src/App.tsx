@@ -1,5 +1,5 @@
 import { PlayerTable } from './Table';
-import { calculateHeadHunter, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostTelefrags, calculateWrongTurn, filterGameLines, findLongestNameStreak, parseGameEvents } from './functions';
+import { calculateHeadHunter, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostTelefrags, calculateWrongTurn, filterGameLines, parseGameEvents } from './functions';
 import type { AllPlayerStats, HeadHunterAchievement, TelefragAchievement, WrongTurnAchievement, GrenadeAchievement } from './types';
 import React, { useState } from 'react';
 
