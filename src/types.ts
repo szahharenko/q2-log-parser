@@ -11,7 +11,8 @@ export interface PlayerStats {
     grenadeKills: number;
     telefrags: number;
     kdr?: number;
-    eventStreak: number
+    eventStreak: number;
+    headHunter: number;
 }
 export type AllPlayerStats = {
     [playerName: string]: PlayerStats;

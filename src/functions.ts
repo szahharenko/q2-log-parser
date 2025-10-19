@@ -134,7 +134,7 @@ export const parseGameEvents = (lines: string[]): AllPlayerStats => {
     const stats: AllPlayerStats = {};
     const ensurePlayer = (name: string) => {
       if (!stats[name]) {
-        stats[name] = { kills: 0, deaths: 0, suicides: 0,  telefrags: 0, eventStreak: 0, killBreakdown: {}, grenadeKills: 0 };
+        stats[name] = { kills: 0, deaths: 0, suicides: 0,  telefrags: 0, eventStreak: 0, killBreakdown: {}, grenadeKills: 0, headHunter: 0};
       }
     };
     let currentStreakPlayer: string | null = null;
