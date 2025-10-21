@@ -1,5 +1,5 @@
 import { killPatterns, suicidePatterns } from "./patterns";
-import { AllPlayerStats, EventStreakAchievement, GrenadeAchievement, HeadHunterAchievement, TelefragAchievement, WrongTurnAchievement } from "./types";
+import { AllPlayerStats, EventStreakAchievement, GrenadeAchievement, HeadHunterAchievement, TelefragAchievement, WrongTurnAchievement } from "../types/types";
 
 export const calculateHeadHunter = (stats: AllPlayerStats): HeadHunterAchievement | null => {
     const players = Object.keys(stats);

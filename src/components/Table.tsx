@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { PlayerStats } from './types';
+import { PlayerStats } from '../types/types';
 
 interface PlayerTableProps {
     playerStats: Record<string, PlayerStats>;

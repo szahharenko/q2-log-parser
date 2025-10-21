@@ -1,4 +1,4 @@
-import { PlayerStats as PlayerStatsType } from './types';
+import { PlayerStats as PlayerStatsType } from '../types/types';
 
 interface PlayerStatsProps {
     playerStats: Record<string, PlayerStatsType>;

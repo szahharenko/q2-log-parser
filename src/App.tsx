@@ -1,8 +1,8 @@
-import { Achievements } from './Achievements';
-import { PlayerStats } from './PlayerStats';
-import { PlayerTable } from './Table';
-import { filterGameLines, parseGameEvents } from './functions';
-import type { AllPlayerStats } from './types';
+import { Achievements } from './components/Achievements';
+import { PlayerStats } from './components/PlayerStats';
+import { PlayerTable } from './components/Table';
+import { filterGameLines, parseGameEvents } from './utils/functions';
+import type { AllPlayerStats } from './types/types';
 import React, { useState } from 'react';
 
 const LogParser: React.FC = () => {
@@ -40,19 +40,18 @@ const LogParser: React.FC = () => {
       // Wait for all files to be read
       const allFileContents = await Promise.all(readPromises);
 
-      // Join the content of all files into a single string
+      // Extract and process game event lines from all files
       const fullContent = allFileContents.join('\n');
-
-      // --- The rest of the processing is the same ---
       const timestampRegex = /^\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}\] /;
       const allLines = fullContent.split('\n').map(line => line.replace(timestampRegex, ''));
-
       const onlyGameEvents = filterGameLines(allLines);
+
+      // Parse game events to calculate stats
       const { stats: calculatedStats, weaponStats: calculatedWeaponStats} = parseGameEvents(onlyGameEvents);
 
       setPlayerStats(calculatedStats);
       setWeaponStats(calculatedWeaponStats);
-      setMessage(`Successfully parsed the log.`);
+      setMessage(`Successfully parsed ${files.length} log file(s).`);
 
     } catch (error) {
       setMessage(`An error occurred: ${error}`);

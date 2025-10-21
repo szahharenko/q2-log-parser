@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { GrenadeAchievement, HeadHunterAchievement, PlayerStats, TelefragAchievement, WrongTurnAchievement } from './types';
-import { calculateHeadHunter, calculateMostBlasterKills, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostTelefrags, calculateNoMercyForMinions, calculateWrongTurn } from './functions';
+import { GrenadeAchievement, HeadHunterAchievement, PlayerStats, TelefragAchievement, WrongTurnAchievement } from '../types/types';
+import { calculateHeadHunter, calculateMostBlasterKills, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostTelefrags, calculateNoMercyForMinions, calculateWrongTurn } from '../utils/functions';
 
 interface AchievementsProps {
     playerStats: Record<string, PlayerStats>;
@@ -8,7 +8,7 @@ interface AchievementsProps {
 }
 
 export const Achievements = ({playerStats, weaponStats}: AchievementsProps) => {
-    
+
     const [headHunter, setHeadHunter] = useState<HeadHunterAchievement | null>(null);
     const [mostTelefrags, setMostTelefrags] = useState<TelefragAchievement | null>(null);
     const [wrongTurn, setWrongTurn] = useState<WrongTurnAchievement | null>(null);
