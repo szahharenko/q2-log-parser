@@ -196,8 +196,10 @@ const getWeaponName = (pattern: string): Weapon | null => {
     if(pattern.includes("shrapnel")) return 'Grenade';
     if(pattern.includes("grenade")) return 'Grenade';
     if(pattern.includes("invade")) return 'Telefrag';
+    if(pattern.includes("pain")) return 'Telefrag';
     if(pattern.includes("gunned down by")) return 'Shotgun';
     if(pattern.includes("blasted by")) return 'Blaster';
+
     return null;
 }
 
