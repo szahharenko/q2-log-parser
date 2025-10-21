@@ -1,5 +1,5 @@
 import { PlayerTable } from './Table';
-import { calculateHeadHunter, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostTelefrags, calculateNoMercyForMinions, calculateWrongTurn, filterGameLines, parseGameEvents } from './functions';
+import { calculateHeadHunter, calculateMostBlasterKills, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostTelefrags, calculateNoMercyForMinions, calculateWrongTurn, filterGameLines, parseGameEvents } from './functions';
 import type { AllPlayerStats, HeadHunterAchievement, TelefragAchievement, WrongTurnAchievement, GrenadeAchievement } from './types';
 import React, { useState } from 'react';
 
@@ -9,9 +9,10 @@ const LogParser: React.FC = () => {
   const [headHunter, setHeadHunter] = useState<HeadHunterAchievement | null>(null);
   const [mostTelefrags, setMostTelefrags] = useState<TelefragAchievement | null>(null);
   const [wrongTurn, setWrongTurn] = useState<WrongTurnAchievement | null>(null);
-  const [mostGrenades, setMostGrenades] = useState<GrenadeAchievement | null>(null);
   const [mostEventStreak, setMostEventStreak] = useState<WrongTurnAchievement | null>(null);
   const [mostBully, setMostBully] = useState<HeadHunterAchievement | null>(null);
+  const [mostGrenades, setMostGrenades] = useState<GrenadeAchievement | null>(null);
+  const [mostBlaster, setMostBlaster] = useState<GrenadeAchievement | null>(null);
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setPlayerStats({});
@@ -68,6 +69,7 @@ const LogParser: React.FC = () => {
       setMostTelefrags(calculateMostTelefrags(calculatedStats));
       setWrongTurn(calculateWrongTurn(calculatedStats));
       setMostGrenades(calculateMostGrenadeKills(calculatedStats));
+      setMostBlaster(calculateMostBlasterKills(calculatedStats));
       setMostEventStreak(calculateMostEventStreak(calculatedStats));
       setMostBully(calculateNoMercyForMinions(calculatedStats)); // Reusing HeadHunter calculation for Bully
 
@@ -153,6 +155,16 @@ const LogParser: React.FC = () => {
         </div>
       )}
 
+      { /* Blaster kills achievement could be added here similarly */ }
+      {mostBlaster && (
+        <div style={{ padding: '10px 15px', border: '1px solid #17a2b8', backgroundColor: '#d1f0f7', borderRadius: '5px', marginBottom: '20px' }}>
+          <h3 style={{ marginTop: 0 }}>🔫 Optimist</h3>
+          <p style={{ margin: 0 }}>
+            <strong>{mostBlaster.achievers.join(' & ')}</strong> tops the charts with <strong>{mostBlaster.count}</strong> blaster kills!
+          </p>
+        </div>
+      )}
+
       {/* Detailed stats */}
       {Object.keys(playerStats).length > 0 && (
         <div style={{ marginTop: '30px' }}>
@@ -169,6 +181,17 @@ const LogParser: React.FC = () => {
                                 .map(([victim, count]) => (
                                     <li key={victim}>
                                         Killed <strong>{victim}</strong> {count} {count > 1 ? 'times' : 'time'}
+                                    </li>
+                                ))}
+                        </ul>
+                        {/* weaponKillsBreakdown */ }
+                        <h5 style={{ margin: '10px 0 5px 0' }}>{player} weapon stats:</h5>
+                        <ul style={{ margin: 0, paddingLeft: '20px' }}>
+                            {Object.entries(stats.weaponKillsBreakdown)
+                                .sort(([, a], [, b]) => b - a)
+                                .map(([weapon, count]) => (
+                                    <li key={weapon}>
+                                        {weapon}: <strong>{count}</strong> {count > 1 ? 'kills' : 'kill'}
                                     </li>
                                 ))}
                         </ul>

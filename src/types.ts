@@ -3,17 +3,22 @@
 export interface KillBreakdown {
     [victimName: string]: number;
   }
+export interface WeaponKillsBreakdown {
+    [weaponName: string]: number
+};
 export interface PlayerStats {
     kills: number;
     deaths: number;
     suicides: number;
     killBreakdown: KillBreakdown;
+    weaponKillsBreakdown: WeaponKillsBreakdown
     grenadeKills: number;
     telefrags: number;
     kdr?: number;
     eventStreak: number;
     headHunter: number;
     looseHunter: number;
+    blasterKills: number;
 }
 export type AllPlayerStats = {
     [playerName: string]: PlayerStats;

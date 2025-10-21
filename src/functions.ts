@@ -136,6 +136,20 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
     return { achievers, count: maxGrenadeKills };
   };
 
+  export const calculateMostBlasterKills = (stats: AllPlayerStats): GrenadeAchievement | null => {
+    let maxBlasterKills = 0;
+    for (const playerName in stats) {
+        if (stats[playerName].blasterKills > maxBlasterKills) {
+            maxBlasterKills = stats[playerName].blasterKills;
+        }
+    }
+
+    if (maxBlasterKills === 0) return null;
+
+    const achievers = Object.keys(stats).filter(p => stats[p].blasterKills === maxBlasterKills);
+    return { achievers, count: maxBlasterKills };
+  }
+
   export const calculateMostEventStreak = (stats: AllPlayerStats): EventStreakAchievement | null => {
     let maxEventStreak = 0;
     for (const playerName in stats) {
@@ -168,12 +182,28 @@ export const filterGameLines = (lines: string[]): string[] => {
   });
 };
 
+const getWeaponName = (pattern: string): string => {
+    if(pattern.includes("railed")) return 'Railgun';
+    if(pattern.includes("rocket")) return 'Rocket Launcher';
+    if(pattern.includes("machinegunned")) return 'Machinegun';
+    if(pattern.includes("chaingun")) return 'Chaingun';
+    if(pattern.includes("super shotgun")) return 'Super Shotgun';
+    if(pattern.includes("hyperblaster")) return 'Hyperblaster';
+    if(pattern.includes("BFG")) return 'BFG';
+    if(pattern.includes("grenade")) return 'Grenade';
+    if(pattern.includes("shrapnel")) return 'Grenade';
+    if(pattern.includes("grenade")) return 'Grenade';
+    if(pattern.includes("invade")) return 'Telefrag';
+    if(pattern.includes("gunned down by")) return 'Shotgun';
+    if(pattern.includes("blasted by")) return 'Blaster';
+    return '';
+}
 
 export const parseGameEvents = (lines: string[]): AllPlayerStats => {
     const stats: AllPlayerStats = {};
     const ensurePlayer = (name: string) => {
       if (!stats[name]) {
-        stats[name] = { kills: 0, deaths: 0, suicides: 0,  telefrags: 0, eventStreak: 0, killBreakdown: {}, grenadeKills: 0, headHunter: 0, looseHunter: 0};
+        stats[name] = { kills: 0, deaths: 0, suicides: 0,  telefrags: 0, eventStreak: 0, killBreakdown: {}, grenadeKills: 0, headHunter: 0, looseHunter: 0, weaponKillsBreakdown: {}, blasterKills: 0};
       }
     };
     let currentStreakPlayer: string | null = null;
@@ -203,14 +233,23 @@ export const parseGameEvents = (lines: string[]): AllPlayerStats => {
               stats[killer].kills += 1;
               stats[victim].deaths += 1;
               stats[killer].killBreakdown[victim] = (stats[killer].killBreakdown[victim] || 0) + 1;
+              stats[killer].weaponKillsBreakdown = stats[killer].weaponKillsBreakdown || {};
 
               const patternSource = pattern.source;
-              if (patternSource.includes("invade")) {
-                  stats[killer].telefrags += 1;
-              } else if (patternSource.includes("grenade") || patternSource.includes("shrapnel")) {
-                  stats[killer].grenadeKills += 1;
+              const weapon = getWeaponName(patternSource);
+              if (weapon) {
+                  stats[killer].weaponKillsBreakdown[weapon] = (stats[killer].weaponKillsBreakdown[weapon] || 0) + 1;
               }
 
+              if (weapon === 'Telefrag') {
+                  stats[killer].telefrags += 1;
+              }
+              if (weapon === 'Grenade') {
+                  stats[killer].grenadeKills += 1;
+              }
+              if (weapon === 'Blaster') {
+                stats[killer].blasterKills += 1;
+            }
               eventFound = true;
               break;
           }

@@ -6,7 +6,7 @@ interface PlayerTableProps {
 }
 
 export const PlayerTable = ({playerStats}: PlayerTableProps) => {
-    const [orderBy, setOrderBy] = useState< 'kills' | 'deaths' | 'suicides' | 'grenadeKills' | 'telefrags' | 'kdr' | 'eventStreak' | 'headHunter' | 'looseHunter'>('kills') ;
+    const [orderBy, setOrderBy] = useState< 'kills' | 'deaths' | 'suicides' | 'grenadeKills' | 'telefrags' | 'kdr' | 'eventStreak' | 'headHunter' | 'looseHunter' | 'blasterKills'>('kills') ;
 
     let data = Object.entries(playerStats).sort(([, a], [, b]) => b.kills - a.kills || a.deaths - b.deaths)
     if (data.length === 0) return null;
@@ -59,6 +59,12 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
     const secondMaxLooseHunter = Math.max(...data.filter(([, stats]) => stats.looseHunter < maxLooseHunter).map(([, stats]) => stats.looseHunter));
     const thirdMaxLooseHunter = Math.max(...data.filter(([, stats]) => stats.looseHunter < secondMaxLooseHunter).map(([, stats]) => stats.looseHunter));
 
+    //blasterKills
+    const maxBlasterKills = Math.max(...data.map(([, stats]) => stats.blasterKills));
+    const secondMaxBlasterKills = Math.max(...data.filter(([, stats]) => stats.blasterKills < maxBlasterKills).map(([, stats]) => stats.blasterKills));
+    const thirdMaxBlasterKills = Math.max(...data.filter(([, stats]) => stats.blasterKills < secondMaxBlasterKills).map(([, stats]) => stats.blasterKills));
+
+
     const getLeadClass = (value: number, max: number, secondmax: number, thirdmax: number) => {
         if (value === max && max !== secondmax) {
             return 'lead-highest';
@@ -98,6 +104,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                     <th className='sortable' onClick={() => setOrderBy('grenadeKills')}>Grenadier {orderBy === 'grenadeKills' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('eventStreak')}>Troublemaker {orderBy === 'eventStreak' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('looseHunter')}>Bully {orderBy === 'looseHunter' ? '▼' : ''}</th>
+                    <th className='sortable' onClick={() => setOrderBy('blasterKills')}>Optimist {orderBy === 'blasterKills' ? '▼' : ''}</th>
                 </tr>
             </thead>
             <tbody>
@@ -113,6 +120,8 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                         <td className={getLeadClass(stats.grenadeKills, maxGrenadeKills, secondMaxGrenadeKills, thirdMaxGrenadeKills)}>{stats.grenadeKills}</td>
                         <td className={getLeadClass(stats.eventStreak, maxEventStreak, secondMaxEventStreak, thirdMaxEventStreak)}>{stats.eventStreak}</td>
                         <td className={getLeadClass(stats.looseHunter, maxLooseHunter, secondMaxLooseHunter, thirdMaxLooseHunter)}>{stats.looseHunter}</td>
+                        <td className={getLeadClass(stats.blasterKills, maxBlasterKills, secondMaxBlasterKills, thirdMaxBlasterKills)}>{stats.blasterKills}</td>
+
                     </tr>
                 ))}
             </tbody>
