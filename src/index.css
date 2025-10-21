@@ -82,7 +82,6 @@ td {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 .achievements-list > div {
   width: calc(33% - 12px);
