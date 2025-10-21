@@ -1,5 +1,5 @@
 import { PlayerTable } from './Table';
-import { calculateHeadHunter, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostTelefrags, calculateWrongTurn, filterGameLines, parseGameEvents } from './functions';
+import { calculateHeadHunter, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostTelefrags, calculateNoMercyForMinions, calculateWrongTurn, filterGameLines, parseGameEvents } from './functions';
 import type { AllPlayerStats, HeadHunterAchievement, TelefragAchievement, WrongTurnAchievement, GrenadeAchievement } from './types';
 import React, { useState } from 'react';
 
@@ -11,6 +11,7 @@ const LogParser: React.FC = () => {
   const [wrongTurn, setWrongTurn] = useState<WrongTurnAchievement | null>(null);
   const [mostGrenades, setMostGrenades] = useState<GrenadeAchievement | null>(null);
   const [mostEventStreak, setMostEventStreak] = useState<WrongTurnAchievement | null>(null);
+  const [mostBully, setMostBully] = useState<HeadHunterAchievement | null>(null);
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setPlayerStats({});
@@ -68,6 +69,7 @@ const LogParser: React.FC = () => {
       setWrongTurn(calculateWrongTurn(calculatedStats));
       setMostGrenades(calculateMostGrenadeKills(calculatedStats));
       setMostEventStreak(calculateMostEventStreak(calculatedStats));
+      setMostBully(calculateNoMercyForMinions(calculatedStats)); // Reusing HeadHunter calculation for Bully
 
     } catch (error) {
       setMessage(`An error occurred: ${error}`);
@@ -137,6 +139,16 @@ const LogParser: React.FC = () => {
           <h3 style={{ marginTop: 0 }}>🔥 Troublemaker</h3>
           <p style={{ margin: 0 }}>
             <strong>{mostEventStreak.achievers.join(' & ')}</strong> caused chaos with an event streak of <strong>{mostEventStreak.count}</strong>!
+          </p>
+        </div>
+      )}
+
+      { /*No Mercy for Minions */ }
+      {mostBully && (
+        <div style={{ padding: '10px 15px', border: '1px solid #ff5733', backgroundColor: '#ffe6e1', borderRadius: '5px', marginBottom: '20px' }}>
+          <h3 style={{ marginTop: 0 }}>👊 Bully</h3>
+          <p style={{ margin: 0 }}>
+            <strong>{mostBully.hunter}</strong> Has no mercy for Minions by (<strong>{mostBully.leader}</strong>) {mostBully.killsOnLeader} {mostBully.killsOnLeader > 1 ? 'times' : 'time'}!
           </p>
         </div>
       )}

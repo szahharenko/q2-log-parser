@@ -13,6 +13,7 @@ export interface PlayerStats {
     kdr?: number;
     eventStreak: number;
     headHunter: number;
+    looseHunter: number;
 }
 export type AllPlayerStats = {
     [playerName: string]: PlayerStats;

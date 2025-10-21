@@ -6,15 +6,17 @@ interface PlayerTableProps {
 }
 
 export const PlayerTable = ({playerStats}: PlayerTableProps) => {
-    const [orderBy, setOrderBy] = useState< 'kills' | 'deaths' | 'suicides' | 'grenadeKills' | 'telefrags' | 'kdr' | 'eventStreak' | 'headHunter'>('kills') ;
+    const [orderBy, setOrderBy] = useState< 'kills' | 'deaths' | 'suicides' | 'grenadeKills' | 'telefrags' | 'kdr' | 'eventStreak' | 'headHunter' | 'looseHunter'>('kills') ;
 
     let data = Object.entries(playerStats).sort(([, a], [, b]) => b.kills - a.kills || a.deaths - b.deaths)
     if (data.length === 0) return null;
     const playerWithMostKills = data[0][0];
+    const playerWithMostDeaths = data.sort(([, a], [, b]) => b.deaths - a.deaths)[0][0];
     data = data.map(([player, stats]) => [player, {
         ...stats,
         kdr: stats.deaths === 0 ? stats.kills : parseFloat((stats.kills / stats.deaths).toFixed(2)),
         headHunter: stats.killBreakdown[playerWithMostKills] || 0,
+        looseHunter: stats.killBreakdown[playerWithMostDeaths] || 0,
      }]);
 
     // Determine max, second max, and third max for kills, KDR, deaths, and suicides
@@ -51,6 +53,11 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
     const maxHeadHunter = Math.max(...data.map(([, stats]) => stats.headHunter));
     const secondMaxHeadHunter = Math.max(...data.filter(([, stats]) => stats.headHunter < maxHeadHunter).map(([, stats]) => stats.headHunter));
     const thirdMaxHeadHunter = Math.max(...data.filter(([, stats]) => stats.headHunter < secondMaxHeadHunter).map(([, stats]) => stats.headHunter));
+
+    //looseHunter
+    const maxLooseHunter = Math.max(...data.map(([, stats]) => stats.looseHunter));
+    const secondMaxLooseHunter = Math.max(...data.filter(([, stats]) => stats.looseHunter < maxLooseHunter).map(([, stats]) => stats.looseHunter));
+    const thirdMaxLooseHunter = Math.max(...data.filter(([, stats]) => stats.looseHunter < secondMaxLooseHunter).map(([, stats]) => stats.looseHunter));
 
     const getLeadClass = (value: number, max: number, secondmax: number, thirdmax: number) => {
         if (value === max && max !== secondmax) {
@@ -90,6 +97,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                     <th className='sortable' onClick={() => setOrderBy('telefrags')}>Respawn Hero {orderBy === 'telefrags' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('grenadeKills')}>Grenadier {orderBy === 'grenadeKills' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('eventStreak')}>Troublemaker {orderBy === 'eventStreak' ? '▼' : ''}</th>
+                    <th className='sortable' onClick={() => setOrderBy('looseHunter')}>Bully {orderBy === 'looseHunter' ? '▼' : ''}</th>
                 </tr>
             </thead>
             <tbody>
@@ -104,7 +112,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                         <td className={getLeadClass(stats.telefrags, maxTelefrags, secondMaxTelefrags, thirdMaxTelefrags)}>{stats.telefrags}</td>
                         <td className={getLeadClass(stats.grenadeKills, maxGrenadeKills, secondMaxGrenadeKills, thirdMaxGrenadeKills)}>{stats.grenadeKills}</td>
                         <td className={getLeadClass(stats.eventStreak, maxEventStreak, secondMaxEventStreak, thirdMaxEventStreak)}>{stats.eventStreak}</td>
-
+                        <td className={getLeadClass(stats.looseHunter, maxLooseHunter, secondMaxLooseHunter, thirdMaxLooseHunter)}>{stats.looseHunter}</td>
                     </tr>
                 ))}
             </tbody>

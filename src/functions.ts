@@ -49,6 +49,45 @@ export const calculateHeadHunter = (stats: AllPlayerStats): HeadHunterAchievemen
     return null;
   };
 
+export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAchievement | null => {
+    const players = Object.keys(stats);
+    if (players.length < 2) return null; // Not enough players for an achievement
+    // 1. Find the player(s) with the most deaths
+    let maxDeaths = 0;
+    for (const playerName in stats) {
+      if (stats[playerName].deaths > maxDeaths) {
+        maxDeaths = stats[playerName].deaths;
+      }
+    }
+    // If no one has deaths, no achievement
+    if (maxDeaths === 0) return null;
+    // Get an array of all players who are tied for most deaths
+    const mostDeceased = players.filter(p => stats[p].deaths === maxDeaths);
+    // 2. Find who killed the most-deceased player(s) the most
+    let bestBully = { name: '', kills: 0 };
+    for (const playerName in stats) {
+      // A player cannot be a bully for killing themselves
+      if (mostDeceased.includes(playerName)) continue;
+      let killsOnDeceased = 0;
+      // Sum up this player's kills on all most-deceased players
+      for (const deceased of mostDeceased) {
+        killsOnDeceased += stats[playerName].killBreakdown[deceased] || 0;
+      }
+      if (killsOnDeceased > bestBully.kills) {
+        bestBully = { name: playerName, kills: killsOnDeceased };
+      }
+    }
+    // 3. Return the achievement object if a bully was found
+    if (bestBully.kills > 0) {
+      return {
+        hunter: bestBully.name,
+        killsOnLeader: bestBully.kills,
+        leader: mostDeceased.join(', '), // Handles ties gracefully
+      };
+    }
+    return null;
+}
+
   export const calculateMostTelefrags = (stats: AllPlayerStats): TelefragAchievement | null => {
     let maxTelefrags = 0;
     for (const playerName in stats) {
@@ -134,7 +173,7 @@ export const parseGameEvents = (lines: string[]): AllPlayerStats => {
     const stats: AllPlayerStats = {};
     const ensurePlayer = (name: string) => {
       if (!stats[name]) {
-        stats[name] = { kills: 0, deaths: 0, suicides: 0,  telefrags: 0, eventStreak: 0, killBreakdown: {}, grenadeKills: 0, headHunter: 0};
+        stats[name] = { kills: 0, deaths: 0, suicides: 0,  telefrags: 0, eventStreak: 0, killBreakdown: {}, grenadeKills: 0, headHunter: 0, looseHunter: 0};
       }
     };
     let currentStreakPlayer: string | null = null;
