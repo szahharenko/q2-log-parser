@@ -103,7 +103,7 @@ const LogParser: React.FC = () => {
       { /* Total weapon usage (killed by weapon) */}
       {weaponStats && (
         <div style={{ margin: '30px 0' }}>
-            <h3>Combined weapon Usage Statistics 🔫</h3>
+            <h3>Combined weapon Usage Statistics 🔫 ({Object.values(weaponStats).reduce((a, b) => a + b, 0)})</h3>
             <ul style={{ margin: 0, paddingLeft: '20px' }}>
                 {Object.entries(weaponStats)
                     .sort(([, a], [, b]) => b - a)
