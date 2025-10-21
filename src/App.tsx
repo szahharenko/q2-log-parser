@@ -148,7 +148,7 @@ const LogParser: React.FC = () => {
         <div style={{ padding: '10px 15px', border: '1px solid #ff5733', backgroundColor: '#ffe6e1', borderRadius: '5px', marginBottom: '20px' }}>
           <h3 style={{ marginTop: 0 }}>👊 Bully</h3>
           <p style={{ margin: 0 }}>
-            <strong>{mostBully.hunter}</strong> Has no mercy for Minions by (<strong>{mostBully.leader}</strong>) {mostBully.killsOnLeader} {mostBully.killsOnLeader > 1 ? 'times' : 'time'}!
+            <strong>{mostBully.hunter}</strong> Has no mercy for Minions by killing <strong>{mostBully.leader}</strong> {mostBully.killsOnLeader} {mostBully.killsOnLeader > 1 ? 'times' : 'time'}!
           </p>
         </div>
       )}
