@@ -31,7 +31,7 @@ export const Achievements = ({playerStats, weaponStats}: AchievementsProps) => {
     return <>
       { /* Total weapon usage (killed by weapon) */}
       {weaponStats && (
-        <div style={{ margin: '30px 0' }}>
+        <div className='page' style={{ margin: '30px 0' }}>
             <h3>Combined weapon Usage Statistics 🔫 ({Object.values(weaponStats).reduce((a, b) => a + b, 0)})</h3>
             <ul style={{ margin: 0, paddingLeft: '20px' }}>
                 {Object.entries(weaponStats)
@@ -45,70 +45,76 @@ export const Achievements = ({playerStats, weaponStats}: AchievementsProps) => {
         </div>
       )}
 
-      {/* Achievements */}
-      {headHunter && (
-        <div style={{ padding: '10px 15px', border: '1px solid #e0c200', backgroundColor: '#fffbe6', borderRadius: '5px', marginBottom: '20px' }}>
-          <h3 style={{ marginTop: 0 }}>🏆 Head Hunter</h3>
-          <p style={{ margin: 0 }}>
-            <strong>{headHunter.hunter}</strong> is the Head Hunter for killing the leader (<strong>{headHunter.leader}</strong>) {headHunter.killsOnLeader} {headHunter.killsOnLeader > 1 ? 'times' : 'time'}!
-          </p>
+      <div className='page' style={{ margin: '30px 0' }}>
+        {/* title for achievements */}
+        <h3>Achievements 🏆</h3>
+        <div className='achievements-list page'>
+          {/* Achievements */}
+          {headHunter && (
+            <div style={{  border: '1px solid #e0c200', backgroundColor: '#fffbe6' }}>
+              <h3 >🏆 Head Hunter</h3>
+              <p>
+                <strong>{headHunter.hunter}</strong> is the Head Hunter for killing the leader (<strong>{headHunter.leader}</strong>) {headHunter.killsOnLeader} {headHunter.killsOnLeader > 1 ? 'times' : 'time'}!
+              </p>
+            </div>
+          )}
+
+          {mostTelefrags && (
+              <div style={{  border: '1px solid #6f42c1', backgroundColor: '#f3eefc' }}>
+                <h3 >🏅 Respawn Hero</h3>
+                <p>
+                  <strong>{mostTelefrags.achievers.join(' & ')}</strong> {mostTelefrags.achievers.length > 1 ? 'share the award' : 'gets the award'} with <strong>{mostTelefrags.count}</strong> telefrags!
+                </p>
+              </div>
+          )}
+
+          {wrongTurn && (
+            <div style={{  border: '1px solid #dc3545', backgroundColor: '#fbe9eb' }}>
+              <h3 >🤦 Wrong Turn</h3>
+              <p>
+                <strong>{wrongTurn.achievers.join(' & ')}</strong> took a wrong turn {wrongTurn.count} {wrongTurn.count > 1 ? 'times' : 'time'} to earn this award.
+              </p>
+            </div>
+          )}
+
+          {mostGrenades && (
+              <div style={{  border: '1px solid #28a745', backgroundColor: '#e9f7ec', }}>
+                <h3 >💣 Grenadier</h3>
+                <p>
+                  <strong>{mostGrenades.achievers.join(' & ')}</strong> earned the top spot with <strong>{mostGrenades.count}</strong> grenade kills!
+                </p>
+              </div>
+          )}
+
+          {mostEventStreak && (
+            <div style={{  border: '1px solid #aea601ff', backgroundColor: '#feffadff' }}>
+              <h3 >🔥 Troublemaker</h3>
+              <p>
+                <strong>{mostEventStreak.achievers.join(' & ')}</strong> caused chaos with an event streak of <strong>{mostEventStreak.count}</strong>!
+              </p>
+            </div>
+          )}
+
+          { /*No Mercy for Minions */ }
+          {mostBully && (
+            <div style={{  border: '1px solid #ff5733', backgroundColor: '#ffe6e1' }}>
+              <h3 >👊 Bully</h3>
+              <p>
+                <strong>{mostBully.hunter}</strong> Has no mercy for Minions by killing <strong>{mostBully.leader}</strong> {mostBully.killsOnLeader} {mostBully.killsOnLeader > 1 ? 'times' : 'time'}!
+              </p>
+            </div>
+          )}
+
+          { /* Blaster kills achievement could be added here similarly */ }
+          {mostBlaster && (
+            <div style={{  border: '1px solid #17a2b8', backgroundColor: '#d1f0f7' }}>
+              <h3>🔫 Optimist</h3>
+              <p>
+                <strong>{mostBlaster.achievers.join(' & ')}</strong> tops the charts with <strong>{mostBlaster.count}</strong> blaster kills!
+              </p>
+            </div>
+          )}
         </div>
-      )}
-
-      {mostTelefrags && (
-          <div style={{ padding: '10px 15px', border: '1px solid #6f42c1', backgroundColor: '#f3eefc', borderRadius: '5px', marginBottom: '20px' }}>
-            <h3 style={{ marginTop: 0 }}>🏅 Respawn Hero</h3>
-            <p style={{ margin: 0 }}>
-              <strong>{mostTelefrags.achievers.join(' & ')}</strong> {mostTelefrags.achievers.length > 1 ? 'share the award' : 'gets the award'} with <strong>{mostTelefrags.count}</strong> telefrags!
-            </p>
-          </div>
-      )}
-
-      {wrongTurn && (
-        <div style={{ padding: '10px 15px', border: '1px solid #dc3545', backgroundColor: '#fbe9eb', borderRadius: '5px', marginBottom: '20px' }}>
-          <h3 style={{ marginTop: 0 }}>🤦 Wrong Turn</h3>
-          <p style={{ margin: 0 }}>
-            <strong>{wrongTurn.achievers.join(' & ')}</strong> took a wrong turn {wrongTurn.count} {wrongTurn.count > 1 ? 'times' : 'time'} to earn this award.
-          </p>
-        </div>
-      )}
-
-      {mostGrenades && (
-          <div style={{ padding: '10px 15px', border: '1px solid #28a745', backgroundColor: '#e9f7ec', borderRadius: '5px', marginBottom: '20px' }}>
-            <h3 style={{ marginTop: 0 }}>💣 Grenadier</h3>
-            <p style={{ margin: 0 }}>
-              <strong>{mostGrenades.achievers.join(' & ')}</strong> earned the top spot with <strong>{mostGrenades.count}</strong> grenade kills!
-            </p>
-          </div>
-      )}
-
-      {mostEventStreak && (
-        <div style={{ padding: '10px 15px', border: '1px solid #aea601ff', backgroundColor: '#feffadff', borderRadius: '5px', marginBottom: '20px' }}>
-          <h3 style={{ marginTop: 0 }}>🔥 Troublemaker</h3>
-          <p style={{ margin: 0 }}>
-            <strong>{mostEventStreak.achievers.join(' & ')}</strong> caused chaos with an event streak of <strong>{mostEventStreak.count}</strong>!
-          </p>
-        </div>
-      )}
-
-      { /*No Mercy for Minions */ }
-      {mostBully && (
-        <div style={{ padding: '10px 15px', border: '1px solid #ff5733', backgroundColor: '#ffe6e1', borderRadius: '5px', marginBottom: '20px' }}>
-          <h3 style={{ marginTop: 0 }}>👊 Bully</h3>
-          <p style={{ margin: 0 }}>
-            <strong>{mostBully.hunter}</strong> Has no mercy for Minions by killing <strong>{mostBully.leader}</strong> {mostBully.killsOnLeader} {mostBully.killsOnLeader > 1 ? 'times' : 'time'}!
-          </p>
-        </div>
-      )}
-
-      { /* Blaster kills achievement could be added here similarly */ }
-      {mostBlaster && (
-        <div style={{ padding: '10px 15px', border: '1px solid #17a2b8', backgroundColor: '#d1f0f7', borderRadius: '5px', marginBottom: '20px' }}>
-          <h3 style={{ marginTop: 0 }}>🔫 Optimist</h3>
-          <p style={{ margin: 0 }}>
-            <strong>{mostBlaster.achievers.join(' & ')}</strong> tops the charts with <strong>{mostBlaster.count}</strong> blaster kills!
-          </p>
-        </div>
-      )}
+      </div>
     </>
 }

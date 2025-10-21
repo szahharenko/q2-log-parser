@@ -61,21 +61,22 @@ const LogParser: React.FC = () => {
 
   return (
     <div>
-      <h2>Q2 Game Log Parser 📜</h2>
-      <p>This tool displays a match leaderboard and a detailed kill breakdown.</p>
-
-      <input
-        type="file"
-        accept=".txt,.log"
-        onChange={handleFileChange}
-        style={{ margin: '20px 0' }}
-        multiple
-      />
-
-      {message && <p><em>{message}</em></p>}
+      <div className='hide-on-print'>
+        <h2>Q2 Game Log Parser 📜</h2>
+        <p>This tool displays a match leaderboard and a detailed kill breakdown.</p>
+        <input
+          type="file"
+          accept=".txt,.log"
+          onChange={handleFileChange}
+          style={{ margin: '20px 0' }}
+          multiple
+        />
+        {message && <p><em>{message}</em></p>}
+      </div>
 
       { Object.keys(playerStats).length > 0 &&
         <>
+
           <PlayerTable playerStats={playerStats}/>
           <Achievements  playerStats={playerStats} weaponStats={weaponStats}/>
           <PlayerStats playerStats={playerStats} />

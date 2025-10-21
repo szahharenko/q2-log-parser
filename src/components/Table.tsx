@@ -89,7 +89,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
         });
     }
 
-    return (<div style={{ marginBottom: '20px' }}>
+    return (<div className='page' style={{ marginBottom: '20px' }}>
         <h3>Comprehensive Leaderboard 🏆</h3>
         <table style={{ borderCollapse: 'collapse', width: 'auto', fontSize: '14px' }}>
             <thead>

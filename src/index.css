@@ -41,3 +41,71 @@ td {
   background-color: #cd7f3233; /* Bronze with transparency */
   font-weight: bold;
 }
+
+.hide-on-print {
+  display: block;
+}
+@media print {
+  .hide-on-print {
+    display: none;
+  }
+}
+
+.player-stats {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  white-space: nowrap;
+}
+.player-details {
+  padding: 15px;
+  border: 1px solid #ccc;
+  min-width: 25%;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 800px) {
+  .player-details {
+      min-width: 50%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .player-details {
+      min-width: 100%;
+  }
+}
+
+@media print {
+    .page, .page-break { break-after: page; }
+}
+
+.achievements-list {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.achievements-list > div {
+  width: calc(33% - 12px);
+  box-sizing: border-box;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+.achievements-list h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.achievements-list p {
+  margin: 0;
+}
+
+@media screen and (min-width: 1200px) {
+  .achievements-list > div {
+    width: calc(25% - 12px);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .achievements-list > div {
+    width: 100%;
+  }
+}
