@@ -182,7 +182,9 @@ export const filterGameLines = (lines: string[]): string[] => {
   });
 };
 
-const getWeaponName = (pattern: string): string => {
+export type Weapon = 'Railgun' | 'Rocket Launcher' | 'Machinegun' | 'Chaingun' | 'Super Shotgun' | 'Hyperblaster' | 'BFG' | 'Grenade' | 'Telefrag' | 'Shotgun' | 'Blaster';
+
+const getWeaponName = (pattern: string): Weapon | null => {
     if(pattern.includes("railed")) return 'Railgun';
     if(pattern.includes("rocket")) return 'Rocket Launcher';
     if(pattern.includes("machinegunned")) return 'Machinegun';
@@ -196,18 +198,33 @@ const getWeaponName = (pattern: string): string => {
     if(pattern.includes("invade")) return 'Telefrag';
     if(pattern.includes("gunned down by")) return 'Shotgun';
     if(pattern.includes("blasted by")) return 'Blaster';
-    return '';
+    return null;
 }
 
-export const parseGameEvents = (lines: string[]): AllPlayerStats => {
+export const parseGameEvents = (lines: string[]): { stats: AllPlayerStats, weaponStats: { [K in Weapon]: number}} => {
     const stats: AllPlayerStats = {};
+    const weaponStats: { [K in Weapon]: number} = {
+      'Railgun': 0,
+      'Rocket Launcher': 0,
+      'Machinegun': 0,
+      'Chaingun': 0,
+      'Super Shotgun': 0,
+      'Hyperblaster': 0,
+      'BFG': 0,
+      'Grenade': 0,
+      'Telefrag': 0,
+      'Shotgun': 0,
+      'Blaster': 0
+    }
     const ensurePlayer = (name: string) => {
       if (!stats[name]) {
         stats[name] = { kills: 0, deaths: 0, suicides: 0,  telefrags: 0, eventStreak: 0, killBreakdown: {}, grenadeKills: 0, headHunter: 0, looseHunter: 0, weaponKillsBreakdown: {}, blasterKills: 0};
       }
     };
     let currentStreakPlayer: string | null = null;
-    let currentStreakCount = 0;
+    let currentStreakCount =
+
+    0;
 
     lines.forEach(line => {
       let eventFound = false;
@@ -237,6 +254,9 @@ export const parseGameEvents = (lines: string[]): AllPlayerStats => {
 
               const patternSource = pattern.source;
               const weapon = getWeaponName(patternSource);
+              if (weapon) {
+                  weaponStats[weapon] += 1;
+              }
               if (weapon) {
                   stats[killer].weaponKillsBreakdown[weapon] = (stats[killer].weaponKillsBreakdown[weapon] || 0) + 1;
               }
@@ -276,6 +296,8 @@ export const parseGameEvents = (lines: string[]): AllPlayerStats => {
           }
       }
     });
-    console.log({stats})
-    return stats;
+    return {
+      stats,
+      weaponStats
+    };
   };

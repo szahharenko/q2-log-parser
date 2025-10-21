@@ -24,6 +24,7 @@ export type AllPlayerStats = {
     [playerName: string]: PlayerStats;
 };
 
+
 export interface HeadHunterAchievement {
     hunter: string;
     killsOnLeader: number;

@@ -13,6 +13,7 @@ const LogParser: React.FC = () => {
   const [mostBully, setMostBully] = useState<HeadHunterAchievement | null>(null);
   const [mostGrenades, setMostGrenades] = useState<GrenadeAchievement | null>(null);
   const [mostBlaster, setMostBlaster] = useState<GrenadeAchievement | null>(null);
+  const [weaponStats, setWeaponStats] = useState<Record<string, number> | null>(null);
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setPlayerStats({});
@@ -59,7 +60,8 @@ const LogParser: React.FC = () => {
       // Assign achievements...
       // ... (same achievement assignment logic as before) ...
       const onlyGameEvents = filterGameLines(allLines);
-      const calculatedStats = parseGameEvents(onlyGameEvents);
+      const { stats: calculatedStats, weaponStats: calculatedWeaponStats} = parseGameEvents(onlyGameEvents);
+      setWeaponStats(calculatedWeaponStats);
 
       setPlayerStats(calculatedStats);
       setMessage(`Successfully parsed the log.`);
@@ -98,6 +100,21 @@ const LogParser: React.FC = () => {
       {message && <p><em>{message}</em></p>}
 
       <PlayerTable playerStats={playerStats}/>
+      { /* Total weapon usage (killed by weapon) */}
+      {weaponStats && (
+        <div style={{ margin: '30px 0' }}>
+            <h3>Combined weapon Usage Statistics 🔫</h3>
+            <ul style={{ margin: 0, paddingLeft: '20px' }}>
+                {Object.entries(weaponStats)
+                    .sort(([, a], [, b]) => b - a)
+                    .map(([weapon, count]) => (
+                        <li key={weapon}>
+                            <strong>{weapon}</strong>: {count} {count > 1 ? 'kills' : 'kill'}
+                        </li>
+                    ))}
+            </ul>
+        </div>
+      )}
 
       {/* Achievements */}
       {headHunter && (
