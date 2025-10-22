@@ -4,6 +4,7 @@ import { PlayerTable } from './components/Table';
 import { filterGameLines, parseGameEvents } from './utils/functions';
 import type { AllPlayerStats } from './types/types';
 import React, { useState } from 'react';
+import { Weapons } from './components/Weapons';
 
 const LogParser: React.FC = () => {
   const [message, setMessage] = useState<string>('Please select a log file to view its content.');
@@ -78,7 +79,8 @@ const LogParser: React.FC = () => {
         <>
 
           <PlayerTable playerStats={playerStats}/>
-          <Achievements  playerStats={playerStats} weaponStats={weaponStats}/>
+          <Weapons weaponStats={weaponStats}/>
+          <Achievements  playerStats={playerStats}/>
           <PlayerStats playerStats={playerStats} />
         </>
       }

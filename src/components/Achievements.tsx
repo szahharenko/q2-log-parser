@@ -4,10 +4,9 @@ import { calculateHeadHunter, calculateMostBlasterKills, calculateMostEventStrea
 
 interface AchievementsProps {
     playerStats: Record<string, PlayerStats>;
-    weaponStats: Record<string, number> | null;
 }
 
-export const Achievements = ({playerStats, weaponStats}: AchievementsProps) => {
+export const Achievements = ({playerStats}: AchievementsProps) => {
 
     const [headHunter, setHeadHunter] = useState<HeadHunterAchievement | null>(null);
     const [mostTelefrags, setMostTelefrags] = useState<TelefragAchievement | null>(null);
@@ -18,7 +17,6 @@ export const Achievements = ({playerStats, weaponStats}: AchievementsProps) => {
     const [mostBlaster, setMostBlaster] = useState<GrenadeAchievement | null>(null);
 
     useEffect(() => {
-        // Achievements
         setHeadHunter(calculateHeadHunter(playerStats));
         setMostTelefrags(calculateMostTelefrags(playerStats));
         setWrongTurn(calculateWrongTurn(playerStats));
@@ -29,22 +27,6 @@ export const Achievements = ({playerStats, weaponStats}: AchievementsProps) => {
     }, [playerStats]);
 
     return <>
-      { /* Total weapon usage (killed by weapon) */}
-      {weaponStats && (
-        <div className='page' style={{ margin: '30px 0' }}>
-            <h3>Combined weapon Usage Statistics 🔫 ({Object.values(weaponStats).reduce((a, b) => a + b, 0)})</h3>
-            <ul style={{ margin: 0, paddingLeft: '20px' }}>
-                {Object.entries(weaponStats)
-                    .sort(([, a], [, b]) => b - a)
-                    .map(([weapon, count]) => (
-                        <li key={weapon}>
-                            <strong>{weapon}</strong>: {count} {count > 1 ? 'kills' : 'kill'}
-                        </li>
-                    ))}
-            </ul>
-        </div>
-      )}
-
       <div className='page' style={{ margin: '30px 0' }}>
         {/* title for achievements */}
         <h3>Achievements 🏆</h3>
