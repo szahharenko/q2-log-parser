@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { GrenadeAchievement, HeadHunterAchievement, PlayerStats, TelefragAchievement, WrongTurnAchievement } from '../types/types';
+import { HeadHunterAchievement, PlayerStats, Achievement } from '../types/types';
 import { calculateHeadHunter, calculateMostBlasterKills, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostTelefrags, calculateNoMercyForMinions, calculateWrongTurn } from '../utils/functions';
 
 interface AchievementsProps {
@@ -9,12 +9,12 @@ interface AchievementsProps {
 export const Achievements = ({playerStats}: AchievementsProps) => {
 
     const [headHunter, setHeadHunter] = useState<HeadHunterAchievement | null>(null);
-    const [mostTelefrags, setMostTelefrags] = useState<TelefragAchievement | null>(null);
-    const [wrongTurn, setWrongTurn] = useState<WrongTurnAchievement | null>(null);
-    const [mostEventStreak, setMostEventStreak] = useState<WrongTurnAchievement | null>(null);
+    const [mostTelefrags, setMostTelefrags] = useState<Achievement | null>(null);
+    const [wrongTurn, setWrongTurn] = useState<Achievement | null>(null);
+    const [mostEventStreak, setMostEventStreak] = useState<Achievement | null>(null);
     const [mostBully, setMostBully] = useState<HeadHunterAchievement | null>(null);
-    const [mostGrenades, setMostGrenades] = useState<GrenadeAchievement | null>(null);
-    const [mostBlaster, setMostBlaster] = useState<GrenadeAchievement | null>(null);
+    const [mostGrenades, setMostGrenades] = useState<Achievement | null>(null);
+    const [mostBlaster, setMostBlaster] = useState<Achievement | null>(null);
 
     useEffect(() => {
         setHeadHunter(calculateHeadHunter(playerStats));

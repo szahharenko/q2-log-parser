@@ -77,7 +77,6 @@ const LogParser: React.FC = () => {
 
       { Object.keys(playerStats).length > 0 &&
         <>
-
           <PlayerTable playerStats={playerStats}/>
           <Weapons weaponStats={weaponStats}/>
           <Achievements  playerStats={playerStats}/>

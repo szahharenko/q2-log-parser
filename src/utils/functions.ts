@@ -1,5 +1,5 @@
 import { killPatterns, suicidePatterns } from "./patterns";
-import { AllPlayerStats, EventStreakAchievement, GrenadeAchievement, HeadHunterAchievement, TelefragAchievement, WrongTurnAchievement } from "../types/types";
+import { AllPlayerStats, HeadHunterAchievement, Achievement } from "../types/types";
 
 export const calculateHeadHunter = (stats: AllPlayerStats): HeadHunterAchievement | null => {
     const players = Object.keys(stats);
@@ -88,7 +88,7 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
     return null;
 }
 
-  export const calculateMostTelefrags = (stats: AllPlayerStats): TelefragAchievement | null => {
+  export const calculateMostTelefrags = (stats: AllPlayerStats): Achievement | null => {
     let maxTelefrags = 0;
     for (const playerName in stats) {
       if (stats[playerName].telefrags > maxTelefrags) {
@@ -108,7 +108,7 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
     return { achievers, count: maxTelefrags };
   };
 
-  export  const calculateWrongTurn = (stats: AllPlayerStats): WrongTurnAchievement | null => {
+  export  const calculateWrongTurn = (stats: AllPlayerStats): Achievement | null => {
     let maxSuicides = 0;
     for (const playerName in stats) {
         if (stats[playerName].suicides > maxSuicides) {
@@ -122,7 +122,7 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
     return { achievers, count: maxSuicides };
   };
 
-  export const calculateMostGrenadeKills = (stats: AllPlayerStats): GrenadeAchievement | null => {
+  export const calculateMostGrenadeKills = (stats: AllPlayerStats): Achievement | null => {
     let maxGrenadeKills = 0;
     for (const playerName in stats) {
         if (stats[playerName].grenadeKills > maxGrenadeKills) {
@@ -136,7 +136,7 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
     return { achievers, count: maxGrenadeKills };
   };
 
-  export const calculateMostBlasterKills = (stats: AllPlayerStats): GrenadeAchievement | null => {
+  export const calculateMostBlasterKills = (stats: AllPlayerStats): Achievement | null => {
     let maxBlasterKills = 0;
     for (const playerName in stats) {
         if (stats[playerName].blasterKills > maxBlasterKills) {
@@ -150,7 +150,7 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
     return { achievers, count: maxBlasterKills };
   }
 
-  export const calculateMostEventStreak = (stats: AllPlayerStats): EventStreakAchievement | null => {
+  export const calculateMostEventStreak = (stats: AllPlayerStats): Achievement | null => {
     let maxEventStreak = 0;
     for (const playerName in stats) {
         if (stats[playerName].eventStreak > maxEventStreak) {

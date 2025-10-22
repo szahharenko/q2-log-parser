@@ -1,5 +1,4 @@
 
-// Type definitions (unchanged from previous version)
 export interface KillBreakdown {
     [victimName: string]: number;
   }
@@ -20,32 +19,18 @@ export interface PlayerStats {
     looseHunter: number;
     blasterKills: number;
 }
+
 export type AllPlayerStats = {
     [playerName: string]: PlayerStats;
 };
 
-
 export interface HeadHunterAchievement {
     hunter: string;
     killsOnLeader: number;
-    leader: string; // Can be a single name or comma-separated for ties
+    leader: string;
 }
 
-export interface TelefragAchievement {
-    achievers: string[]; // Array to handle ties
-    count: number;
-}
-
-export interface WrongTurnAchievement {
-    achievers: string[];
-    count: number;
-}
-
-export interface GrenadeAchievement {
-    achievers: string[];
-    count: number;
-}
-export interface EventStreakAchievement {
+export interface Achievement {
     achievers: string[];
     count: number;
 }
