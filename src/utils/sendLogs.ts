@@ -2,6 +2,7 @@
 interface LogResponse {
     status: 'success' | 'error';
     message: string;
+    id?: string;
   }
 
   // Define the shape of the data we are sending

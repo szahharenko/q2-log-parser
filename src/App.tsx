@@ -6,6 +6,7 @@ import type { AllPlayerStats } from './types/types';
 import React, { useState } from 'react';
 import { Weapons } from './components/Weapons';
 import { sendLogs } from './utils/sendLogs';
+import { getLogs } from './utils/getLogs';
 
 const LogParser: React.FC = () => {
   const [message, setMessage] = useState<string>('Please select a log file to view its content.');
@@ -14,8 +15,32 @@ const LogParser: React.FC = () => {
   const [gameEvents, setGameEvents] = useState<string[]>([]);
   const [status, setStatus] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [loadedEvents, setLoadedEvents] = useState<string[] | null>(null);
 
-  //sendLogs(['1','2'], 'https://agly.eu/hooks/q2parser/');
+  const API_URL = 'https://q2.agly.eu/server/';
+  const reportId = window.location.search.split('?r=')[1];
+
+  if (reportId) {
+    getLogs(reportId, API_URL).then(data => {
+      console.log('Log data received:', data);
+      setLoadedEvents(data?.split('\n') || null);
+      if (loadedEvents?.length) {
+        setGameEvents(loadedEvents);
+        // Parse game events to calculate stats
+        const { stats: calculatedStats, weaponStats: calculatedWeaponStats} = parseGameEvents(loadedEvents);
+
+        setPlayerStats(calculatedStats);
+        setWeaponStats(calculatedWeaponStats);
+        setMessage(`Successfully loaded report.`);
+      } else {
+        console.error('Nothing to show');
+        //window.location.href = window.location.origin
+      }
+    }).catch(err => {
+      console.error('Error fetching log data:', err);
+      //window.location.href = window.location.origin
+    });
+  }
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setPlayerStats({});
@@ -77,48 +102,52 @@ const LogParser: React.FC = () => {
       return;
     }
 
-    const response = await sendLogs(gameEvents, 'https://agly.eu/hooks/q2parser/');
+    const response = await sendLogs(gameEvents, API_URL);
+    const { status: respStatus, message: respMessage, id: respId } = response;
 
     // 3. Update state based on the response
     setIsLoading(false);
-    if (response.status === 'success') {
+    if (respStatus === 'success') {
       setStatus('Logs saved successfully!');
-      console.log('Server response:', response.message);
+      console.log('Server response:', respMessage);
+      window.location.href = window.location.href + `?r=${respId}`
     } else {
-      setStatus(`Error: ${response.message}`);
-      console.error('Server error:', response.message);
+      setStatus(`Error: ${respMessage}`);
+      console.error('Server error:', respMessage);
     }
   };
 
 
   return (
     <div>
-      <div className='hide-on-print'>
-        <h2>Q2 Game Log Parser 📜</h2>
-        <p>This tool displays a match leaderboard and a detailed kill breakdown.</p>
-        { gameEvents.length > 0 &&
-          <>
-            <button onClick={saveReport} disabled={isLoading} style={{ margin: '0 10px 0 0'}}>
-              {isLoading ? 'Sending...' : 'Save report'}
-            </button>
-            {/* Display a status message to the user */}
-            {
-              status &&
-                <p style={{ color: status.startsWith('Error') ? 'red' : 'green' }}>
-                  {status}
-                </p>
-            }
-          </>
-        }
-        <input
-          type="file"
-          accept=".txt,.log"
-          onChange={handleFileChange}
-          style={{ margin: '20px 0' }}
-          multiple
-        />
-        {message && <p><em>{message}</em></p>}
-      </div>
+      { reportId === null &&
+        <div className='hide-on-print'>
+          <h2>Q2 Game Log Parser 📜</h2>
+          <p>This tool displays a match leaderboard and a detailed kill breakdown.</p>
+          { gameEvents.length > 0 &&
+            <>
+              <button onClick={saveReport} disabled={isLoading} style={{ margin: '0 10px 0 0'}}>
+                {isLoading ? 'Sending...' : 'Save report'}
+              </button>
+              {/* Display a status message to the user */}
+              {
+                status &&
+                  <p style={{ color: status.startsWith('Error') ? 'red' : 'green' }}>
+                    {status}
+                  </p>
+              }
+            </>
+          }
+          <input
+            type="file"
+            accept=".txt,.log"
+            onChange={handleFileChange}
+            style={{ margin: '20px 0' }}
+            multiple
+          />
+          {message && <p><em>{message}</em></p>}
+        </div>
+      }
 
       { Object.keys(playerStats).length > 0 &&
         <>
