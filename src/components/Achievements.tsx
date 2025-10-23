@@ -110,7 +110,7 @@ export const Achievements = ({playerStats, weaponStats}: AchievementsProps) => {
           {
             leastUsedWeapon && (
               <div style={{  border: '1px solid #795548', backgroundColor: '#f5f0ed' }}>
-                <h3>🎯 Specialist</h3>
+                <h3>🔪 Specialist</h3>
                 {specialist ? (
                   <p>
                     <strong>{specialist.player}</strong> mastered the <strong>{specialist.weapon}</strong> with <strong>{specialist.kills}</strong> kills, the least used weapon with only <strong>{leastUsedWeapon.count}</strong> total kills!

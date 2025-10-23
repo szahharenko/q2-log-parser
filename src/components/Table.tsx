@@ -66,7 +66,6 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                     <th className='sortable' onClick={() => setOrderBy('eventStreak')}>Troublemaker {orderBy === 'eventStreak' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('looseHunter')}>Bully {orderBy === 'looseHunter' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('blasterKills')}>Optimist {orderBy === 'blasterKills' ? '▼' : ''}</th>
-                    <th>Specialist</th>
                 </tr>
             </thead>
             <tbody>
@@ -83,7 +82,6 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                         <td className={getLeadClass(stats, 'eventStreak')}>{stats.eventStreak}</td>
                         <td className={getLeadClass(stats, 'looseHunter')}>{stats.looseHunter}</td>
                         <td className={getLeadClass(stats, 'blasterKills')}>{stats.blasterKills}</td>
-
                     </tr>
                 ))}
             </tbody>
