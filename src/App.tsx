@@ -154,7 +154,10 @@ const LogParser: React.FC = () => {
         </>
       }
 
-
+      <hr/>
+      <p style={{textAlign:'center', padding: '10px'}}>
+        This tool is designed & developed by <a href="https://t.me/Acrashik" target="_blank" rel="noopener noreferrer">Acrashik</a> and <a href="https://t.me/exeshe4ki">Exeshe4ki</a>.
+      </p>
     </div>
   );
 };
