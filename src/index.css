@@ -54,23 +54,33 @@ td {
 .player-stats {
   margin-top: 30px;
   display: flex;
+  gap: 15px;
   flex-wrap: wrap;
-  white-space: nowrap;
 }
 .player-details {
   padding: 15px;
   border: 1px solid #ccc;
-  min-width: 25%;
+  width: calc(33% - 12px);
   box-sizing: border-box;
+  padding: 10px 15px;
+  border-radius: 5px;
 }
-@media screen and (max-width: 800px) {
+
+@media screen and (min-width: 1200px) {
   .player-details {
-      min-width: 50%;
+    width: calc(25% - 12px);
   }
 }
+
+@media screen and (max-width: 800px) {
+  .player-details {
+    width: calc(50% - 12px);
+  }
+}
+
 @media screen and (max-width: 600px) {
   .player-details {
-      min-width: 100%;
+    width: 100%;
   }
 }
 
