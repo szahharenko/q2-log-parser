@@ -15,7 +15,7 @@ const LogParser: React.FC = () => {
   const [status, setStatus] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  sendLogs(['1','2'], 'https://agly.eu/hooks/q2parser/');
+  //sendLogs(['1','2'], 'https://agly.eu/hooks/q2parser/');
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setPlayerStats({});

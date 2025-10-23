@@ -33,7 +33,7 @@ export const Achievements = ({playerStats, weaponStats}: AchievementsProps) => {
         const leastUsedWeapon = getLeastUsedWeapon(weaponStats);
         setLeastUsedWeapon(leastUsedWeapon);
         playerStats && leastUsedWeapon && setSpecialist(calculateSpecialist(leastUsedWeapon?.weapon, playerStats));
-    }, []);
+    }, [playerStats, weaponStats]);
 
     return <>
       <div className='page' style={{ margin: '30px 0' }}>
