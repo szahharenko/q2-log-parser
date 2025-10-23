@@ -7,7 +7,7 @@ interface LogResponse {
 
   // Define the shape of the data we are sending
   interface LogPayload {
-    lines: string[];
+    lines: string;
   }
 
   /**
@@ -21,7 +21,7 @@ interface LogResponse {
     try {
       // --- NEW: Create the payload object ---
       const payload: LogPayload = {
-        lines: logs
+        lines: JSON.stringify(logs),
       };
 
       const response = await fetch(url, {
