@@ -19,59 +19,20 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
         looseHunter: stats.killBreakdown[playerWithMostDeaths] || 0,
      }]);
 
-    // Determine max, second max, and third max for kills, KDR, deaths, and suicides
-    const maxKills = Math.max(...data.map(([, stats]) => stats.kills));
-    const secondMaxKills = Math.max(...data.filter(([, stats]) => stats.kills < maxKills).map(([, stats]) => stats.kills));
-    const thirdMaxKills = Math.max(...data.filter(([, stats]) => stats.kills < secondMaxKills).map(([, stats]) => stats.kills));
 
-    // kdr
-    const maxKDR = Math.max(...data.map(([, stats]) => stats.kdr || 0));
-    const secondMaxKDR = Math.max(...data.filter(([, stats]) => (stats.kdr || 0) < maxKDR).map(([, stats]) => stats.kdr || 0));
-    const thirdMaxKDR = Math.max(...data.filter(([, stats]) => (stats.kdr || 0) < secondMaxKDR).map(([, stats]) => stats.kdr || 0));
+    const getLeadClass = (stats: PlayerStats, key: keyof PlayerStats ) : string => {
+        const value = stats[key];
+        if (value === 0) return '';
+        const max = Math.max(...data.map(([, s]) => s[key] as number));
+        const secondMax = Math.max(...data.filter(([, s]) => (s[key] as number) < max).map(([, s]) => s[key] as number));
+        const thirdMax = Math.max(...data.filter(([, s]) => (s[key] as number) < secondMax).map(([, s]) => s[key] as number));
 
-    // suicides
-    const maxSuicides = Math.max(...data.map(([, stats]) => stats.suicides));
-    const secondMaxSuicides = Math.max(...data.filter(([, stats]) => stats.suicides < maxSuicides).map(([, stats]) => stats.suicides));
-    const thirdMaxSuicides = Math.max(...data.filter(([, stats]) => stats.suicides < secondMaxSuicides).map(([, stats]) => stats.suicides));
-
-    // grenade kills
-    const maxGrenadeKills = Math.max(...data.map(([, stats]) => stats.grenadeKills));
-    const secondMaxGrenadeKills = Math.max(...data.filter(([, stats]) => stats.grenadeKills < maxGrenadeKills).map(([, stats]) => stats.grenadeKills));
-    const thirdMaxGrenadeKills = Math.max(...data.filter(([, stats]) => stats.grenadeKills < secondMaxGrenadeKills).map(([, stats]) => stats.grenadeKills));
-
-    //telefrags
-    const maxTelefrags = Math.max(...data.map(([, stats]) => stats.telefrags));
-    const secondMaxTelefrags = Math.max(...data.filter(([, stats]) => stats.telefrags < maxTelefrags).map(([, stats]) => stats.telefrags));
-    const thirdMaxTelefrags = Math.max(...data.filter(([, stats]) => stats.telefrags < secondMaxTelefrags).map(([, stats]) => stats.telefrags));
-
-    //eventStreak
-     const maxEventStreak = Math.max(...data.map(([, stats]) => stats.eventStreak));
-     const secondMaxEventStreak = Math.max(...data.filter(([, stats]) => stats.eventStreak < maxEventStreak).map(([, stats]) => stats.eventStreak));
-     const thirdMaxEventStreak = Math.max(...data.filter(([, stats]) => stats.eventStreak < secondMaxEventStreak).map(([, stats]) => stats.eventStreak));
-
-    //headHunter
-    const maxHeadHunter = Math.max(...data.map(([, stats]) => stats.headHunter));
-    const secondMaxHeadHunter = Math.max(...data.filter(([, stats]) => stats.headHunter < maxHeadHunter).map(([, stats]) => stats.headHunter));
-    const thirdMaxHeadHunter = Math.max(...data.filter(([, stats]) => stats.headHunter < secondMaxHeadHunter).map(([, stats]) => stats.headHunter));
-
-    //looseHunter
-    const maxLooseHunter = Math.max(...data.map(([, stats]) => stats.looseHunter));
-    const secondMaxLooseHunter = Math.max(...data.filter(([, stats]) => stats.looseHunter < maxLooseHunter).map(([, stats]) => stats.looseHunter));
-    const thirdMaxLooseHunter = Math.max(...data.filter(([, stats]) => stats.looseHunter < secondMaxLooseHunter).map(([, stats]) => stats.looseHunter));
-
-    //blasterKills
-    const maxBlasterKills = Math.max(...data.map(([, stats]) => stats.blasterKills));
-    const secondMaxBlasterKills = Math.max(...data.filter(([, stats]) => stats.blasterKills < maxBlasterKills).map(([, stats]) => stats.blasterKills));
-    const thirdMaxBlasterKills = Math.max(...data.filter(([, stats]) => stats.blasterKills < secondMaxBlasterKills).map(([, stats]) => stats.blasterKills));
-
-
-    const getLeadClass = (value: number, max: number, secondmax: number, thirdmax: number) => {
-        if (value === max && max !== secondmax) {
+        if (value === max && max !== secondMax) {
             return 'lead-highest';
-        } else if (value === secondmax && max !== secondmax) {
-            return 'lead-secondhighest';
-        } else if (value === thirdmax && secondmax !== thirdmax) {
-            return 'lead-thirdhighest';
+        } else if (value === secondMax && max !== secondMax) {
+            return 'lead-second-highest';
+        } else if (value === thirdMax && secondMax !== thirdMax) {
+            return 'lead-third-highest';
         }
         return '';
     }
@@ -111,16 +72,16 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                 {getDataInOrder().map(([player, stats]) => (
                     <tr key={player}>
                         <td>{player}</td>
-                        <td className={getLeadClass(stats.kills, maxKills, secondMaxKills, thirdMaxKills)}>{stats.kills}</td>
-                        <td className={getLeadClass(stats.kdr || 0, maxKDR, secondMaxKDR, thirdMaxKDR)}>{stats.kdr}</td>
-                        <td>{stats.deaths}</td>
-                        <td className={getLeadClass(stats.headHunter, maxHeadHunter, secondMaxHeadHunter, thirdMaxHeadHunter)}>{stats.headHunter}</td>
-                        <td className={getLeadClass(stats.suicides, maxSuicides, secondMaxSuicides, thirdMaxSuicides)}>{stats.suicides}</td>
-                        <td className={getLeadClass(stats.telefrags, maxTelefrags, secondMaxTelefrags, thirdMaxTelefrags)}>{stats.telefrags}</td>
-                        <td className={getLeadClass(stats.grenadeKills, maxGrenadeKills, secondMaxGrenadeKills, thirdMaxGrenadeKills)}>{stats.grenadeKills}</td>
-                        <td className={getLeadClass(stats.eventStreak, maxEventStreak, secondMaxEventStreak, thirdMaxEventStreak)}>{stats.eventStreak}</td>
-                        <td className={getLeadClass(stats.looseHunter, maxLooseHunter, secondMaxLooseHunter, thirdMaxLooseHunter)}>{stats.looseHunter}</td>
-                        <td className={getLeadClass(stats.blasterKills, maxBlasterKills, secondMaxBlasterKills, thirdMaxBlasterKills)}>{stats.blasterKills}</td>
+                        <td className={getLeadClass(stats, 'kills')}>{stats.kills}</td>
+                        <td className={getLeadClass(stats, 'kdr')}>{stats.kdr}</td>
+                        <td className={getLeadClass(stats, 'deaths')}>{stats.deaths}</td>
+                        <td className={getLeadClass(stats, 'headHunter')}>{stats.headHunter}</td>
+                        <td className={getLeadClass(stats, 'suicides')}>{stats.suicides}</td>
+                        <td className={getLeadClass(stats, 'telefrags')}>{stats.telefrags}</td>
+                        <td className={getLeadClass(stats, 'grenadeKills')}>{stats.grenadeKills}</td>
+                        <td className={getLeadClass(stats, 'eventStreak')}>{stats.eventStreak}</td>
+                        <td className={getLeadClass(stats, 'looseHunter')}>{stats.looseHunter}</td>
+                        <td className={getLeadClass(stats, 'blasterKills')}>{stats.blasterKills}</td>
 
                     </tr>
                 ))}
