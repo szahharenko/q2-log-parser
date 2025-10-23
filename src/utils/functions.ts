@@ -164,6 +164,28 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
     return { achievers, count: maxEventStreak };
   };
 
+  export const calculateSpecialist = (leastUsedWeapon: string | null, playerStats: AllPlayerStats) => {
+    if (!leastUsedWeapon) return null;
+    let topPlayer = '';
+    let topKills = 0;
+    for (const [player, stats] of Object.entries(playerStats)) {
+        const killsWithWeapon = stats.weaponKillsBreakdown[leastUsedWeapon] || 0;
+        if (killsWithWeapon > topKills) {
+            topKills = killsWithWeapon;
+            topPlayer = player;
+        }
+    }
+    return topPlayer ? { player: topPlayer, weapon: leastUsedWeapon, kills: topKills } : null;
+  }
+
+  export const getLeastUsedWeapon = (weaponStats: Record<string, number> | null ) => {
+    if (!weaponStats) return null;
+    const entries = Object.entries(weaponStats).filter(([, count]) => count > 0);
+    if (entries.length === 0) return null;
+    entries.sort((a, b) => a[1] - b[1]);
+    return { weapon: entries[0][0], count: entries[0][1] };
+}
+
 export const filterGameLines = (lines: string[]): string[] => {
   return lines.filter(line => {
     // Check if line matches any kill pattern

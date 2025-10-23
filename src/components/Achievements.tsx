@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { HeadHunterAchievement, PlayerStats, Achievement } from '../types/types';
-import { calculateHeadHunter, calculateMostBlasterKills, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostTelefrags, calculateNoMercyForMinions, calculateWrongTurn } from '../utils/functions';
+import { calculateHeadHunter, calculateMostBlasterKills, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostTelefrags, calculateNoMercyForMinions, calculateSpecialist, calculateWrongTurn, getLeastUsedWeapon } from '../utils/functions';
 
 interface AchievementsProps {
     playerStats: Record<string, PlayerStats>;
+    weaponStats: Record<string, number> | null;
 }
 
-export const Achievements = ({playerStats}: AchievementsProps) => {
+export const Achievements = ({playerStats, weaponStats}: AchievementsProps) => {
 
     const [headHunter, setHeadHunter] = useState<HeadHunterAchievement | null>(null);
     const [mostTelefrags, setMostTelefrags] = useState<Achievement | null>(null);
@@ -15,6 +16,8 @@ export const Achievements = ({playerStats}: AchievementsProps) => {
     const [mostBully, setMostBully] = useState<HeadHunterAchievement | null>(null);
     const [mostGrenades, setMostGrenades] = useState<Achievement | null>(null);
     const [mostBlaster, setMostBlaster] = useState<Achievement | null>(null);
+    const [leastUsedWeapon, setLeastUsedWeapon] = useState<{ weapon: string; count: number } | null>(null);
+    const [specialist, setSpecialist] = useState<{ player: string; weapon: string; kills: number } | null>(null);
 
     useEffect(() => {
         setHeadHunter(calculateHeadHunter(playerStats));
@@ -24,7 +27,13 @@ export const Achievements = ({playerStats}: AchievementsProps) => {
         setMostBlaster(calculateMostBlasterKills(playerStats));
         setMostEventStreak(calculateMostEventStreak(playerStats));
         setMostBully(calculateNoMercyForMinions(playerStats));
-    }, [playerStats]);
+    }, [playerStats, weaponStats]);
+
+    useEffect(() => {
+        const leastUsedWeapon = getLeastUsedWeapon(weaponStats);
+        setLeastUsedWeapon(leastUsedWeapon);
+        playerStats && leastUsedWeapon && setSpecialist(calculateSpecialist(leastUsedWeapon?.weapon, playerStats));
+    }, []);
 
     return <>
       <div className='page' style={{ margin: '30px 0' }}>
@@ -96,6 +105,22 @@ export const Achievements = ({playerStats}: AchievementsProps) => {
               </p>
             </div>
           )}
+
+          { /* Player with moskt kills from Least used weapon */}
+          {
+            leastUsedWeapon && (
+              <div style={{  border: '1px solid #795548', backgroundColor: '#f5f0ed' }}>
+                <h3>🎯 Specialist</h3>
+                {specialist ? (
+                  <p>
+                    <strong>{specialist.player}</strong> mastered the <strong>{specialist.weapon}</strong> with <strong>{specialist.kills}</strong> kills, the least used weapon with only <strong>{leastUsedWeapon.count}</strong> total kills!
+                  </p>
+                ) : (
+                  <p>No player achieved kills with the least used weapon: <strong>{leastUsedWeapon.weapon}</strong>.</p>
+                )}
+              </div>
+            )
+          }
         </div>
       </div>
     </>

@@ -3,7 +3,7 @@ import { PlayerStats } from './components/PlayerStats';
 import { PlayerTable } from './components/Table';
 import { filterGameLines, parseGameEvents } from './utils/functions';
 import type { AllPlayerStats } from './types/types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Weapons } from './components/Weapons';
 
 const LogParser: React.FC = () => {
@@ -79,7 +79,7 @@ const LogParser: React.FC = () => {
         <>
           <PlayerTable playerStats={playerStats}/>
           <Weapons weaponStats={weaponStats}/>
-          <Achievements  playerStats={playerStats}/>
+          <Achievements  playerStats={playerStats} weaponStats={weaponStats}/>
           <PlayerStats playerStats={playerStats} />
         </>
       }
