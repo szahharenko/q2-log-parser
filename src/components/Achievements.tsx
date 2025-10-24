@@ -153,14 +153,6 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                 })
               }
               </ul>
-              <div>Chat:
-                { nonGameEvents && nonGameEvents.length > 0 && nonGameEvents.map((line, index) => {
-                  if (line.toLowerCase().includes('tet') || line.toLocaleLowerCase().includes('spacer')) {
-                    return <div key={index}>{line}</div>
-                  }
-                  return null;
-                })}
-              </div>
               {tetKillers.every(({ killsOnTet }) => killsOnTet === 0) && <div>No one cheated on Tet. Well done!</div>}
             </div>
           </div>

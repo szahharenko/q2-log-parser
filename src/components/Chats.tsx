@@ -13,7 +13,7 @@ export const Chats = ({nonGameEvents}: ChatsProps) => {
         { chatHidden ?
           <button onClick={() => setChatHidden(false)}>Show Chats</button>
           :
-          <div>
+          <pre>
               { nonGameEvents && nonGameEvents.length > 0 && nonGameEvents.map((line, index) => {
                 if (
                   line.includes('Timelimit hit.') ||
@@ -40,7 +40,7 @@ export const Chats = ({nonGameEvents}: ChatsProps) => {
                 return <div key={index}>{line}</div>
 
               })}
-          </div>
+          </pre>
       }
       </div>
     </>

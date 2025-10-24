@@ -13,6 +13,7 @@ const LogParser: React.FC = () => {
   const [message, setMessage] = useState<string>('Please select a log file to view its content.');
   const [playerStats, setPlayerStats] = useState<AllPlayerStats>({});
   const [weaponStats, setWeaponStats] = useState<Record<string, number> | null>(null);
+  const [allLines, setAllLines] = useState<string[]>([]);
   const [gameEvents, setGameEvents] = useState<string[]>([]);
   const [nonGameEvents, setNoneGameEvents] = useState<string[]>([]);
   const [status, setStatus] = useState<string>('');
@@ -24,7 +25,11 @@ const LogParser: React.FC = () => {
   useEffect(() => {
     getLogs(reportId, API_URL).then(data => {
       if (data?.length) {
-        setGameEvents(data);
+        const onlyGameEvents = filterGameLines(data);
+        const nonGameEvents = filterNonGameLines(data);
+        setAllLines(data);
+        setNoneGameEvents(nonGameEvents);
+        setGameEvents(onlyGameEvents);
         // Parse game events to calculate stats
         const { stats: calculatedStats, weaponStats: calculatedWeaponStats} = parseGameEvents(data);
         setPlayerStats(calculatedStats);
@@ -76,6 +81,7 @@ const LogParser: React.FC = () => {
       const allLines = fullContent.split('\n').map(line => line.replace(timestampRegex, ''));
       const onlyGameEvents = filterGameLines(allLines);
       const nonGameEvents = filterNonGameLines(allLines);
+      setAllLines(allLines);
       setNoneGameEvents(nonGameEvents);
       setGameEvents(onlyGameEvents);
 
@@ -102,7 +108,7 @@ const LogParser: React.FC = () => {
       return;
     }
 
-    const response = await sendLogs(gameEvents, API_URL);
+    const response = await sendLogs(allLines, API_URL);
     const { status: respStatus, message: respMessage, id: respId } = response;
 
     // 3. Update state based on the response
