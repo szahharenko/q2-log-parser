@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { HeadHunterAchievement, PlayerStats, Achievement } from '../types/types';
-import { calculateHeadHunter, calculateMostBlasterKills, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostTelefrags, calculateNoMercyForMinions, calculateSpecialist, calculateWrongTurn, getLeastUsedWeapon } from '../utils/functions';
+import { calculateHeadHunter, calculateMostBlasterKills, calculateMostChats, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostTelefrags, calculateNoMercyForMinions, calculateSpecialist, calculateWrongTurn, getLeastUsedWeapon } from '../utils/functions';
 import tet from '../img/tet.jpg'; // Tell webpack this JS file uses this image
 
 interface AchievementsProps {
@@ -21,6 +21,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
     const [leastUsedWeapon, setLeastUsedWeapon] = useState<{ weapon: string; count: number } | null>(null);
     const [specialist, setSpecialist] = useState<{ player: string; weapon: string; kills: number } | null>(null);
     const [tetKillers, setTetKiller] = useState<{ player: string; killsOnTet: number }[] | null>(null);
+    const [mostChats, setMostChats] = useState<Achievement | null>(null);
 
     useEffect(() => {
         setHeadHunter(calculateHeadHunter(playerStats));
@@ -30,6 +31,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
         setMostBlaster(calculateMostBlasterKills(playerStats));
         setMostEventStreak(calculateMostEventStreak(playerStats));
         setMostBully(calculateNoMercyForMinions(playerStats));
+        setMostChats(calculateMostChats(playerStats));
     }, [playerStats, weaponStats]);
 
     useEffect(() => {
@@ -132,6 +134,16 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                 ) : (
                   <p>No player achieved kills with the least used weapon: <strong>{leastUsedWeapon.weapon}</strong>.</p>
                 )}
+              </div>
+            )
+          }
+
+          { /* Player who speaks to much */}
+          {
+            mostChats && (
+              <div style={{  border: '1px solid #009688', backgroundColor: '#e0f2f1' }}>
+                <h3>💬 Chatterbox</h3>
+                <p><strong>{mostChats.achievers.join(' & ')}</strong> leads the chatter with <strong>{mostChats.count}</strong> chat messages!</p>
               </div>
             )
           }

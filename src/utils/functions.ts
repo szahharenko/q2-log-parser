@@ -178,6 +178,20 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
     return topPlayer ? { player: topPlayer, weapon: leastUsedWeapon, kills: topKills } : null;
   }
 
+  export const calculateMostChats = (playerStats: AllPlayerStats): Achievement | null => {
+    let maxChats = 0;
+    for (const playerName in playerStats) {
+        const chatCount = playerStats[playerName].chats.length;
+        if (chatCount > maxChats) {
+            maxChats = chatCount;
+        }
+    }
+
+    if (maxChats === 0) return null;
+    const achievers = Object.keys(playerStats).filter(p => playerStats[p].chats.length === maxChats);
+    return { achievers, count: maxChats };
+  };
+
   export const getLeastUsedWeapon = (weaponStats: Record<string, number> | null ) => {
     if (!weaponStats) return null;
     const entries = Object.entries(weaponStats).filter(([, count]) => count > 0);
