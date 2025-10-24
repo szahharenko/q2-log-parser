@@ -23,7 +23,7 @@ const LogParser: React.FC = () => {
   const reportId = window.location.search.split('?r=')[1];
 
   useEffect(() => {
-    getLogs(reportId, API_URL).then(data => {
+    reportId && getLogs(reportId, API_URL).then(data => {
       if (data?.length) {
         const onlyGameEvents = filterGameLines(data);
         const nonGameEvents = filterNonGameLines(data);
@@ -36,11 +36,11 @@ const LogParser: React.FC = () => {
         setWeaponStats(calculatedWeaponStats);
         setMessage(`Successfully loaded report.`);
       } else {
-        console.error('Nothing to show');
+        setMessage(`This report do no exist report.`);
         //window.location.href = window.location.origin
       }
-    }).catch(err => {
-      console.error('Error fetching log data:', err);
+    }).catch(_e => {
+      setMessage(`This report do no exist report.`);
      //window.location.href = window.location.origin
     });
   }, [reportId]);

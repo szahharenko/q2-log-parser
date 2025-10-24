@@ -273,7 +273,7 @@ export const parseGameEvents = (lines: string[], nonGameLines: string[]): { stat
     }
     const ensurePlayer = (name: string) => {
       if (!stats[name]) {
-        stats[name] = { kills: 0, deaths: 0, suicides: 0,  telefrags: 0, eventStreak: 0, killBreakdown: {}, grenadeKills: 0, headHunter: 0, looseHunter: 0, weaponKillsBreakdown: {}, blasterKills: 0, chats: []};
+        stats[name] = { kills: 0, deaths: 0, suicides: 0,  telefrags: 0, eventStreak: 0, killBreakdown: {}, grenadeKills: 0, headHunter: 0, looseHunter: 0, weaponKillsBreakdown: {}, blasterKills: 0, chats: [], chatCount: 0};
       }
     };
     let currentStreakPlayer: string | null = null;
@@ -353,10 +353,10 @@ export const parseGameEvents = (lines: string[], nonGameLines: string[]): { stat
     nonGameLines.forEach( line => {
       playersList.forEach(p => {
         line.startsWith(p) && stats[p].chats.push(line)
+        stats[p].chatCount = stats[p].chatCount + 1;
       })
 
     })
-    console.log(stats)
     return {
       stats,
       weaponStats

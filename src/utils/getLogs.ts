@@ -16,6 +16,7 @@
       });
 
       if (!response.ok) {
+        alert("Failed to load report!");
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
@@ -23,7 +24,7 @@
       return data;
 
     } catch (error) {
-      console.error("Failed to send logs:", error);
+      alert("Failed to load report!");
       return null;
     }
   }

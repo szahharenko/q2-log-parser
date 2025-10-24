@@ -53,10 +53,10 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
 
     return <>
       <div className='page' style={{ margin: '30px 0' }}>
-        {/* title for achievements */}
+
         <h3>Achievements 🏆</h3>
         <div className='achievements-list page'>
-          {/* Achievements */}
+
           {headHunter && (
             <div style={{  border: '1px solid #e0c200', backgroundColor: '#fffbe6' }}>
               <h3 >🏆 Head Hunter</h3>

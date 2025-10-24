@@ -6,7 +6,7 @@ interface PlayerTableProps {
 }
 
 export const PlayerTable = ({playerStats}: PlayerTableProps) => {
-    const [orderBy, setOrderBy] = useState< 'kills' | 'deaths' | 'suicides' | 'grenadeKills' | 'telefrags' | 'kdr' | 'eventStreak' | 'headHunter' | 'looseHunter' | 'blasterKills'>('kills') ;
+    const [orderBy, setOrderBy] = useState< 'kills' | 'deaths' | 'suicides' | 'grenadeKills' | 'telefrags' | 'kdr' | 'eventStreak' | 'headHunter' | 'looseHunter' | 'blasterKills' | 'chatCount'>('kills') ;
 
     let data = Object.entries(playerStats).sort(([, a], [, b]) => b.kills - a.kills || a.deaths - b.deaths)
     if (data.length === 0) return null;
@@ -17,11 +17,12 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
         kdr: stats.deaths === 0 ? stats.kills : parseFloat((stats.kills / stats.deaths).toFixed(2)),
         headHunter: stats.killBreakdown[playerWithMostKills] || 0,
         looseHunter: stats.killBreakdown[playerWithMostDeaths] || 0,
+        chatCount: stats.chats.length || 0,
      }]);
 
 
     const getLeadClass = (stats: PlayerStats, key: keyof PlayerStats ) : string => {
-        const value = stats[key];
+        let value = stats[key];
         if (value === 0) return '';
         const max = Math.max(...data.map(([, s]) => s[key] as number));
         const secondMax = Math.max(...data.filter(([, s]) => (s[key] as number) < max).map(([, s]) => s[key] as number));
@@ -66,6 +67,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                     <th className='sortable' onClick={() => setOrderBy('eventStreak')}>Troublemaker {orderBy === 'eventStreak' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('looseHunter')}>Bully {orderBy === 'looseHunter' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('blasterKills')}>Optimist {orderBy === 'blasterKills' ? '▼' : ''}</th>
+                    <th className='sortable' onClick={() => setOrderBy('chatCount')}>Chatterbox {orderBy === 'chatCount' ? '▼' : ''}</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,6 +84,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                         <td className={getLeadClass(stats, 'eventStreak')}>{stats.eventStreak}</td>
                         <td className={getLeadClass(stats, 'looseHunter')}>{stats.looseHunter}</td>
                         <td className={getLeadClass(stats, 'blasterKills')}>{stats.blasterKills}</td>
+                        <td className={getLeadClass(stats, 'chatCount')}>{stats.chatCount}</td>
                     </tr>
                 ))}
             </tbody>
