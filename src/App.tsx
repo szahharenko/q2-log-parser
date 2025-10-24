@@ -1,7 +1,7 @@
 import { Achievements } from './components/Achievements';
 import { PlayerStats } from './components/PlayerStats';
 import { PlayerTable } from './components/Table';
-import { filterGameLines, parseGameEvents } from './utils/functions';
+import { filterGameLines, filterNonGameLines, parseGameEvents } from './utils/functions';
 import type { AllPlayerStats } from './types/types';
 import React, { useEffect, useState } from 'react';
 import { Weapons } from './components/Weapons';
@@ -13,6 +13,7 @@ const LogParser: React.FC = () => {
   const [playerStats, setPlayerStats] = useState<AllPlayerStats>({});
   const [weaponStats, setWeaponStats] = useState<Record<string, number> | null>(null);
   const [gameEvents, setGameEvents] = useState<string[]>([]);
+  const [nonGameEvents, setNoneGameEvents] = useState<string[]>([]);
   const [status, setStatus] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -73,6 +74,8 @@ const LogParser: React.FC = () => {
       const timestampRegex = /^\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}\] /;
       const allLines = fullContent.split('\n').map(line => line.replace(timestampRegex, ''));
       const onlyGameEvents = filterGameLines(allLines);
+      const nonGameEvents = filterNonGameLines(allLines);
+      setNoneGameEvents(nonGameEvents);
       setGameEvents(onlyGameEvents);
 
       // Parse game events to calculate stats
@@ -149,7 +152,7 @@ const LogParser: React.FC = () => {
         <>
           <PlayerTable playerStats={playerStats}/>
           <Weapons weaponStats={weaponStats}/>
-          <Achievements  playerStats={playerStats} weaponStats={weaponStats}/>
+          <Achievements  playerStats={playerStats} weaponStats={weaponStats} nonGameEvents={nonGameEvents}/>
           <PlayerStats playerStats={playerStats} />
         </>
       }

@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import { HeadHunterAchievement, PlayerStats, Achievement } from '../types/types';
 import { calculateHeadHunter, calculateMostBlasterKills, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostTelefrags, calculateNoMercyForMinions, calculateSpecialist, calculateWrongTurn, getLeastUsedWeapon } from '../utils/functions';
+import tet from '../img/tet.jpg'; // Tell webpack this JS file uses this image
+import { json } from 'stream/consumers';
+
 
 interface AchievementsProps {
     playerStats: Record<string, PlayerStats>;
     weaponStats: Record<string, number> | null;
+    nonGameEvents?: string[];
 }
 
-export const Achievements = ({playerStats, weaponStats}: AchievementsProps) => {
+export const Achievements = ({playerStats, weaponStats, nonGameEvents}: AchievementsProps) => {
 
     const [headHunter, setHeadHunter] = useState<HeadHunterAchievement | null>(null);
     const [mostTelefrags, setMostTelefrags] = useState<Achievement | null>(null);
@@ -18,6 +22,7 @@ export const Achievements = ({playerStats, weaponStats}: AchievementsProps) => {
     const [mostBlaster, setMostBlaster] = useState<Achievement | null>(null);
     const [leastUsedWeapon, setLeastUsedWeapon] = useState<{ weapon: string; count: number } | null>(null);
     const [specialist, setSpecialist] = useState<{ player: string; weapon: string; kills: number } | null>(null);
+    const [tetKillers, setTetKiller] = useState<{ player: string; killsOnTet: number }[] | null>(null);
 
     useEffect(() => {
         setHeadHunter(calculateHeadHunter(playerStats));
@@ -28,6 +33,17 @@ export const Achievements = ({playerStats, weaponStats}: AchievementsProps) => {
         setMostEventStreak(calculateMostEventStreak(playerStats));
         setMostBully(calculateNoMercyForMinions(playerStats));
     }, [playerStats, weaponStats]);
+
+    useEffect(() => {
+      const hasTet = Object.keys(playerStats).some(name => name.toLowerCase().includes('tet'));
+      if (hasTet) {
+        const tetKillers = Object.entries(playerStats).map(([player, stats]) => ({
+          player, killsOnTet: stats.killBreakdown['tet'] || 0
+        }));
+
+        setTetKiller(tetKillers);
+      }
+    }, [playerStats]);
 
     useEffect(() => {
         const leastUsedWeapon = getLeastUsedWeapon(weaponStats);
@@ -123,5 +139,27 @@ export const Achievements = ({playerStats, weaponStats}: AchievementsProps) => {
           }
         </div>
       </div>
+      {
+        tetKillers && (
+          <div className='tet-details' style={{  border: '1px solid #ff9800', backgroundColor: '#fff3e0' }}>
+            <div><img src={tet} alt='tet'/></div>
+            <div>
+              <h3>😤😒 Д`Артаньян</h3>
+              <p>Cheater list</p>
+              <ul>
+              {
+                tetKillers.sort((a, b) => b.killsOnTet - a.killsOnTet).map(({ player, killsOnTet }) => {
+                  return killsOnTet === 0 ? null : <li key={player}>
+                    <strong>{player}</strong> cheated <strong>{killsOnTet}</strong> times on tet
+                  </li>
+                })
+              }
+              </ul>
+              { JSON.stringify(nonGameEvents?.filter(line => line.toLowerCase().includes('tet') || line.toLocaleLowerCase().includes('spacer'))) }
+              {tetKillers.every(({ killsOnTet }) => killsOnTet === 0) && <div>No one cheated on Tet. Well done!</div>}
+            </div>
+          </div>
+        )
+      }
     </>
 }

@@ -204,6 +204,23 @@ export const filterGameLines = (lines: string[]): string[] => {
   });
 };
 
+export const filterNonGameLines = (lines: string[]): string[] => {
+  return lines.filter(line => {
+    // Check if line matches any kill pattern
+    for (const pattern of killPatterns) {
+        if (pattern.test(line)) {
+            return false;
+        }
+    }
+    // Check if line matches any
+    for (const pattern of suicidePatterns) {
+        if (pattern.test(line)) {
+            return false;
+        }
+    }
+    return true;
+  });
+};
 export type Weapon = 'Railgun' | 'Rocket Launcher' | 'Machinegun' | 'Chaingun' | 'Super Shotgun' | 'Hyperblaster' | 'BFG' | 'Grenade' | 'Telefrag' | 'Shotgun' | 'Blaster';
 
 const getWeaponName = (pattern: string): Weapon | null => {
