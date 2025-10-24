@@ -158,7 +158,9 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
           <div className='tet-details' style={{  border: '1px solid #ff9800', backgroundColor: '#fff3e0' }}>
             <div><img src={tet} alt='tet'/></div>
             <div>
+              <strong>tet (spacer) personal achievement</strong>
               <h3>😤😒 Д`Артаньян</h3>
+
               <p>Cheater list</p>
               <ul>
               {
