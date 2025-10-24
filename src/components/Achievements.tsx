@@ -193,7 +193,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                 specialist && <>
                   <h3>🔪 Специалист</h3>
                   <p>
-                    <strong>{specialist.player}</strong> освоил <strong>{specialist.weapon}</strong>, совершив <strong>{specialist.kills}</strong> убийств — это наименее используемое оружие, с которым было совершено всего <strong>{leastUsedWeapon.count}</strong> убийств!
+                    <strong>{specialist.player}</strong> в совершенстве освоил <strong>{specialist.weapon}</strong>, совершив <strong>{specialist.kills}</strong> убийств — это наименее используемое оружие, с которым было совершено всего <strong>{leastUsedWeapon.count}</strong> убийств!
                   </p>
                 </>
               }
