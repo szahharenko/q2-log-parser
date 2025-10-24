@@ -21,22 +21,6 @@ export const Chats = ({nonGameEvents}: ChatsProps) => {
                 ) {
                   return <hr/>
                 }
-                if (
-                  line.includes('Out of item:') ||
-                  line.includes('remaining in match') ||
-                  line.includes('Logging console ') ||
-                  line.includes('----- MVD_GameShutdown -----') ||
-                  line.includes('[MVD]') ||
-                  line.includes('No players to chase.') ||
-                  line.includes('No Grenades') ||
-                  line.includes('No Rockets') ||
-                  line.includes('No Cells') ||
-                  line.includes('No Slugs') ||
-                  line.includes('No Nails') ||
-                  line.includes('No Bullets')
-                ) {
-                  return null;
-                }
                 return <div key={index}>{line}</div>
 
               })}

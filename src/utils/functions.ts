@@ -232,7 +232,27 @@ export const filterNonGameLines = (lines: string[]): string[] => {
             return false;
         }
     }
-    return true;
+    const systemMessages = [
+      'Out of item:',
+      'remaining in match',
+      'Logging console ',
+      '----- MVD_GameShutdown -----',
+      '[MVD]',
+      'No players to chase.',
+      'No Grenades',
+      'No Rockets',
+      'No Cells',
+      'No Slugs',
+      'No Nails',
+      'No Bullets',
+      'is ready!',
+      'connected',
+      'entered the game',
+      'disconnected',
+      'All players ready!'
+    ]
+    const lineContainsKeyword = systemMessages.some(keyword => line.includes(keyword));
+    return !lineContainsKeyword;
   });
 };
 export type Weapon = 'Railgun' | 'Rocket Launcher' | 'Machinegun' | 'Chaingun' | 'Super Shotgun' | 'Hyperblaster' | 'BFG' | 'Grenade' | 'Telefrag' | 'Shotgun' | 'Blaster';
