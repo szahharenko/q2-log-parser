@@ -54,7 +54,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
     return <>
       <div className='page' style={{ margin: '30px 0' }}>
 
-        <h3>Achievements 🏆</h3>
+        <h3>Prize Pool 🏆💰 Achievements</h3>
         <div className='achievements-list page'>
 
           {headHunter && (
@@ -102,6 +102,10 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
             </div>
           )}
 
+        </div>
+
+        <h3>Bonus 🏆🌟Achievements</h3>
+        <div className='achievements-list page'>
           { /*No Mercy for Minions */ }
           {mostBully && (
             <div style={{  border: '1px solid #ff5733', backgroundColor: '#ffe6e1' }}>
