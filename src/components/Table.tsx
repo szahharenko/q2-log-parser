@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { PlayerStats } from '../types/types';
+import { getLanguage } from '../utils/getLanguage';
 
 interface PlayerTableProps {
     playerStats: Record<string, PlayerStats>;
@@ -7,6 +8,8 @@ interface PlayerTableProps {
 
 export const PlayerTable = ({playerStats}: PlayerTableProps) => {
     const [orderBy, setOrderBy] = useState< 'kills' | 'deaths' | 'suicides' | 'grenadeKills' | 'telefrags' | 'kdr' | 'eventStreak' | 'headHunter' | 'looseHunter' | 'blasterKills' | 'chatCount'>('kills') ;
+    const lang = getLanguage();
+
 
     let data = Object.entries(playerStats).sort(([, a], [, b]) => b.kills - a.kills || a.deaths - b.deaths)
     if (data.length === 0) return null;
@@ -52,22 +55,28 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
     }
 
     return (<div className='page' style={{ marginBottom: '20px' }}>
-        <h3>Comprehensive Leaderboard 🏆</h3>
+        { lang === 'en' ?
+            <h3>Comprehensive Leaderboard 🏆</h3>:
+            <h3>Подробная таблица лидеров 🏆</h3>
+        }
+
+
+
         <table style={{ borderCollapse: 'collapse', width: 'auto', fontSize: '14px' }}>
             <thead>
                 <tr style={{ backgroundColor: '#eee' }}>
                     <th>Player</th>
-                    <th className='sortable' onClick={() => setOrderBy('kills')}>Kills {orderBy === 'kills' ? '▼' : ''}</th>
+                    <th className='sortable' onClick={() => setOrderBy('kills')}>{ lang === 'en' ? 'Kills' : 'Убийств'} {orderBy === 'kills' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('kdr')}>KDR {orderBy === 'kdr' ? '▼' : ''}</th>
-                    <th className='sortable' onClick={() => setOrderBy('deaths')}>Deaths {orderBy === 'deaths' ? '▼' : ''}</th>
+                    <th className='sortable' onClick={() => setOrderBy('deaths')}>{ lang === 'en' ? 'Deaths' : 'Смерти'} {orderBy === 'deaths' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('headHunter')}>Head Hunter {orderBy === 'headHunter' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('suicides')}>Wrong turn {orderBy === 'suicides' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('telefrags')}>Respawn Hero {orderBy === 'telefrags' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('grenadeKills')}>Grenadier {orderBy === 'grenadeKills' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('eventStreak')}>Troublemaker {orderBy === 'eventStreak' ? '▼' : ''}</th>
-                    <th className='sortable' onClick={() => setOrderBy('looseHunter')}>Bully {orderBy === 'looseHunter' ? '▼' : ''}</th>
-                    <th className='sortable' onClick={() => setOrderBy('blasterKills')}>Optimist {orderBy === 'blasterKills' ? '▼' : ''}</th>
-                    <th className='sortable' onClick={() => setOrderBy('chatCount')}>Chatterbox {orderBy === 'chatCount' ? '▼' : ''}</th>
+                    <th className='sortable' onClick={() => setOrderBy('looseHunter')}>{ lang === 'en' ? 'Bully' : 'Задира'} {orderBy === 'looseHunter' ? '▼' : ''}</th>
+                    <th className='sortable' onClick={() => setOrderBy('blasterKills')}>{ lang === 'en' ? 'Optimist' : 'Оптимист'} {orderBy === 'blasterKills' ? '▼' : ''}</th>
+                    <th className='sortable' onClick={() => setOrderBy('chatCount')}>{ lang === 'en' ? 'Chatterbox' : 'Болтун'} {orderBy === 'chatCount' ? '▼' : ''}</th>
                 </tr>
             </thead>
             <tbody>
