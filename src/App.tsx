@@ -31,7 +31,7 @@ const LogParser: React.FC = () => {
         setNoneGameEvents(nonGameEvents);
         setGameEvents(onlyGameEvents);
         // Parse game events to calculate stats
-        const { stats: calculatedStats, weaponStats: calculatedWeaponStats} = parseGameEvents(data);
+        const { stats: calculatedStats, weaponStats: calculatedWeaponStats} = parseGameEvents(data, nonGameEvents);
         setPlayerStats(calculatedStats);
         setWeaponStats(calculatedWeaponStats);
         setMessage(`Successfully loaded report.`);
@@ -86,7 +86,7 @@ const LogParser: React.FC = () => {
       setGameEvents(onlyGameEvents);
 
       // Parse game events to calculate stats
-      const { stats: calculatedStats, weaponStats: calculatedWeaponStats} = parseGameEvents(onlyGameEvents);
+      const { stats: calculatedStats, weaponStats: calculatedWeaponStats} = parseGameEvents(onlyGameEvents, nonGameEvents);
 
       setPlayerStats(calculatedStats);
       setWeaponStats(calculatedWeaponStats);

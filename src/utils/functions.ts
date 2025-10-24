@@ -242,7 +242,7 @@ const getWeaponName = (pattern: string): Weapon | null => {
     return null;
 }
 
-export const parseGameEvents = (lines: string[]): { stats: AllPlayerStats, weaponStats: { [K in Weapon]: number}} => {
+export const parseGameEvents = (lines: string[], nonGameLines: string[]): { stats: AllPlayerStats, weaponStats: { [K in Weapon]: number}} => {
     const stats: AllPlayerStats = {};
     const weaponStats: { [K in Weapon]: number} = {
       'Railgun': 0,
@@ -259,13 +259,11 @@ export const parseGameEvents = (lines: string[]): { stats: AllPlayerStats, weapo
     }
     const ensurePlayer = (name: string) => {
       if (!stats[name]) {
-        stats[name] = { kills: 0, deaths: 0, suicides: 0,  telefrags: 0, eventStreak: 0, killBreakdown: {}, grenadeKills: 0, headHunter: 0, looseHunter: 0, weaponKillsBreakdown: {}, blasterKills: 0};
+        stats[name] = { kills: 0, deaths: 0, suicides: 0,  telefrags: 0, eventStreak: 0, killBreakdown: {}, grenadeKills: 0, headHunter: 0, looseHunter: 0, weaponKillsBreakdown: {}, blasterKills: 0, chats: []};
       }
     };
     let currentStreakPlayer: string | null = null;
-    let currentStreakCount =
-
-    0;
+    let currentStreakCount = 0;
 
     lines.forEach(line => {
       let eventFound = false;
@@ -337,6 +335,14 @@ export const parseGameEvents = (lines: string[]): { stats: AllPlayerStats, weapo
           }
       }
     });
+    const playersList = Object.keys(stats)
+    nonGameLines.forEach( line => {
+      playersList.forEach(p => {
+        line.startsWith(p) && stats[p].chats.push(line)
+      })
+
+    })
+    console.log(stats)
     return {
       stats,
       weaponStats

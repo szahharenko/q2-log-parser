@@ -18,6 +18,7 @@ export interface PlayerStats {
     headHunter: number;
     looseHunter: number;
     blasterKills: number;
+    chats: string[];
 }
 
 export type AllPlayerStats = {
