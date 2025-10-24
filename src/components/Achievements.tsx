@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { HeadHunterAchievement, PlayerStats, Achievement } from '../types/types';
 import { calculateHeadHunter, calculateMostBlasterKills, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostTelefrags, calculateNoMercyForMinions, calculateSpecialist, calculateWrongTurn, getLeastUsedWeapon } from '../utils/functions';
 import tet from '../img/tet.jpg'; // Tell webpack this JS file uses this image
-import { json } from 'stream/consumers';
-
 
 interface AchievementsProps {
     playerStats: Record<string, PlayerStats>;
@@ -155,7 +153,14 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                 })
               }
               </ul>
-              { JSON.stringify(nonGameEvents?.filter(line => line.toLowerCase().includes('tet') || line.toLocaleLowerCase().includes('spacer'))) }
+              <div>Chat:
+                { nonGameEvents && nonGameEvents.length > 0 && nonGameEvents.map((line, index) => {
+                  if (line.toLowerCase().includes('tet') || line.toLocaleLowerCase().includes('spacer')) {
+                    return <div key={index}>{line}</div>
+                  }
+                  return null;
+                })}
+              </div>
               {tetKillers.every(({ killsOnTet }) => killsOnTet === 0) && <div>No one cheated on Tet. Well done!</div>}
             </div>
           </div>

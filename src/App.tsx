@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { Weapons } from './components/Weapons';
 import { sendLogs } from './utils/sendLogs';
 import { getLogs } from './utils/getLogs';
+import { Chats } from './components/Chats';
 
 const LogParser: React.FC = () => {
   const [message, setMessage] = useState<string>('Please select a log file to view its content.');
@@ -156,7 +157,7 @@ const LogParser: React.FC = () => {
           <PlayerStats playerStats={playerStats} />
         </>
       }
-
+      <Chats nonGameEvents={nonGameEvents}/>
       <hr style={{margin: '30px 0'}}/>
       <p style={{textAlign:'center', padding: '10px'}}>
         This tool is designed & developed by <a href="https://t.me/Acrashik" target="_blank" rel="noopener noreferrer">Acrashik</a> and <a href="https://t.me/exeshe4ki">Exeshe4ki</a>.
