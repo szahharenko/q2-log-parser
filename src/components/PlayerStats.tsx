@@ -42,7 +42,7 @@ export const PlayerStats = ({playerStats}: PlayerStatsProps) => {
                                 .map(([weapon, count]) => (
                                     <li key={weapon}>
                                         {weapon}: <strong>{count}</strong>
-                                        { lang === 'en' ? <>{count > 1 ? 'kills' : 'kill'}</>  : <> фрагов</>}
+                                        { lang === 'en' ? <>{count > 1 ? 'kills' : 'kill'}</>  : null}
                                     </li>
                                 ))}
                         </ul>

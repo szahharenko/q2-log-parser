@@ -14,7 +14,7 @@ export const Chats = ({nonGameEvents}: ChatsProps) => {
           { lang === 'en' ?
             <h3>In-game Chats 💬</h3>
             :
-            <h3>Внутри-игровые игры 💬</h3>
+            <h3>Внутри-игровые чаты 💬</h3>
           }
         { chatHidden ?
           <button onClick={() => setChatHidden(false)}>

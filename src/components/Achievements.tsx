@@ -22,6 +22,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
     const [leastUsedWeapon, setLeastUsedWeapon] = useState<{ weapon: string; count: number } | null>(null);
     const [specialist, setSpecialist] = useState<{ player: string; weapon: string; kills: number } | null>(null);
     const [tetKillers, setTetKiller] = useState<{ player: string; killsOnTet: number }[] | null>(null);
+    const [tetSuicides, setTetSuicides] = useState<number | null>(null);
     const [mostChats, setMostChats] = useState<Achievement | null>(null);
     const lang = getLanguage();
 
@@ -43,7 +44,8 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
         const tetKillers = Object.entries(playerStats).map(([player, stats]) => ({
           player, killsOnTet: stats.killBreakdown['tet'] || 0
         }));
-
+        ;
+        setTetSuicides(playerStats['tet']?.suicides || 0);
         setTetKiller(tetKillers);
       }
     }, [playerStats]);
@@ -113,7 +115,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                 </p>
                 :
                 <p>
-                  <strong>{mostGrenades.achievers.join(' & ')}</strong> занял первое место, совершив <strong>{mostGrenades.count}</strong> убийства гранатами!
+                  <strong>{mostGrenades.achievers.join(' & ')}</strong> занял первое место, совершив <strong>{mostGrenades.count}</strong> убийств(а) гранатами!
                 </p>
               }
               </div>
@@ -157,7 +159,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
             </div>
           )}
 
-          { /* Blaster kills achievement could be added here similarly */ }
+          { /* Blaster kills achievement */ }
           {mostBlaster && (
             <div style={{  border: '1px solid #17a2b8', backgroundColor: '#d1f0f7' }}>
               { lang === 'en' ?
@@ -178,7 +180,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
             </div>
           )}
 
-          { /* Player with moskt kills from Least used weapon */}
+          { /* Player with most kills from Least used weapon */}
           {
             leastUsedWeapon && (
               <div style={{  border: '1px solid #795548', backgroundColor: '#f5f0ed' }}>
@@ -193,7 +195,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                 specialist && <>
                   <h3>🔪 Специалист</h3>
                   <p>
-                    <strong>{specialist.player}</strong> в совершенстве освоил <strong>{specialist.weapon}</strong>, совершив <strong>{specialist.kills}</strong> убийств — это наименее используемое оружие, с которым было совершено всего <strong>{leastUsedWeapon.count}</strong> убийств!
+                    <strong>{specialist.player}</strong> в совершенстве освоил <strong>{specialist.weapon}</strong>, совершив <strong>{specialist.kills}</strong> убийств(а) — это наименее используемое оружие, с которым было совершено всего <strong>{leastUsedWeapon.count}</strong> убийств(а)!
                   </p>
                 </>
               }
@@ -222,7 +224,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
         </div>
       </div>
       {
-        tetKillers && (
+        tetKillers && lang !== 'en' && (
           <div className='tet-details' style={{  border: '1px solid #ff9800', backgroundColor: '#fff3e0' }}>
             <div><img src={tet} alt='tet'/></div>
             <div>
@@ -232,13 +234,15 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
               <p>Читеры замешанные в деле</p>
               <ul>
               {
-                tetKillers.sort((a, b) => b.killsOnTet - a.killsOnTet).map(({ player, killsOnTet }) => {
+                tetKillers.sort((a, b) => b.killsOnTet - a.killsOnTet).map(({ player, killsOnTet }, index) => {
+                  const epitet = ['нечестно', 'гнусно', 'подло', 'вероломно', 'коварно', 'хитрожопо', 'предательски', 'мерзко', 'гадко', 'грязно', 'низменно'];
                   return killsOnTet === 0 ? null : <li key={player}>
-                    <strong>{player}</strong> нечестно убил tet-а <strong>{killsOnTet}</strong> раза
+                    <strong>{player}</strong> {epitet[index]} убил tet-а <strong>{killsOnTet}</strong> раз(а)
                   </li>
                 })
               }
               </ul>
+              <p>Да и сам tet постарался... Вошёл не в ту дверь аж <strong>{tetSuicides}</strong> раз(а).</p>
             </div>
           </div>
         )
