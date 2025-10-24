@@ -28,7 +28,12 @@ export const Chats = ({nonGameEvents}: ChatsProps) => {
                   line.includes('----- MVD_GameShutdown -----') ||
                   line.includes('[MVD]') ||
                   line.includes('No players to chase.') ||
-                  line.includes('No Grenades')
+                  line.includes('No Grenades') ||
+                  line.includes('No Rockets') ||
+                  line.includes('No Cells') ||
+                  line.includes('No Slugs') ||
+                  line.includes('No Nails') ||
+                  line.includes('No Bullets')
                 ) {
                   return null;
                 }
