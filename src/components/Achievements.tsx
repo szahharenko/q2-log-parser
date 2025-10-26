@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { HeadHunterAchievement, PlayerStats, Achievement } from '../types/types';
-import { calculateHeadHunter, calculateMostBlasterKills, calculateMostChats, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostTelefrags, calculateNoMercyForMinions, calculateSpecialist, calculateWrongTurn, getLeastUsedWeapon } from '../utils/functions';
+import { calculateHeadHunter, calculateMostBlasterKills, calculateMostChats, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostQuads, calculateMostTelefrags, calculateNoMercyForMinions, calculateSpecialist, calculateWrongTurn, getBestFragAchievers, getLeastUsedWeapon, getWftAchievers } from '../utils/functions';
 import tet from '../img/tet.jpg'; // Tell webpack this JS file uses this image
 import { getLanguage } from '../utils/getLanguage';
 
@@ -12,6 +12,9 @@ interface AchievementsProps {
 
 export const Achievements = ({playerStats, weaponStats, nonGameEvents}: AchievementsProps) => {
 
+    const [mostQuads, setMostQuads] = useState<Achievement | null>(null);
+    const [bestFrag, setBestFrag] = useState<Achievement | null>(null);
+    const [wft, setWft] = useState<Achievement | null>(null);
     const [headHunter, setHeadHunter] = useState<HeadHunterAchievement | null>(null);
     const [mostTelefrags, setMostTelefrags] = useState<Achievement | null>(null);
     const [wrongTurn, setWrongTurn] = useState<Achievement | null>(null);
@@ -36,6 +39,9 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
         setMostEventStreak(calculateMostEventStreak(playerStats));
         setMostBully(calculateNoMercyForMinions(playerStats));
         setMostChats(calculateMostChats(playerStats));
+        setMostQuads(calculateMostQuads(playerStats));
+        setBestFrag(getBestFragAchievers(playerStats));
+        setWft(getWftAchievers(playerStats));
     }, [playerStats, weaponStats]);
 
     useEffect(() => {
@@ -61,6 +67,51 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
 
         <h3>{ lang === 'en' ? 'Prize Pool 🏆💰 Achievements' : 'Призовые 🏆💰 Ачивки'}</h3>
         <div className='achievements-list page'>
+
+          {mostQuads && (
+            <div style={{  border: '1px solid #ffa500', backgroundColor: '#fff8e1' }}>
+              <h3 >🔶 Quad Collector</h3>
+              { lang === 'en' ?
+                <p>
+                  <strong>{mostQuads.achievers.join(' & ')}</strong> picked up the most quads with <strong>{mostQuads.count}</strong> pickups!
+                </p>
+                :
+                <p>
+                  <strong>{mostQuads.achievers.join(' & ')}</strong> собрал(и) больше всех квадов — всего <strong>{mostQuads.count}</strong> штук!
+                </p>
+              }
+            </div>
+          )}
+
+          {bestFrag && (
+            <div style={{  border: '1px solid #2196f3', backgroundColor: '#e3f2fd' }}>
+              <h3 >🥇 Best Frag</h3>
+              { lang === 'en' ?
+                <p>
+                  <strong>{bestFrag.achievers.join(' & ')}</strong> achieved the Best Frag award!
+                </p>
+                :
+                <p>
+                  <strong>{bestFrag.achievers.join(' & ')}</strong> получил(и) награду за лучший фраг!
+                </p>
+              }
+            </div>
+          )}
+
+          {wft && (
+            <div style={{  border: '1px solid #9c27b0', backgroundColor: '#f3e5f5' }}>
+              <h3 >🤯 WFT Moment</h3>
+              { lang === 'en' ?
+                <p>
+                  <strong>{wft.achievers.join(' & ')}</strong> achieved the WFT award!
+                </p>
+                :
+                <p>
+                  <strong>{wft.achievers.join(' & ')}</strong> получил(и) награду за худший фраг!
+                </p>
+              }
+            </div>
+          )}
 
           {headHunter && (
             <div style={{  border: '1px solid #e0c200', backgroundColor: '#fffbe6' }}>
@@ -235,14 +286,15 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
               <ul>
               {
                 tetKillers.sort((a, b) => b.killsOnTet - a.killsOnTet).map(({ player, killsOnTet }, index) => {
-                  const epitet = ['нечестно', 'гнусно', 'подло', 'вероломно', 'коварно', 'хитрожопо', 'предательски', 'мерзко', 'гадко', 'грязно', 'низменно'];
+                  const epitet = ['нечестно', 'гнусно', 'подло', 'вероломно', 'коварно', 'хитрожопо', 'мерзко', 'гадко', 'грязно', 'низменно', 'предательски'];
                   return killsOnTet === 0 ? null : <li key={player}>
                     <strong>{player}</strong> {epitet[index]} убил tet-а <strong>{killsOnTet}</strong> раз(а)
                   </li>
                 })
               }
               </ul>
-              <p>Да и сам tet постарался... Вошёл не в ту дверь аж <strong>{tetSuicides}</strong> раз(а).</p>
+              <p>Да и сам tet молодец! Предательски самоликвидировался <strong>{tetSuicides}</strong> раз(а).</p>
+
             </div>
           </div>
         )

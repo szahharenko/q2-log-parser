@@ -1,4 +1,4 @@
-import { killPatterns, suicidePatterns } from "./patterns";
+import { customPatterns, killPatterns, suicidePatterns } from "./patterns";
 import { AllPlayerStats, HeadHunterAchievement, Achievement } from "../types/types";
 
 export const calculateHeadHunter = (stats: AllPlayerStats): HeadHunterAchievement | null => {
@@ -178,6 +178,30 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
     return topPlayer ? { player: topPlayer, weapon: leastUsedWeapon, kills: topKills } : null;
   }
 
+  export const calculateMostQuads = (playerStats: AllPlayerStats): Achievement | null => {
+    let maxQuads = 0;
+    for (const playerName in playerStats) {
+        if (playerStats[playerName].quadsPicked > maxQuads) {
+            maxQuads = playerStats[playerName].quadsPicked;
+        }
+    }
+    if (maxQuads === 0) return null;
+    const achievers = Object.keys(playerStats).filter(p => playerStats[p].quadsPicked === maxQuads);
+    return { achievers, count: maxQuads };
+  };
+
+  export const getBestFragAchievers = (playerStats: AllPlayerStats): Achievement | null => {
+    const achievers = Object.keys(playerStats).filter(p => playerStats[p].bestFrag);
+    if (achievers.length === 0) return null;
+    return { achievers, count: achievers.length };
+  }
+
+  export const getWftAchievers = (playerStats: AllPlayerStats): Achievement | null => {
+    const achievers = Object.keys(playerStats).filter(p => playerStats[p].wft);
+    if (achievers.length === 0) return null;
+    return { achievers, count: achievers.length };
+  };
+
   export const calculateMostChats = (playerStats: AllPlayerStats): Achievement | null => {
     let maxChats = 0;
     for (const playerName in playerStats) {
@@ -210,6 +234,12 @@ export const filterGameLines = (lines: string[]): string[] => {
     }
     // Check if line matches any
     for (const pattern of suicidePatterns) {
+        if (pattern.test(line)) {
+            return true;
+        }
+    }
+    // Check if line matches any
+    for (const pattern of customPatterns) {
         if (pattern.test(line)) {
             return true;
         }
@@ -293,7 +323,24 @@ export const parseGameEvents = (lines: string[], nonGameLines: string[]): { stat
     }
     const ensurePlayer = (name: string) => {
       if (!stats[name]) {
-        stats[name] = { kills: 0, deaths: 0, suicides: 0,  telefrags: 0, eventStreak: 0, killBreakdown: {}, grenadeKills: 0, headHunter: 0, looseHunter: 0, weaponKillsBreakdown: {}, blasterKills: 0, chats: [], chatCount: 0};
+        stats[name] = {
+          kills: 0,
+          deaths: 0,
+          suicides: 0,
+          telefrags: 0,
+          eventStreak: 0,
+          killBreakdown: {},
+          grenadeKills: 0,
+          headHunter: 0,
+          looseHunter: 0,
+          weaponKillsBreakdown: {},
+          blasterKills: 0,
+          chats: [],
+          chatCount: 0,
+          quadsPicked: 0,
+          bestFrag: false,
+          wft: false
+        };
       }
     };
     let currentStreakPlayer: string | null = null;
@@ -347,7 +394,6 @@ export const parseGameEvents = (lines: string[], nonGameLines: string[]): { stat
               break;
           }
       }
-
       // 2. If it wasn't a kill, check for a suicide
       if (!eventFound) {
           for (const pattern of suicidePatterns) {
@@ -364,9 +410,33 @@ export const parseGameEvents = (lines: string[], nonGameLines: string[]): { stat
                   stats[player].eventStreak = Math.max(stats[player].eventStreak, currentStreakCount);
                   stats[player].suicides += 1;
                   stats[player].deaths += 1; // A suicide still counts as a death
+                  eventFound = true;
                   break;
               }
           }
+      }
+      // 3. Custom
+      if (!eventFound) {
+          for (const pattern of customPatterns) {
+              const match = line.match(pattern);
+              if (match) {
+                  const player = match[1].trim();
+                  ensurePlayer(player);
+                  if (pattern.source.includes('picked quad')) {
+                    const quadsCount = match[2].trim();
+                    stats[player].quadsPicked = parseInt(quadsCount) || 0;
+                  }
+                  if (pattern.source.includes('gets a Best Frag')) {
+                    stats[player].bestFrag = true
+                  }
+                  if (pattern.source.includes('gets a WFT')) {
+                    stats[player].wft = true
+                  }
+                  eventFound = true;
+                  break;
+              }
+          }
+
       }
     });
     const playersList = Object.keys(stats)

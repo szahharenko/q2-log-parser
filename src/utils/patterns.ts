@@ -42,3 +42,8 @@ export const suicidePatterns = [
     /(.+) tripped on his own grenade/,
     /(.+) tripped on its own grenade/
 ];
+export const customPatterns = [
+    /(.+) gets a Best Frag achievement/,
+    /(.+) gets a WFT achievement/,
+    /(.+) picked quad (.+) times/
+];

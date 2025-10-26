@@ -20,6 +20,9 @@ export interface PlayerStats {
     blasterKills: number;
     chats: string[];
     chatCount: number;
+    quadsPicked: number;
+    bestFrag: boolean;
+    wft: boolean;
 }
 
 export type AllPlayerStats = {
