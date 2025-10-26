@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { HeadHunterAchievement, PlayerStats, Achievement } from '../types/types';
 import { calculateHeadHunter, calculateMostBlasterKills, calculateMostChats, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostQuads, calculateMostTelefrags, calculateNoMercyForMinions, calculateSpecialist, calculateWrongTurn, getBestFragAchievers, getLeastUsedWeapon, getWftAchievers } from '../utils/functions';
 import tet from '../img/tet1.jpg'; // Tell webpack this JS file uses this image
+import kot from '../img/kot.jpg'; // Tell webpack this JS file uses this image
 import { getLanguage } from '../utils/getLanguage';
 
 interface AchievementsProps {
@@ -285,6 +286,18 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
               </ul>
               <p>Да и сам tet молодец! Предательски самоликвидировался <strong>{tetSuicides}</strong> раз(а).</p>
 
+            </div>
+          </div>
+        )
+      }
+      {
+        lang !== 'en' && (
+          <div className='tet-details' style={{  margin: '20px 0', border: '1px solid rgb(147 0 255)', backgroundColor: 'rgb(245 209 244)' }}>
+            <div><img src={kot} alt='tet'/></div>
+            <div>
+              <strong>персональная ачивка Q ((MIR)RPG) </strong>
+              <h3>🐱📦💸 Спонсор Шрёдингера</h3>
+              <p>Квантовая неопределенность приносит Q 666 бонусных очков.</p>
             </div>
           </div>
         )
