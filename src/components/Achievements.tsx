@@ -229,23 +229,18 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
 
           { /* Player with most kills from Least used weapon */}
           {
-            leastUsedWeapon && (
+            leastUsedWeapon && specialist && (
               <div style={{  border: '1px solid #795548', backgroundColor: '#f5f0ed' }}>
-              { lang === 'en' ?
-                specialist && <>
-                  <h3>🔪 Specialist</h3>
+                <h3>🔪 Boomstick baron</h3>
+                { lang === 'en' ?
                   <p>
                     <strong>{specialist.player}</strong> mastered the <strong>{specialist.weapon}</strong> with <strong>{specialist.kills}</strong> kills, the least used weapon with only <strong>{leastUsedWeapon.count}</strong> total kills!
                   </p>
-                </>
-                :
-                specialist && <>
-                  <h3>🔪 Специалист</h3>
+                  :
                   <p>
                     <strong>{specialist.player}</strong> в совершенстве освоил <strong>{specialist.weapon}</strong>, совершив <strong>{specialist.kills}</strong> убийств(а) — это наименее используемое оружие, с которым было совершено всего <strong>{leastUsedWeapon.count}</strong> убийств(а)!
                   </p>
-                </>
-              }
+                }
               </div>
             )
           }
