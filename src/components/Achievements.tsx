@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { HeadHunterAchievement, PlayerStats, Achievement } from '../types/types';
 import { calculateHeadHunter, calculateMostBlasterKills, calculateMostChats, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostQuads, calculateMostTelefrags, calculateNoMercyForMinions, calculateSpecialist, calculateWrongTurn, getBestFragAchievers, getLeastUsedWeapon, getWftAchievers } from '../utils/functions';
-import tet from '../img/tet.jpg'; // Tell webpack this JS file uses this image
+import tet from '../img/tet1.jpg'; // Tell webpack this JS file uses this image
 import { getLanguage } from '../utils/getLanguage';
 
 interface AchievementsProps {
@@ -193,11 +193,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
         <div className='achievements-list page'>
           {mostBully && (
             <div style={{  border: '1px solid #ff5733', backgroundColor: '#ffe6e1' }}>
-              { lang === 'en' ?
-                <h3 >👊 Bully</h3>
-                :
-                <h3 >👊 Задира</h3>
-              }
+              <h3 >👊 Zero tolerance</h3>
               { lang === 'en' ?
                 <p>
                   <strong>{mostBully.hunter}</strong> Has no mercy for weakest by killing <strong>{mostBully.leader}</strong> {mostBully.killsOnLeader} {mostBully.killsOnLeader > 1 ? 'times' : 'time'}!
@@ -258,14 +254,13 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
           {
             mostChats && (
               <div style={{  border: '1px solid #009688', backgroundColor: '#e0f2f1' }}>
+                <h3>💬Chat lord</h3>
                 { lang === 'en' ?
                   <>
-                    <h3>💬 Chatterbox</h3>
                     <p><strong>{mostChats.achievers.join(' & ')}</strong> leads the chatter with <strong>{mostChats.count}</strong> chat messages!</p>
                   </>
                   :
                   <>
-                    <h3>💬 Болтун</h3>
                     <p><strong>{mostChats.achievers.join(' & ')}</strong> лидирует в чате с <strong>{mostChats.count}</strong> сообщениями!</p>
                   </>
                 }

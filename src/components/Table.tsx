@@ -75,9 +75,9 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                     <th className='sortable' onClick={() => setOrderBy('telefrags')}>Respawn Hero {orderBy === 'telefrags' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('grenadeKills')}>Grenadier {orderBy === 'grenadeKills' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('eventStreak')}>Troublemaker {orderBy === 'eventStreak' ? '▼' : ''}</th>
-                    <th className='sortable' onClick={() => setOrderBy('looseHunter')}>{ lang === 'en' ? 'Bully' : 'Задира'} {orderBy === 'looseHunter' ? '▼' : ''}</th>
+                    <th className='sortable' onClick={() => setOrderBy('looseHunter')}>Zero tolerance {orderBy === 'looseHunter' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('blasterKills')}>{ lang === 'en' ? 'Optimist' : 'Оптимист'} {orderBy === 'blasterKills' ? '▼' : ''}</th>
-                    <th className='sortable' onClick={() => setOrderBy('chatCount')}>{ lang === 'en' ? 'Chatterbox' : 'Болтун'} {orderBy === 'chatCount' ? '▼' : ''}</th>
+                    <th className='sortable' onClick={() => setOrderBy('chatCount')}>Chat lord {orderBy === 'chatCount' ? '▼' : ''}</th>
                 </tr>
             </thead>
             <tbody>
