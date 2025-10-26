@@ -70,14 +70,14 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
 
           {mostQuads && (
             <div style={{  border: '1px solid #ffa500', backgroundColor: '#fff8e1' }}>
-              <h3 >🔶 Quad Collector</h3>
+              <h3 >🔶 Dominator</h3>
               { lang === 'en' ?
                 <p>
-                  <strong>{mostQuads.achievers.join(' & ')}</strong> picked up the most quads with <strong>{mostQuads.count}</strong> pickups!
+                  <strong>{mostQuads.achievers.join(' & ')}</strong> picked up Quad <strong>{mostQuads.count}</strong> times and turned the match into a one-sided massacre.
                 </p>
                 :
                 <p>
-                  <strong>{mostQuads.achievers.join(' & ')}</strong> собрал(и) больше всех квадов — всего <strong>{mostQuads.count}</strong> штук!
+                  <strong>{mostQuads.achievers.join(' & ')}</strong> урвал Quad <strong>{mostQuads.count}</strong> раз и матч превратился в казнь.
                 </p>
               }
             </div>
@@ -88,11 +88,11 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
               <h3 >🥇 Best Frag</h3>
               { lang === 'en' ?
                 <p>
-                  <strong>{bestFrag.achievers.join(' & ')}</strong> achieved the Best Frag award!
+                  <strong>{bestFrag.achievers.join(' & ')}</strong> catches the moment your crosshair and destiny had perfect chemistry.
                 </p>
                 :
                 <p>
-                  <strong>{bestFrag.achievers.join(' & ')}</strong> получил(и) награду за лучший фраг!
+                  <strong>{bestFrag.achievers.join(' & ')}</strong> поймал момент, когда прицел и судьба идеально сошлись.
                 </p>
               }
             </div>
@@ -103,11 +103,11 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
               <h3 >🤯 WFT Moment</h3>
               { lang === 'en' ?
                 <p>
-                  <strong>{wft.achievers.join(' & ')}</strong> achieved the WFT award!
+                  <strong>{wft.achievers.join(' & ')}</strong> wanted to make it look cool… and ended up earning an achievement instead.
                 </p>
                 :
                 <p>
-                  <strong>{wft.achievers.join(' & ')}</strong> получил(и) награду за худший фраг!
+                  <strong>{wft.achievers.join(' & ')}</strong> хотел сделать красиво, а получилось... достижение.
                 </p>
               }
             </div>
