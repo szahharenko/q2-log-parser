@@ -8,7 +8,6 @@ import { Weapons } from './components/Weapons';
 import { sendLogs } from './utils/sendLogs';
 import { getLogs } from './utils/getLogs';
 import { Chats } from './components/Chats';
-import { get } from 'http';
 import { getLanguage } from './utils/getLanguage';
 
 const LogParser: React.FC = () => {
