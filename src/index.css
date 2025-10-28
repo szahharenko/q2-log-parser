@@ -7,6 +7,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+h2 {
+  font-size: 36px;
+  margin-bottom: 0.5em;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -94,7 +98,7 @@ td {
   flex-wrap: wrap;
 }
 .achievements-list > div {
-  width: calc(33% - 12px);
+  width: calc(50% - 12px);
   box-sizing: border-box;
   padding: 10px 15px;
   border-radius: 5px;
@@ -103,18 +107,21 @@ td {
 .achievements-list h3 {
   margin-top: 0;
   margin-bottom: 10px;
+  font-size: 30px;
 }
 .achievements-list p {
   margin: 0;
 }
 
-@media screen and (min-width: 1200px) {
-  .achievements-list > div {
-    width: calc(25% - 12px);
-  }
+.achievement {
+  display: flex;
+  align-items: center;
+  background: #efefef;
+  border-radius: 10px;
+  border: solid 1px #ccc;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
   .achievements-list > div {
     width: 100%;
   }
