@@ -104,7 +104,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                     <strong>{bestFrag.achievers.join(' & ')}</strong> поймал момент, когда прицел и судьба идеально сошлись.
                   </p>
                 :
-                <p>tba</p>
+                <p>TBA</p>
               }
             </div>
           </div>
@@ -123,7 +123,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                     <strong>{wft.achievers.join(' & ')}</strong> хотел сделать красиво, а получилось... достижение.
                   </p>
                 :
-                <p>tba</p>
+                <p>TBA</p>
               }
             </div>
           </div>
@@ -142,7 +142,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                     <strong>{dominator.achievers.join(' & ')}</strong> доминировал на арене с неудержимой силой.
                   </p>
                 :
-                <p>tba</p>
+                <p>TBA</p>
               }
             </div>
           </div>
@@ -161,7 +161,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                   <strong>{mostQuads.achievers.join(' & ')}</strong> урвал Quad <strong>{mostQuads.count}</strong> раз и матч превратился в казнь.
                 </p>
                 :
-                <p>tba</p>
+                <p>TBA</p>
               }
             </div>
           </div>
@@ -269,7 +269,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                     <strong>{willPower.achievers.join(' & ')}</strong> продемонстрировал непоколебимую силу воли перед лицом невзгод.
                   </p>
                 :
-                <p>tba</p>
+                <p>TBA</p>
               }
             </div>
           </div>
