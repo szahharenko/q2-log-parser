@@ -451,6 +451,7 @@ export const parseGameEvents = (lines: string[], nonGameLines: string[]): { stat
                     stats[player].dominator = true
                   }
                   if(pattern.source.includes('gets a WillPower')) {
+                    console.log('WillPower achieved by', player);
                     stats[player].willPower = true
                   }
                   eventFound = true;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { HeadHunterAchievement, PlayerStats, Achievement } from '../types/types';
-import { calculateHeadHunter, calculateMostBlasterKills, calculateMostChats, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostQuads, calculateMostTelefrags, calculateNoMercyForMinions, calculateSpecialist, calculateWrongTurn, getBestFragAchievers, getDominatorAchievers, getLeastUsedWeapon, getWftAchievers } from '../utils/functions';
+import { calculateHeadHunter, calculateMostBlasterKills, calculateMostChats, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostQuads, calculateMostTelefrags, calculateNoMercyForMinions, calculateSpecialist, calculateWrongTurn, getBestFragAchievers, getDominatorAchievers, getLeastUsedWeapon, getWftAchievers, getWillPowerAchievers } from '../utils/functions';
 import { getLanguage } from '../utils/getLanguage';
 
 import Sponsor from '../img/Sponsor.png'; // Tell webpack this JS file uses this image
@@ -62,7 +62,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
         setBestFrag(getBestFragAchievers(playerStats));
         setWft(getWftAchievers(playerStats));
         setDominator(getDominatorAchievers(playerStats));
-        setWillPower(getWftAchievers(playerStats));
+        setWillPower(getWillPowerAchievers(playerStats));
     }, [playerStats, weaponStats]);
 
     useEffect(() => {
