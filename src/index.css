@@ -96,6 +96,7 @@ td {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
+  font-size: 20px;
 }
 .achievements-list > div {
   width: calc(50% - 12px);
@@ -116,9 +117,20 @@ td {
 .achievement {
   display: flex;
   align-items: center;
-  background: #efefef;
+  background: #ffd70033;
   border-radius: 10px;
   border: solid 1px #ccc;
+}
+.achievement.bonus {
+  background: #c0c0c033;
+  border: solid 1px ;
+}
+.achievement.personal {
+  background: #cd7f3233;
+}
+
+.achievement img {
+  max-width: 20vw;
 }
 
 @media screen and (max-width: 1000px) {
