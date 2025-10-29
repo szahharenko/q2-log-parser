@@ -45,5 +45,7 @@ export const suicidePatterns = [
 export const customPatterns = [
     /(.+) gets a Best Frag achievement/,
     /(.+) gets a WFT achievement/,
-    /(.+) picked quad (.+) times/
+    /(.+) picked quad (.+) times/,
+    /(.+) gets a Dominator achievement/,
+    /(.+) gets a WillPower achievement/
 ];
