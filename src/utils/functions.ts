@@ -202,6 +202,19 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
     return { achievers, count: achievers.length };
   };
 
+  export const getDominatorAchievers = (playerStats: AllPlayerStats): Achievement | null => {
+    const achievers = Object.keys(playerStats).filter(p => playerStats[p].dominator);
+    if (achievers.length === 0) return null;
+    return { achievers, count: achievers.length };
+  };
+
+  export const getWillPowerAchievers = (playerStats: AllPlayerStats): Achievement | null => {
+    const achievers = Object.keys(playerStats).filter(p => playerStats[p].willPower);
+    if (achievers.length === 0) return null;
+    return { achievers, count: achievers.length };
+  };
+
+
   export const calculateMostChats = (playerStats: AllPlayerStats): Achievement | null => {
     let maxChats = 0;
     for (const playerName in playerStats) {
@@ -339,7 +352,9 @@ export const parseGameEvents = (lines: string[], nonGameLines: string[]): { stat
           chatCount: 0,
           quadsPicked: 0,
           bestFrag: false,
-          wft: false
+          wft: false,
+          dominator: false,
+          willPower: false
         };
       }
     };
@@ -431,6 +446,12 @@ export const parseGameEvents = (lines: string[], nonGameLines: string[]): { stat
                   }
                   if (pattern.source.includes('gets a WFT')) {
                     stats[player].wft = true
+                  }
+                  if(pattern.source.includes('gets a Dominator')) {
+                    stats[player].dominator = true
+                  }
+                  if(pattern.source.includes('gets a WillPower')) {
+                    stats[player].willPower = true
                   }
                   eventFound = true;
                   break;

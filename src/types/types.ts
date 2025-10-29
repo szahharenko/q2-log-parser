@@ -23,6 +23,8 @@ export interface PlayerStats {
     quadsPicked: number;
     bestFrag: boolean;
     wft: boolean;
+    dominator: boolean;
+    willPower: boolean;
 }
 
 export type AllPlayerStats = {

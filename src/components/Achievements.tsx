@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { HeadHunterAchievement, PlayerStats, Achievement } from '../types/types';
-import { calculateHeadHunter, calculateMostBlasterKills, calculateMostChats, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostQuads, calculateMostTelefrags, calculateNoMercyForMinions, calculateSpecialist, calculateWrongTurn, getBestFragAchievers, getLeastUsedWeapon, getWftAchievers } from '../utils/functions';
+import { calculateHeadHunter, calculateMostBlasterKills, calculateMostChats, calculateMostEventStreak, calculateMostGrenadeKills, calculateMostQuads, calculateMostTelefrags, calculateNoMercyForMinions, calculateSpecialist, calculateWrongTurn, getBestFragAchievers, getDominatorAchievers, getLeastUsedWeapon, getWftAchievers } from '../utils/functions';
 import { getLanguage } from '../utils/getLanguage';
 
 import Sponsor from '../img/Sponsor.png'; // Tell webpack this JS file uses this image
@@ -32,6 +32,8 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
     const [mostQuads, setMostQuads] = useState<Achievement | null>(null);
     const [bestFrag, setBestFrag] = useState<Achievement | null>(null);
     const [wft, setWft] = useState<Achievement | null>(null);
+    const [dominator, setDominator] = useState<Achievement | null>(null);
+    const [willPower, setWillPower] = useState<Achievement | null>(null);
     const [headHunter, setHeadHunter] = useState<HeadHunterAchievement | null>(null);
     const [mostTelefrags, setMostTelefrags] = useState<Achievement | null>(null);
     const [wrongTurn, setWrongTurn] = useState<Achievement | null>(null);
@@ -59,6 +61,8 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
         setMostQuads(calculateMostQuads(playerStats));
         setBestFrag(getBestFragAchievers(playerStats));
         setWft(getWftAchievers(playerStats));
+        setDominator(getDominatorAchievers(playerStats));
+        setWillPower(getWftAchievers(playerStats));
     }, [playerStats, weaponStats]);
 
     useEffect(() => {
@@ -82,33 +86,16 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
     return <>
       <div className='page' style={{ margin: '30px 0' }}>
 
-        <h2>{ lang === 'en' ? 'Prize Pool 🏆💰 Achievements' : 'Призовые 🏆💰 Ачивки'}</h2>
+        <h2>{ lang === 'en' ? 'Prize Pool 🏆💰 Achievements' : 'Призовые 🏆💰 Достижения'}</h2>
         <div className='achievements-list page'>
 
-          {mostQuads && (
-            <div className='achievement'>
-              <div className='icon'><img src={ Quad_maniac } alt='tet'/></div>
-              <div>
-                <h3>Quad maniac</h3>
-                { lang === 'en' ?
-                  <p>
-                    <strong>{mostQuads.achievers.join(' & ')}</strong> picked up Quad <strong>{mostQuads.count}</strong> times and turned the match into a one-sided massacre.
-                  </p>
-                  :
-                  <p>
-                    <strong>{mostQuads.achievers.join(' & ')}</strong> урвал Quad <strong>{mostQuads.count}</strong> раз и матч превратился в казнь.
-                  </p>
-                }
-              </div>
-            </div>
-          )}
 
-          {bestFrag && (
-            <div className='achievement'>
-              <div className='icon'><img src={ Best_frag } alt='tet'/></div>
-              <div>
-                <h3 >Best Frag</h3>
-                { lang === 'en' ?
+          <div className='achievement'>
+            <div className='icon'><img src={ Best_frag } alt='tet'/></div>
+            <div>
+              <h3 >Best Frag</h3>
+              { bestFrag ?
+                lang === 'en' ?
                   <p>
                     <strong>{bestFrag.achievers.join(' & ')}</strong> catches the moment your crosshair and destiny had perfect chemistry.
                   </p>
@@ -116,17 +103,18 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                   <p>
                     <strong>{bestFrag.achievers.join(' & ')}</strong> поймал момент, когда прицел и судьба идеально сошлись.
                   </p>
-                }
-              </div>
+                :
+                <p>tba</p>
+              }
             </div>
-          )}
+          </div>
 
-          {wft && (
-            <div className='achievement'>
-              <div className='icon'><img src={ WFT_moment } alt='tet'/></div>
-              <div>
-                <h3 >WFT Moment</h3>
-                { lang === 'en' ?
+          <div className='achievement'>
+            <div className='icon'><img src={ WFT_moment } alt='tet'/></div>
+            <div>
+              <h3 >WFT Moment</h3>
+              {wft ?
+                lang === 'en' ?
                   <p>
                     <strong>{wft.achievers.join(' & ')}</strong> wanted to make it look cool… and ended up earning an achievement instead.
                   </p>
@@ -134,10 +122,50 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                   <p>
                     <strong>{wft.achievers.join(' & ')}</strong> хотел сделать красиво, а получилось... достижение.
                   </p>
-                }
-              </div>
+                :
+                <p>tba</p>
+              }
             </div>
-          )}
+          </div>
+
+          <div className='achievement'>
+            <div className='icon'><img src={ Dominator } alt='tet'/></div>
+            <div>
+              <h3>Dominator</h3>
+              {dominator ?
+                lang === 'en' ?
+                  <p>
+                    <strong>{dominator.achievers.join(' & ')}</strong> dominated the arena with unstoppable force.
+                  </p>
+                  :
+                  <p>
+                    <strong>{dominator.achievers.join(' & ')}</strong> доминировал на арене с неудержимой силой.
+                  </p>
+                :
+                <p>tba</p>
+              }
+            </div>
+          </div>
+
+          <div className='achievement'>
+            <div className='icon'><img src={ Quad_maniac } alt='tet'/></div>
+            <div>
+              <h3>Quad maniac</h3>
+              { mostQuads ?
+                lang === 'en' ?
+                <p>
+                  <strong>{mostQuads.achievers.join(' & ')}</strong> picked up Quad <strong>{mostQuads.count}</strong> times and turned the match into a one-sided massacre.
+                </p>
+                :
+                <p>
+                  <strong>{mostQuads.achievers.join(' & ')}</strong> урвал Quad <strong>{mostQuads.count}</strong> раз и матч превратился в казнь.
+                </p>
+                :
+                <p>tba</p>
+              }
+            </div>
+          </div>
+
 
           {headHunter && (
             <div className='achievement'>
@@ -228,17 +256,21 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
             </div>
           )}
           <div className='achievement'>
-            <div className='icon'><img src={ Dominator } alt='tet'/></div>
-            <div>
-              <h3>Dominator</h3>
-              <p>tba</p>
-            </div>
-          </div>
-          <div className='achievement'>
             <div className='icon'><img src={ Will_power } alt='tet'/></div>
             <div>
               <h3>Will power</h3>
-              <p>tba</p>
+              { willPower ?
+                lang === 'en' ?
+                  <p>
+                    <strong>{willPower.achievers.join(' & ')}</strong> demonstrated unwavering willpower in the face of adversity.
+                  </p>
+                  :
+                  <p>
+                    <strong>{willPower.achievers.join(' & ')}</strong> продемонстрировал непоколебимую силу воли перед лицом невзгод.
+                  </p>
+                :
+                <p>tba</p>
+              }
             </div>
           </div>
         </div>
@@ -333,7 +365,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
               <div className='achievement personal'>
                 <div className='icon'><img src={Dartagnan} alt='tet'/></div>
                 <div>
-                  персональное достижение <strong>Spacer</strong>
+                  персональная награда <strong>Spacer</strong>
                   <h3>Д`Артаньян</h3>
 
                   <p>Читеры замешанные в деле</p>
@@ -357,7 +389,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
               <div className='achievement personal'>
                 <div className='icon'><img src={Sponsor} alt='tet'/></div>
                 <div>
-                  персональное достижение <strong>Q</strong>
+                  персональная награда <strong>Q</strong>
                   <h3>Спонсор Шрёдингера</h3>
                   <p>Квантовая неопределенность приносит Q 666 бонусных очков.</p>
                 </div>
