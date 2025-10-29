@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getLanguage } from "../utils/getLanguage";
+import { getPlayer } from "../utils/getPlayer";
 
 interface ChatsProps {
     nonGameEvents: string[];
@@ -8,6 +9,8 @@ interface ChatsProps {
 export const Chats = ({nonGameEvents}: ChatsProps) => {
     const [chatHidden, setChatHidden] = useState(true);
     const lang = getLanguage();
+    const activePlayer = getPlayer();
+    if (activePlayer) return null;
     if (!nonGameEvents || nonGameEvents.length === 0) return null;
     return <>
       <div className='page' style={{ margin: '30px 0' }}>

@@ -1,5 +1,6 @@
 import { PlayerStats as PlayerStatsType } from '../types/types';
 import { getLanguage } from '../utils/getLanguage';
+import { getPlayer } from '../utils/getPlayer';
 
 interface PlayerStatsProps {
     playerStats: Record<string, PlayerStatsType>;
@@ -8,6 +9,8 @@ interface PlayerStatsProps {
 export const PlayerStats = ({playerStats}: PlayerStatsProps) => {
     const players = Object.keys(playerStats);
     const lang = getLanguage();
+    const activePlayer = getPlayer();
+
     if (players.length === 0) return null;
     return <div className='page'>
         { lang === 'en' ?
@@ -21,7 +24,7 @@ export const PlayerStats = ({playerStats}: PlayerStatsProps) => {
                 .filter(([, stats]) => stats.kills > 0)
                 .sort(([, a], [, b]) => b.kills - a.kills)
                 .map(([player, stats]) => (
-                    <div className='player-details' key={player}>
+                    (activePlayer ? activePlayer === player : true) && <div className='player-details' key={player}>
                         <h4 style={{ margin: '0 0 5px 0' }}>{player}</h4>
                         <ul style={{ margin: 0, paddingLeft: '20px' }}>
                             {Object.entries(stats.killBreakdown)

@@ -20,6 +20,8 @@ import Best_frag from '../img/Best_frag.png';
 import WFT_moment from '../img/WTF_moment.png';
 import Will_power from '../img/Will_power.png';
 import Q2 from '../img/Q2.png';
+import AchievementItem from './Achivement';
+import { getPlayer } from '../utils/getPlayer';
 
 interface AchievementsProps {
     playerStats: Record<string, PlayerStats>;
@@ -47,6 +49,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
     const [tetSuicides, setTetSuicides] = useState<number | null>(null);
     const [mostChats, setMostChats] = useState<Achievement | null>(null);
     const lang = getLanguage();
+    const activePlayer = getPlayer();
 
 
     useEffect(() => {
@@ -89,234 +92,97 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
         <h2>{ lang === 'en' ? 'Prize Pool 🏆💰 Achievements' : 'Призовые 🏆💰 Достижения'}</h2>
         <div className='achievements-list page'>
 
+          <AchievementItem title={'Best Frag'} achievement={bestFrag} image={Best_frag}
+            text={{
+              en: <><strong>{bestFrag?.achievers.join(' & ')}</strong> catches the moment your crosshair and destiny had perfect chemistry.</>,
+              ru: <><strong>{bestFrag?.achievers.join(' & ')}</strong> поймал момент, когда прицел и судьба идеально сошлись.</>
+            }}
+          />
 
-          <div className='achievement'>
-            <div className='icon'><img src={ Best_frag } alt='tet'/></div>
-            <div>
-              <h3 >Best Frag</h3>
-              { bestFrag ?
-                lang === 'en' ?
-                  <p>
-                    <strong>{bestFrag.achievers.join(' & ')}</strong> catches the moment your crosshair and destiny had perfect chemistry.
-                  </p>
-                  :
-                  <p>
-                    <strong>{bestFrag.achievers.join(' & ')}</strong> поймал момент, когда прицел и судьба идеально сошлись.
-                  </p>
-                :
-                <p>TBA</p>
-              }
-            </div>
-          </div>
+          <AchievementItem title={'WFT Moment'} achievement={wft} image={WFT_moment}
+            text={{
+              en: <><strong>{wft?.achievers.join(' & ')}</strong> wanted to make it look cool… and ended up earning an achievement instead.</>,
+              ru: <><strong>{wft?.achievers.join(' & ')}</strong> хотел сделать красиво, а получилось... достижение.</>
+            }}
+          />
 
-          <div className='achievement'>
-            <div className='icon'><img src={ WFT_moment } alt='tet'/></div>
-            <div>
-              <h3 >WFT Moment</h3>
-              {wft ?
-                lang === 'en' ?
-                  <p>
-                    <strong>{wft.achievers.join(' & ')}</strong> wanted to make it look cool… and ended up earning an achievement instead.
-                  </p>
-                  :
-                  <p>
-                    <strong>{wft.achievers.join(' & ')}</strong> хотел сделать красиво, а получилось... достижение.
-                  </p>
-                :
-                <p>TBA</p>
-              }
-            </div>
-          </div>
+          <AchievementItem title={'Dominator'} achievement={dominator} image={Dominator}
+            text={{
+              en: <><strong>{dominator?.achievers.join(' & ')}</strong> dominated the arena with unstoppable force.</>,
+              ru: <><strong>{dominator?.achievers.join(' & ')}</strong> доминировал на арене с неудержимой силой.</>
+            }}
+          />
 
-          <div className='achievement'>
-            <div className='icon'><img src={ Dominator } alt='tet'/></div>
-            <div>
-              <h3>Dominator</h3>
-              {dominator ?
-                lang === 'en' ?
-                  <p>
-                    <strong>{dominator.achievers.join(' & ')}</strong> dominated the arena with unstoppable force.
-                  </p>
-                  :
-                  <p>
-                    <strong>{dominator.achievers.join(' & ')}</strong> доминировал на арене с неудержимой силой.
-                  </p>
-                :
-                <p>TBA</p>
-              }
-            </div>
-          </div>
+          <AchievementItem title={'Quad maniac'} achievement={mostQuads} image={Quad_maniac}
+            text={{
+              en: <><strong>{mostQuads?.achievers.join(' & ')}</strong> picked up Quad <strong>{mostQuads?.count}</strong> times and turned the match into a one-sided massacre.</>,
+              ru: <><strong>{mostQuads?.achievers.join(' & ')}</strong> урвал Quad <strong>{mostQuads?.count}</strong> раз и матч превратился в казнь.</>
+            }}
+          />
 
-          <div className='achievement'>
-            <div className='icon'><img src={ Quad_maniac } alt='tet'/></div>
-            <div>
-              <h3>Quad maniac</h3>
-              { mostQuads ?
-                lang === 'en' ?
-                <p>
-                  <strong>{mostQuads.achievers.join(' & ')}</strong> picked up Quad <strong>{mostQuads.count}</strong> times and turned the match into a one-sided massacre.
-                </p>
-                :
-                <p>
-                  <strong>{mostQuads.achievers.join(' & ')}</strong> урвал Quad <strong>{mostQuads.count}</strong> раз и матч превратился в казнь.
-                </p>
-                :
-                <p>TBA</p>
-              }
-            </div>
-          </div>
+          <AchievementItem title={'Head Hunter'} achievement={headHunter} image={Head_hunter}
+            text={{
+              en: <><strong>{headHunter?.hunter}</strong> is the Head Hunter for killing the group leader (<strong>{headHunter?.leader}</strong>) {headHunter?.killsOnLeader} {headHunter?.killsOnLeader || 0 > 1 ? 'times' : 'time'}!</>,
+              ru: <><strong>{headHunter?.hunter}</strong> — охотник за головами, убивший лидера группы (<strong>{headHunter?.leader}</strong>) убив его {headHunter?.killsOnLeader} раз!</>
+            }}
+          />
 
+          <AchievementItem title={'Respawn Hero'} achievement={mostTelefrags} image={Respawn_hero}
+            text={{
+              en: <><strong>{mostTelefrags?.achievers.join(' & ')}</strong> {mostTelefrags?.achievers.length || 0 > 1 ? 'share the award' : 'gets the award'} with <strong>{mostTelefrags?.count}</strong> telefrags!</>,
+              ru: <><strong>{mostTelefrags?.achievers.join(' & ')}</strong> {mostTelefrags?.achievers.length || 0> 1 ? 'делят награду' : 'получает награду'} с <strong>{mostTelefrags?.count}</strong> телефрагами!</>
+            }}
+          />
 
-          {headHunter && (
-            <div className='achievement'>
-              <div className='icon'><img src={ Head_hunter } alt='tet'/></div>
-              <div>
-                <h3 >Head Hunter</h3>
-                { lang === 'en' ?
-                  <p>
-                    <strong>{headHunter.hunter}</strong> is the Head Hunter for killing the group leader (<strong>{headHunter.leader}</strong>) {headHunter.killsOnLeader} {headHunter.killsOnLeader > 1 ? 'times' : 'time'}!
-                  </p>
-                  :
-                  <p>
-                    <strong>{headHunter.hunter}</strong> — охотник за головами, убивший лидера группы (<strong>{headHunter.leader}</strong>) убив его {headHunter.killsOnLeader} раз!
-                  </p>
-                }
-              </div>
-            </div>
-          )}
+          <AchievementItem title={''} achievement={wrongTurn} image={Wrong_turn}
+            text={{
+              en: <><strong>{wrongTurn?.achievers.join(' & ')}</strong> took a wrong turn {wrongTurn?.count} {wrongTurn?.count || 0 > 1 ? 'times' : 'time'} to earn this award.</>,
+              ru: <>Чтобы получить эту награду, <strong>{wrongTurn?.achievers.join(' & ')}</strong> {wrongTurn?.count} раз свернул не туда.</>
+            }}
+          />
 
-          {mostTelefrags && (
-              <div className='achievement'>
-                <div className='icon'><img src={ Respawn_hero } alt='tet'/></div>
-                <div>
-                  <h3 >Respawn Hero</h3>
-                  { lang === 'en' ?
-                    <p>
-                      <strong>{mostTelefrags.achievers.join(' & ')}</strong> {mostTelefrags.achievers.length > 1 ? 'share the award' : 'gets the award'} with <strong>{mostTelefrags.count}</strong> telefrags!
-                    </p>
-                    :
-                    <p>
-                      <strong>{mostTelefrags.achievers.join(' & ')}</strong> {mostTelefrags.achievers.length > 1 ? 'делят награду' : 'получает награду'} с <strong>{mostTelefrags.count}</strong> телефрагами!
-                    </p>
-                  }
-                </div>
-              </div>
-          )}
+          <AchievementItem title={'Grenadier'} achievement={mostGrenades} image={Grenadier}
+            text={{
+              en: <><strong>{mostGrenades?.achievers.join(' & ')}</strong> earned the top spot with <strong>{mostGrenades?.count}</strong> grenade kills!</>,
+              ru: <><strong>{mostGrenades?.achievers.join(' & ')}</strong> занял первое место, совершив <strong>{mostGrenades?.count}</strong> убийств(а) гранатами!</>
+            }}
+          />
 
-          {wrongTurn && (
-            <div className='achievement'>
-              <div className='icon'><img src={ Wrong_turn } alt='tet'/></div>
-              <div>
-                <h3 > Wrong Turn</h3>
-                { lang === 'en' ?
-                  <p>
-                    <strong>{wrongTurn.achievers.join(' & ')}</strong> took a wrong turn {wrongTurn.count} {wrongTurn.count > 1 ? 'times' : 'time'} to earn this award.
-                  </p>
-                  :
-                  <p>
-                    Чтобы получить эту награду, <strong>{wrongTurn.achievers.join(' & ')}</strong> {wrongTurn.count} раз свернул не туда.
-                  </p>
-                }
-              </div>
-            </div>
-          )}
-          {mostGrenades && (
-              <div className='achievement'>
-                <div className='icon'><img src={ Grenadier } alt='tet'/></div>
-                <div>
-                  <h3 >Grenadier</h3> Гренадер
-                  { lang === 'en' ?
-                    <p>
-                      <strong>{mostGrenades.achievers.join(' & ')}</strong> earned the top spot with <strong>{mostGrenades.count}</strong> grenade kills!
-                    </p>
-                    :
-                    <p>
-                      <strong>{mostGrenades.achievers.join(' & ')}</strong> занял первое место, совершив <strong>{mostGrenades.count}</strong> убийств(а) гранатами!
-                    </p>
-                  }
-                </div>
-              </div>
-          )}
+          <AchievementItem title={'Troublemaker'} achievement={mostEventStreak} image={Troublemaker}
+            text={{
+              en: <><strong>{mostEventStreak?.achievers.join(' & ')}</strong> caused chaos with an event streak of <strong>{mostEventStreak?.count}</strong>!</>,
+              ru: <><strong>{mostEventStreak?.achievers.join(' & ')}</strong> вызвал хаос с серией событий длинной в <strong>{mostEventStreak?.count}</strong>!</>
+            }}
+          />
 
-          {mostEventStreak && (
-            <div className='achievement'>
-              <div className='icon'><img src={ Troublemaker } alt='tet'/></div>
-              <div>
-                <h3 >Troublemaker</h3>Нарушитель спокойствия
-                { lang === 'en' ?
-                  <p>
-                    <strong>{mostEventStreak.achievers.join(' & ')}</strong> caused chaos with an event streak of <strong>{mostEventStreak.count}</strong>!
-                  </p>
-                  :
-                  <p>
-                    <strong>{mostEventStreak.achievers.join(' & ')}</strong> вызвал хаос с серией событий длинной в <strong>{mostEventStreak.count}</strong>!
-                  </p>
-                }
-              </div>
-            </div>
-          )}
-          <div className='achievement'>
-            <div className='icon'><img src={ Will_power } alt='tet'/></div>
-            <div>
-              <h3>Will power</h3>
-              { willPower ?
-                lang === 'en' ?
-                  <p>
-                    <strong>{willPower.achievers.join(' & ')}</strong> demonstrated unwavering willpower in the face of adversity.
-                  </p>
-                  :
-                  <p>
-                    <strong>{willPower.achievers.join(' & ')}</strong> продемонстрировал непоколебимую силу воли перед лицом невзгод.
-                  </p>
-                :
-                <p>TBA</p>
-              }
-            </div>
-          </div>
+          <AchievementItem title={'Will Power'} achievement={willPower} image={Will_power}
+            text={{
+              en: <><strong>{willPower?.achievers.join(' & ')}</strong> demonstrated unwavering willpower in the face of adversity.</>,
+              ru: <><strong>{willPower?.achievers.join(' & ')}</strong> продемонстрировал непоколебимую силу воли перед лицом невзгод.</>
+            }}
+          />
         </div>
 
         <h2>{ lang === 'en' ? 'Bonus 🏆🌟 Perks' : 'Бонусные 🏆🌟 Навыки'}</h2>
         <div className='achievements-list page'>
-          {mostBully && (
-            <div className='achievement bonus'>
-              <div className='icon'><img src={ Zero_tolerance } alt='tet'/></div>
-              <div>
-                <h3 >Zero tolerance</h3>
-                { lang === 'en' ?
-                  <p>
-                    <strong>{mostBully.hunter}</strong> Has no mercy for weakest by killing <strong>{mostBully.leader}</strong> {mostBully.killsOnLeader} {mostBully.killsOnLeader > 1 ? 'times' : 'time'}!
-                  </p>
-                  :
-                  <p>
-                    <strong>{mostBully.hunter}</strong> не щадит самых слабых, убив <strong>{mostBully.leader}</strong> {mostBully.killsOnLeader} раз!
-                  </p>
-                }
-              </div>
-            </div>
-          )}
 
-          { /* Blaster kills achievement */ }
-          {mostBlaster && (
-            <div className='achievement bonus'>
-              <div className='icon'><img src={ Optimist } alt='tet'/></div>
-              <div>
-                <h3>Optimist</h3>
-                { lang === 'en' ?
-                    <p>
-                      <strong>{mostBlaster.achievers.join(' & ')}</strong> tops the charts with <strong>{mostBlaster.count}</strong> blaster kills!
-                    </p>
-                  :
-                    <p>
-                      <strong>{mostBlaster.achievers.join(' & ')}</strong> возглавляет чарты, убив <strong>{mostBlaster.count}</strong> противников из бластера!
-                    </p>
-                }
-              </div>
-            </div>
-          )}
+          <AchievementItem cssClass={'bonus'} title={'Zero tolerance'} achievement={mostBully} image={Zero_tolerance}
+            text={{
+              en: <><strong>{mostBully?.hunter}</strong> Has no mercy for weakest by killing <strong>{mostBully?.leader}</strong> {mostBully?.killsOnLeader} {mostBully?.killsOnLeader || 0 > 1 ? 'times' : 'time'}!</>,
+              ru: <><strong>{mostBully?.hunter}</strong> не щадит самых слабых, убив <strong>{mostBully?.leader}</strong> {mostBully?.killsOnLeader} раз!</>
+            }}
+          />
+
+          <AchievementItem cssClass={'bonus'} title={'Optimist'} achievement={mostBlaster} image={Optimist}
+            text={{
+              en: <><strong>{mostBlaster?.achievers.join(' & ')}</strong> tops the charts with <strong>{mostBlaster?.count}</strong> blaster kills!</>,
+              ru: <><strong>{mostBlaster?.achievers.join(' & ')}</strong> возглавляет чарты, убив <strong>{mostBlaster?.count}</strong> противников из бластера!</>
+            }}
+          />
 
           { /* Player with most kills from Least used weapon */}
           {
-            leastUsedWeapon && specialist && (
+            leastUsedWeapon && specialist && (activePlayer ? specialist.player === activePlayer : true) && (
               <div className='achievement bonus'>
                 <div className='icon'><img src={ Boomstick_baron } alt='tet'/></div>
                 <div>
@@ -335,33 +201,20 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
             )
           }
 
-          { /* Player who speaks to much */}
-          {
-            mostChats && (
-              <div className='achievement bonus'>
-                <div className='icon'><img src={ Chat_lord } alt='tet'/></div>
-                <div>
-                  <h3>Chat lord</h3>
-                  { lang === 'en' ?
-                    <>
-                      <p><strong>{mostChats.achievers.join(' & ')}</strong> leads the chatter with <strong>{mostChats.count}</strong> chat messages!</p>
-                    </>
-                    :
-                    <>
-                      <p><strong>{mostChats.achievers.join(' & ')}</strong> лидирует в чате с <strong>{mostChats.count}</strong> сообщениями!</p>
-                    </>
-                  }
-                </div>
-              </div>
-            )
-          }
+          <AchievementItem cssClass={'bonus'} title={'Chat lord'} achievement={mostChats} image={Chat_lord}
+            text={{
+              en: <><strong>{mostChats?.achievers.join(' & ')}</strong> leads the chatter with <strong>{mostChats?.count}</strong> chat messages!</>,
+              ru: <><strong>{mostChats?.achievers.join(' & ')}</strong> лидирует в чате с <strong>{mostChats?.count}</strong> сообщениями!</>
+            }}
+          />
+
         </div>
 
         { /* personalized achievements section */ }
         <h2>{ lang === 'en' ? 'Personal rewards 🎖️' : 'Персональные награды 🎖️'}</h2>
         <div className='achievements-list page'>
           {
-            tetKillers && lang !== 'en' && (
+            (activePlayer ? activePlayer === 'Spacer' || activePlayer === 'tet' : true) && tetKillers && lang !== 'en' && (
               <div className='achievement personal'>
                 <div className='icon'><img src={Dartagnan} alt='tet'/></div>
                 <div>
@@ -385,7 +238,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
             )
           }
           {
-            lang !== 'en' && (
+            (activePlayer ? activePlayer === 'Q' : true) && lang !== 'en' && (
               <div className='achievement personal'>
                 <div className='icon'><img src={Sponsor} alt='tet'/></div>
                 <div>
@@ -396,30 +249,39 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
               </div>
             )
           }
-          <div className='achievement personal'>
-            <div className='icon'><img src={Q2} alt='tet'/></div>
-            <div>
-              персональная награда <strong>SparkQ2</strong>
-              <h3>Map maker</h3>
-              <p>Конверсия Corrupted Keep для турнира</p>
+          {
+            (activePlayer ? activePlayer === 'SparkQ2' : true) && lang !== 'en' && (
+            <div className='achievement personal'>
+              <div className='icon'><img src={Q2} alt='tet'/></div>
+              <div>
+                персональная награда <strong>SparkQ2</strong>
+                <h3>Map maker</h3>
+                <p>Конверсия Corrupted Keep для турнира</p>
+              </div>
             </div>
-          </div>
-          <div className='achievement personal'>
-            <div className='icon'><img src={Q2} alt='tet'/></div>
-            <div>
-              персональная награда <strong>WerWolf</strong>
-              <h3>Liquidpedia master</h3>
-              <p>за исторический вклад в оформление турнира</p>
-            </div>
-          </div>
-          <div className='achievement personal'>
-            <div className='icon'><img src={Q2} alt='tet'/></div>
-            <div>
-              персональная награда <strong>TIM</strong>
-              <h3>Qualification hero</h3>
-              <p>Обыграл Давида на его сильнейшей карте</p>
-            </div>
-          </div>
+          )}
+          {
+            (activePlayer ? activePlayer === 'WerWolf' : true) && lang !== 'en' && (
+              <div className='achievement personal'>
+                <div className='icon'><img src={Q2} alt='tet'/></div>
+                <div>
+                  персональная награда <strong>WerWolf</strong>
+                  <h3>Liquidpedia master</h3>
+                  <p>за исторический вклад в оформление турнира</p>
+                </div>
+              </div>
+          )}
+          {
+            (activePlayer ? activePlayer === 'TIM' : true) && lang !== 'en' && (
+              <div className='achievement personal'>
+                <div className='icon'><img src={Q2} alt='tet'/></div>
+                <div>
+                  персональная награда <strong>TIM</strong>
+                  <h3>Qualification hero</h3>
+                  <p>Обыграл Давида на его сильнейшей карте</p>
+                </div>
+              </div>
+          )}
         </div>
       </div>
     </>

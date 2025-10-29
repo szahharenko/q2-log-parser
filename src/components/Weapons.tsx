@@ -1,10 +1,13 @@
 import { getLanguage } from "../utils/getLanguage";
+import { getPlayer } from "../utils/getPlayer";
 
 interface WeaponsProps {
   weaponStats: Record<string, number> | null;
 }
 export const Weapons = ({weaponStats}: WeaponsProps) => {
     const lang = getLanguage();
+    const activePlayer = getPlayer();
+    if (activePlayer) return null;
     return <>
       {weaponStats && (
         <div className='page' style={{ margin: '30px 0' }}>

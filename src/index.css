@@ -98,6 +98,10 @@ td {
   flex-wrap: wrap;
   font-size: 20px;
 }
+.achievements-list:empty::before {
+  content: "🚫";
+  font-size: 40px;
+}
 .achievements-list > div {
   width: calc(50% - 12px);
   box-sizing: border-box;

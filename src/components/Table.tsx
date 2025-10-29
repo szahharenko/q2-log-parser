@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { PlayerStats } from '../types/types';
 import { getLanguage } from '../utils/getLanguage';
+import { getPlayer } from '../utils/getPlayer';
 
 interface PlayerTableProps {
     playerStats: Record<string, PlayerStats>;
@@ -9,6 +10,7 @@ interface PlayerTableProps {
 export const PlayerTable = ({playerStats}: PlayerTableProps) => {
     const [orderBy, setOrderBy] = useState< 'kills' | 'deaths' | 'suicides' | 'grenadeKills' | 'telefrags' | 'kdr' | 'eventStreak' | 'headHunter' | 'looseHunter' | 'blasterKills' | 'chatCount' | 'quadsPicked'>('kills') ;
     const lang = getLanguage();
+    const activePlayer = getPlayer();
 
 
     let data = Object.entries(playerStats).sort(([, a], [, b]) => b.kills - a.kills || a.deaths - b.deaths)
@@ -55,7 +57,9 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
     }
 
     return (<div className='page' style={{ marginBottom: '20px' }}>
-        { lang === 'en' ?
+        {
+            activePlayer ? <h1>{activePlayer}</h1>:
+            lang === 'en' ?
             <h3>Comprehensive Leaderboard 🏆</h3>:
             <h3>Подробная таблица лидеров 🏆</h3>
         }
@@ -82,6 +86,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
             </thead>
             <tbody>
                 {getDataInOrder().map(([player, stats]) => (
+                    (activePlayer ? activePlayer === player : true) &&
                     <tr key={player}>
                         <td>{player}</td>
                         <td className={getLeadClass(stats, 'kills')}>{stats.kills}</td>
