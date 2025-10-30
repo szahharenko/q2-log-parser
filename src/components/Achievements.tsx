@@ -182,7 +182,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
 
           { /* Player with most kills from Least used weapon */}
           {
-            leastUsedWeapon && specialist && (activePlayer ? specialist.player === activePlayer : true) && (
+            leastUsedWeapon && specialist && (activePlayer ? specialist.player.toLocaleLowerCase() === activePlayer : true) && (
               <div className='achievement bonus'>
                 <div className='icon'><img src={ Boomstick_baron } alt='tet'/></div>
                 <div>
@@ -214,7 +214,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
         <h2>{ lang === 'en' ? 'Personal rewards 🎖️' : 'Персональные награды 🎖️'}</h2>
         <div className='achievements-list page'>
           {
-            (activePlayer ? activePlayer === 'Spacer' || activePlayer === 'tet' : true) && tetKillers && lang !== 'en' && (
+            (activePlayer ? activePlayer === 'spacer' || activePlayer === 'tet' : true) && tetKillers && lang !== 'en' && (
               <div className='achievement personal'>
                 <div className='icon'><img src={Dartagnan} alt='tet'/></div>
                 <div>
@@ -238,7 +238,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
             )
           }
           {
-            (activePlayer ? activePlayer === 'Q' : true) && lang !== 'en' && (
+            (activePlayer ? activePlayer === 'q' : true) && lang !== 'en' && (
               <div className='achievement personal'>
                 <div className='icon'><img src={Sponsor} alt='tet'/></div>
                 <div>
@@ -250,7 +250,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
             )
           }
           {
-            (activePlayer ? activePlayer === 'SparkQ2' : true) && lang !== 'en' && (
+            (activePlayer ? activePlayer === 'sparkq2' : true) && lang !== 'en' && (
             <div className='achievement personal'>
               <div className='icon'><img src={Q2} alt='tet'/></div>
               <div>
@@ -261,7 +261,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
             </div>
           )}
           {
-            (activePlayer ? activePlayer === 'WerWolf' : true) && lang !== 'en' && (
+            (activePlayer ? activePlayer === 'werwolf' : true) && lang !== 'en' && (
               <div className='achievement personal'>
                 <div className='icon'><img src={Q2} alt='tet'/></div>
                 <div>
@@ -272,7 +272,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
               </div>
           )}
           {
-            (activePlayer ? activePlayer === 'TIM' : true) && lang !== 'en' && (
+            (activePlayer ? activePlayer === 'tim' : true) && lang !== 'en' && (
               <div className='achievement personal'>
                 <div className='icon'><img src={Q2} alt='tet'/></div>
                 <div>

@@ -24,7 +24,7 @@ export const PlayerStats = ({playerStats}: PlayerStatsProps) => {
                 .filter(([, stats]) => stats.kills > 0)
                 .sort(([, a], [, b]) => b.kills - a.kills)
                 .map(([player, stats]) => (
-                    (activePlayer ? activePlayer === player : true) && <div className='player-details' key={player}>
+                    (activePlayer ? activePlayer === player.toLocaleLowerCase() : true) && <div className='player-details' key={player}>
                         <h4 style={{ margin: '0 0 5px 0' }}>{player}</h4>
                         <ul style={{ margin: 0, paddingLeft: '20px' }}>
                             {Object.entries(stats.killBreakdown)

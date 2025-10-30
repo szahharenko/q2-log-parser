@@ -16,7 +16,9 @@ interface AchievementProps {
 const AchievementItem = ({ image, title, achievement, text, cssClass } : AchievementProps) => {
     const lang = getLanguage();
     const player = getPlayer();
-    const hasPlayer = player && ((achievement && 'achievers' in achievement && achievement.achievers.includes(player)) || achievement && 'hunter' in achievement && achievement.hunter === player);
+    const hasAchievement = (achievement && 'achievers' in achievement && achievement.achievers.map(p => p.toLocaleLowerCase()).includes(player || ''));
+    const isHunter = achievement && 'hunter' in achievement && achievement.hunter.toLocaleLowerCase() === player;
+    const hasPlayer = player && (hasAchievement || isHunter);
     if (player && !hasPlayer) {
         return null;
     }

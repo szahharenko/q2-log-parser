@@ -56,9 +56,29 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
         });
     }
 
+    const openPlayer = (player: string) => () => {
+        //add query parameter ?player= and redirect to that page
+        const url = new URL(window.location.href);
+        url.searchParams.set('player', player);
+        window.location.href = url.toString();
+    }
+
+    const backToList = (e: React.MouseEvent) => {
+        //remove query parameter ?player= and redirect to that page
+        e.preventDefault();
+        const url = new URL(window.location.href);
+        url.searchParams.delete('player');
+        window.location.href = url.toString();
+    }
+
+
     return (<div className='page' style={{ marginBottom: '20px' }}>
         {
-            activePlayer ? <h1>{activePlayer}</h1>:
+            activePlayer ?
+            <>
+                <button onClick={backToList}>{ lang === 'en' ? 'Return to full report' : 'Полный отчет'}</button>
+                <h1>{activePlayer}</h1>
+            </>:
             lang === 'en' ?
             <h3>Comprehensive Leaderboard 🏆</h3>:
             <h3>Подробная таблица лидеров 🏆</h3>
@@ -88,7 +108,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                 {getDataInOrder().map(([player, stats]) => (
                     (activePlayer ? activePlayer === player : true) &&
                     <tr key={player}>
-                        <td>{player}</td>
+                        <td style={activePlayer ? {} : {textDecoration: 'underline', cursor: 'pointer'}} onClick={ activePlayer ? () => null : openPlayer(player)}>{player}</td>
                         <td className={getLeadClass(stats, 'kills')}>{stats.kills}</td>
                         <td className={getLeadClass(stats, 'kdr')}>{stats.kdr}</td>
                         <td className={getLeadClass(stats, 'deaths')}>{stats.deaths}</td>
