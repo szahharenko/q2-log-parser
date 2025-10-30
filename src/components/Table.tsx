@@ -77,7 +77,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
             activePlayer ?
             <>
                 <button onClick={backToList}>{ lang === 'en' ? 'Return to full report' : 'Полный отчет'}</button>
-                <h1>{activePlayer}</h1>
+                <h1 style={{'textTransform': 'capitalize'}}>{activePlayer}</h1>
             </>:
             lang === 'en' ?
             <h3>Comprehensive Leaderboard 🏆</h3>:
@@ -106,7 +106,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
             </thead>
             <tbody>
                 {getDataInOrder().map(([player, stats]) => (
-                    (activePlayer ? activePlayer === player : true) &&
+                    (activePlayer ? activePlayer === player.toLocaleLowerCase() : true) &&
                     <tr key={player}>
                         <td style={activePlayer ? {} : {textDecoration: 'underline', cursor: 'pointer'}} onClick={ activePlayer ? () => null : openPlayer(player)}>{player}</td>
                         <td className={getLeadClass(stats, 'kills')}>{stats.kills}</td>
