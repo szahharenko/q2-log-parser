@@ -89,7 +89,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
     }, [playerStats, weaponStats]);
 
     const formatSubtitle = (text: string) => {
-      return <p style={{marginTop: '10px', opacity: 0.5}}><small>{text}</small></p>
+      return <small  style={{marginTop: '10px', opacity: 0.5, display: 'block'}}>{text}</small>
     }
 
     return <>
@@ -100,14 +100,14 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
 
           <AchievementItem title={'Best Frag'} achievement={bestFrag} image={Best_frag}
             text={{
-              en: <>
+              en: <div>
                 <strong>{bestFrag?.achievers.join(' & ')}</strong> catches the moment your crosshair and destiny had perfect chemistry.
                 { formatSubtitle('Viewer’s Choice: Best Tournament Frag.')}
-              </>,
-              ru: <>
+              </div>,
+              ru: <div>
                 <strong>{bestFrag?.achievers.join(' & ')}</strong> поймал момент, когда прицел и судьба идеально сошлись.
                 { formatSubtitle('Самый зрелищный фраг турнира по мнению аудитории.')}
-              </>
+              </div>
             }}
           />
 
@@ -255,13 +255,13 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                 <div>
                   <h3>Boomstick baron</h3>
                   { lang === 'en' ?
-                    <p>
+                    <div>
                       <strong>{specialist.player}</strong> mastered the <strong>{specialist.weapon}</strong> with <strong>{specialist.kills}</strong> kills, the least used weapon with only <strong>{leastUsedWeapon.count}</strong> total kills!
-                    </p>
+                    </div>
                     :
-                    <p>
+                    <div>
                       <strong>{specialist.player}</strong> в совершенстве освоил <strong>{specialist.weapon}</strong>, совершив <strong>{specialist.kills}</strong> убийств(а) — это наименее используемое оружие, с которым было совершено всего <strong>{leastUsedWeapon.count}</strong> убийств(а)!
-                    </p>
+                    </div>
                   }
                 </div>
               </div>
@@ -293,13 +293,13 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                   {
                     tetKillers.sort((a, b) => b.killsOnTet - a.killsOnTet).map(({ player, killsOnTet }, index) => {
                       const epitet = ['нечестно', 'гнусно', 'подло', 'вероломно', 'коварно', 'хитрожопо', 'мерзко', 'гадко', 'грязно', 'низменно', 'предательски'];
-                      return killsOnTet === 0 ? null : <li key={player}>
+                      return killsOnTet === 0 ? null : <li key={player} style={{ fontSize: '80%' }}>
                         <strong>{player}</strong> {epitet[index]} убил tet-а <strong>{killsOnTet}</strong> раз(а)
                       </li>
                     })
                   }
                   </ul>
-                  <p>Да и сам tet молодец! Предательски самоликвидировался <strong>{tetSuicides}</strong> раз(а).</p>
+                  <p>Предательски принёс себя в жертву <strong>{tetSuicides}</strong> раз(а).</p>
                 </div>
               </div>
             )

@@ -10,7 +10,10 @@ interface PlayerTableProps {
 export const PlayerTable = ({playerStats}: PlayerTableProps) => {
     const [orderBy, setOrderBy] = useState< 'kills' | 'deaths' | 'suicides' | 'grenadeKills' | 'telefrags' | 'kdr' | 'eventStreak' | 'headHunter' | 'looseHunter' | 'blasterKills' | 'chatCount' | 'quadsPicked'>('kills') ;
     const lang = getLanguage();
+    const urlParams = new URLSearchParams(window.location.search);
+    const reportId = urlParams.get('r');
     const activePlayer = getPlayer();
+
 
 
     let data = Object.entries(playerStats).sort(([, a], [, b]) => b.kills - a.kills || a.deaths - b.deaths)
@@ -83,9 +86,6 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
             <h3>Comprehensive Leaderboard 🏆</h3>:
             <h3>Подробная таблица лидеров 🏆</h3>
         }
-
-
-
         <table style={{ borderCollapse: 'collapse', width: 'auto', fontSize: '14px' }}>
             <thead>
                 <tr style={{ backgroundColor: '#eee' }}>
@@ -108,7 +108,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                 {getDataInOrder().map(([player, stats]) => (
                     (activePlayer ? activePlayer === player.toLocaleLowerCase() : true) &&
                     <tr key={player}>
-                        <td style={activePlayer ? {} : {textDecoration: 'underline', cursor: 'pointer'}} onClick={ activePlayer ? () => null : openPlayer(player)}>{player}</td>
+                        <td style={ !reportId || activePlayer ? {} : {textDecoration: 'underline', cursor: 'pointer'}} onClick={  !reportId || activePlayer ? () => null : openPlayer(player)}>{player}</td>
                         <td className={getLeadClass(stats, 'kills')}>{stats.kills}</td>
                         <td className={getLeadClass(stats, 'kdr')}>{stats.kdr}</td>
                         <td className={getLeadClass(stats, 'deaths')}>{stats.deaths}</td>
