@@ -88,6 +88,10 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
         playerStats && leastUsedWeapon && setSpecialist(calculateSpecialist(leastUsedWeapon?.weapon, playerStats));
     }, [playerStats, weaponStats]);
 
+    const formatSubtitle = (text: string) => {
+      return <p style={{marginTop: '10px', opacity: 0.5}}><small>{text}</small></p>
+    }
+
     return <>
       <div className='page' style={{ margin: '30px 0' }}>
 
@@ -96,71 +100,132 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
 
           <AchievementItem title={'Best Frag'} achievement={bestFrag} image={Best_frag}
             text={{
-              en: <><strong>{bestFrag?.achievers.join(' & ')}</strong> catches the moment your crosshair and destiny had perfect chemistry.</>,
-              ru: <><strong>{bestFrag?.achievers.join(' & ')}</strong> поймал момент, когда прицел и судьба идеально сошлись.</>
+              en: <>
+                <strong>{bestFrag?.achievers.join(' & ')}</strong> catches the moment your crosshair and destiny had perfect chemistry.
+                { formatSubtitle('Viewer’s Choice: Best Tournament Frag.')}
+              </>,
+              ru: <>
+                <strong>{bestFrag?.achievers.join(' & ')}</strong> поймал момент, когда прицел и судьба идеально сошлись.
+                { formatSubtitle('Самый зрелищный фраг турнира по мнению аудитории.')}
+              </>
             }}
           />
 
           <AchievementItem title={'WTF Moment'} achievement={wft} image={WFT_moment}
             text={{
-              en: <><strong>{wft?.achievers.join(' & ')}</strong> wanted to make it look cool… and ended up earning an achievement instead.</>,
-              ru: <><strong>{wft?.achievers.join(' & ')}</strong> хотел сделать красиво, а получилось... достижение.</>
+              en: <>
+                <strong>{wft?.achievers.join(' & ')}</strong> wanted to make it look cool… and ended up earning an achievement instead.
+                { formatSubtitle('Viewer’s Choice: Most Bizarre Moment of the Tournament')}
+              </>,
+              ru: <>
+                <strong>{wft?.achievers.join(' & ')}</strong> хотел сделать красиво, а получилось... достижение.
+                { formatSubtitle('Самый курьёзный момент турнира по мнению аудитории')}
+              </>
             }}
           />
 
           <AchievementItem title={'Dominator'} achievement={dominator} image={Dominator}
             text={{
-              en: <><strong>{dominator?.achievers.join(' & ')}</strong> dominated the arena with unstoppable force.</>,
-              ru: <><strong>{dominator?.achievers.join(' & ')}</strong> доминировал на арене с неудержимой силой.</>
+              en: <>
+                <strong>{dominator?.achievers.join(' & ')}</strong> dominated the arena with unstoppable force.
+                { formatSubtitle('Player Who Has the Longest Win Streak.')}
+              </>,
+              ru: <>
+                <strong>{dominator?.achievers.join(' & ')}</strong> доминировал на арене с неудержимой силой.
+                { formatSubtitle('Cамая длинная череда побед без поражений.')}
+              </>
             }}
           />
 
           <AchievementItem title={'Quad maniac'} achievement={mostQuads} image={Quad_maniac}
             text={{
-              en: <><strong>{mostQuads?.achievers.join(' & ')}</strong> picked up Quad <strong>{mostQuads?.count}</strong> times and turned the match into a one-sided massacre.</>,
-              ru: <><strong>{mostQuads?.achievers.join(' & ')}</strong> урвал Quad <strong>{mostQuads?.count}</strong> раз и матч превратился в казнь.</>
+              en: <>
+                <strong>{mostQuads?.achievers.join(' & ')}</strong> picked up Quad <strong>{mostQuads?.count}</strong> times and turned the match into a one-sided massacre.
+                 { formatSubtitle('Player Who Picked Up the Most Quads.')}
+
+              </>,
+              ru: <>
+                <strong>{mostQuads?.achievers.join(' & ')}</strong> урвал Quad <strong>{mostQuads?.count}</strong> раз и матч превратился в казнь.
+                 { formatSubtitle('Больше всех утащил Quad Damage.') }
+              </>
             }}
           />
 
           <AchievementItem title={'Head Hunter'} achievement={headHunter} image={Head_hunter}
             text={{
-              en: <><strong>{headHunter?.hunter}</strong> is the Head Hunter for killing the group leader (<strong>{headHunter?.leader}</strong>) {headHunter?.killsOnLeader} {headHunter?.killsOnLeader || 0 > 1 ? 'times' : 'time'}!</>,
-              ru: <><strong>{headHunter?.hunter}</strong> — охотник за головами, убивший лидера группы (<strong>{headHunter?.leader}</strong>) убив его {headHunter?.killsOnLeader} раз!</>
+              en: <>
+                <strong>{headHunter?.hunter}</strong> is the Head Hunter for killing the group leader (<strong>{headHunter?.leader}</strong>) {headHunter?.killsOnLeader} {headHunter?.killsOnLeader || 0 > 1 ? 'times' : 'time'}!
+                { formatSubtitle('Player Who Killed the Most Group Leaders.') }
+              </>,
+              ru: <>
+                <strong>{headHunter?.hunter}</strong> — охотник за головами, убивший лидера группы (<strong>{headHunter?.leader}</strong>) убив его {headHunter?.killsOnLeader} раз!
+                { formatSubtitle('Больше всех завалил лидера группы.') }
+              </>
             }}
           />
 
           <AchievementItem title={'Respawn Hero'} achievement={mostTelefrags} image={Respawn_hero}
             text={{
-              en: <><strong>{mostTelefrags?.achievers.join(' & ')}</strong> {mostTelefrags?.achievers.length || 0 > 1 ? 'share the award' : 'gets the award'} with <strong>{mostTelefrags?.count}</strong> telefrags!</>,
-              ru: <><strong>{mostTelefrags?.achievers.join(' & ')}</strong> {mostTelefrags?.achievers.length || 0> 1 ? 'делят награду' : 'получает награду'} с <strong>{mostTelefrags?.count}</strong> телефрагами!</>
+              en: <>
+                <strong>{mostTelefrags?.achievers.join(' & ')}</strong> {mostTelefrags?.achievers.length || 0 > 1 ? 'share the award' : 'gets the award'} with <strong>{mostTelefrags?.count}</strong> telefrags!
+                { formatSubtitle('Player Who Has Most Telefrag Kills.') }
+              </>,
+              ru: <>
+                <strong>{mostTelefrags?.achievers.join(' & ')}</strong> {mostTelefrags?.achievers.length || 0> 1 ? 'делят награду' : 'получает награду'} с <strong>{mostTelefrags?.count}</strong> телефрагами!
+                { formatSubtitle('Наибольшее количество телефрагов.') }
+              </>
             }}
           />
 
-          <AchievementItem title={''} achievement={wrongTurn} image={Wrong_turn}
+          <AchievementItem title={'Wrong turn'} achievement={wrongTurn} image={Wrong_turn}
             text={{
-              en: <><strong>{wrongTurn?.achievers.join(' & ')}</strong> took a wrong turn {wrongTurn?.count} {wrongTurn?.count || 0 > 1 ? 'times' : 'time'} to earn this award.</>,
-              ru: <>Чтобы получить эту награду, <strong>{wrongTurn?.achievers.join(' & ')}</strong> {wrongTurn?.count} раз свернул не туда.</>
+              en: <>
+                <strong>{wrongTurn?.achievers.join(' & ')}</strong> took a wrong turn {wrongTurn?.count} {wrongTurn?.count || 0 > 1 ? 'times' : 'time'} to earn this award.
+                { formatSubtitle('Player Who Died the Most in Acid or Lava.') }
+              </>,
+              ru: <>
+                Чтобы получить эту награду, <strong>{wrongTurn?.achievers.join(' & ')}</strong> {wrongTurn?.count} раз свернул не туда.
+                { formatSubtitle('Наибольшее количество смертей в кислоте и лаве.') }
+              </>
             }}
           />
 
           <AchievementItem title={'Grenadier'} achievement={mostGrenades} image={Grenadier}
             text={{
-              en: <><strong>{mostGrenades?.achievers.join(' & ')}</strong> earned the top spot with <strong>{mostGrenades?.count}</strong> grenade kills!</>,
-              ru: <><strong>{mostGrenades?.achievers.join(' & ')}</strong> занял первое место, совершив <strong>{mostGrenades?.count}</strong> убийств(а) гранатами!</>
+              en: <>
+                <strong>{mostGrenades?.achievers.join(' & ')}</strong> earned the top spot with <strong>{mostGrenades?.count}</strong> grenade kills!
+                { formatSubtitle('Player Who Scored the Most Grenade and Hand Grenade Kills.') }
+              </>,
+              ru: <>
+                <strong>{mostGrenades?.achievers.join(' & ')}</strong> занял первое место, совершив <strong>{mostGrenades?.count}</strong> убийств(а) гранатами!
+                { formatSubtitle('Наибольшее количество фрагов  ручными гранатами и из гранатомёта.') }
+              </>
             }}
           />
 
           <AchievementItem title={'Troublemaker'} achievement={mostEventStreak} image={Troublemaker}
             text={{
-              en: <><strong>{mostEventStreak?.achievers.join(' & ')}</strong> caused chaos with an event streak of <strong>{mostEventStreak?.count}</strong>!</>,
-              ru: <><strong>{mostEventStreak?.achievers.join(' & ')}</strong> вызвал хаос с серией событий длинной в <strong>{mostEventStreak?.count}</strong>!</>
+              en: <>
+                <strong>{mostEventStreak?.achievers.join(' & ')}</strong> caused chaos with an event streak of <strong>{mostEventStreak?.count}</strong>!
+                { formatSubtitle('Longest Console Log Streak made by player.') }
+              </>,
+              ru: <>
+                <strong>{mostEventStreak?.achievers.join(' & ')}</strong> вызвал хаос с серией событий длинной в <strong>{mostEventStreak?.count}</strong>!
+                { formatSubtitle('Самая длинная серия упоминаний игрока в консоли.') }
+              </>
             }}
           />
 
           <AchievementItem title={'Will Power'} achievement={willPower} image={Will_power}
             text={{
-              en: <><strong>{willPower?.achievers.join(' & ')}</strong> demonstrated unwavering willpower in the face of adversity.</>,
-              ru: <><strong>{willPower?.achievers.join(' & ')}</strong> продемонстрировал непоколебимую силу воли перед лицом невзгод.</>
+              en: <>
+                <strong>{willPower?.achievers.join(' & ')}</strong> demonstrated unwavering willpower in the face of adversity.
+                { formatSubtitle('Player Who Finished Last the Most Times.') }
+              </>,
+              ru: <>
+                <strong>{willPower?.achievers.join(' & ')}</strong> продемонстрировал непоколебимую силу воли перед лицом невзгод.
+                { formatSubtitle('Наибольшее количество последних мест в турнире.') }
+              </>
             }}
           />
         </div>
