@@ -19,7 +19,9 @@ import Zero_tolerance from '../img/Zero_tolerance.png';
 import Best_frag from '../img/Best_frag.png';
 import WFT_moment from '../img/WTF_moment.png';
 import Will_power from '../img/Will_power.png';
-import Q2 from '../img/Q2.png';
+import Lmaster from '../img/Lmaster.png';
+import Qhero from '../img/Qhero.png';
+import Mapmaker from '../img/Mapmaker.png';
 import AchievementItem from './Achivement';
 import { getPlayer } from '../utils/getPlayer';
 
@@ -99,7 +101,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
             }}
           />
 
-          <AchievementItem title={'WFT Moment'} achievement={wft} image={WFT_moment}
+          <AchievementItem title={'WTF Moment'} achievement={wft} image={WFT_moment}
             text={{
               en: <><strong>{wft?.achievers.join(' & ')}</strong> wanted to make it look cool… and ended up earning an achievement instead.</>,
               ru: <><strong>{wft?.achievers.join(' & ')}</strong> хотел сделать красиво, а получилось... достижение.</>
@@ -252,7 +254,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
           {
             (activePlayer ? activePlayer === 'sparkq2' : true) && lang !== 'en' && (
             <div className='achievement personal'>
-              <div className='icon'><img src={Q2} alt='tet'/></div>
+              <div className='icon'><img src={Mapmaker} alt='tet'/></div>
               <div>
                 персональная награда <strong>SparkQ2</strong>
                 <h3>Map maker</h3>
@@ -263,7 +265,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
           {
             (activePlayer ? activePlayer === 'werwolf' : true) && lang !== 'en' && (
               <div className='achievement personal'>
-                <div className='icon'><img src={Q2} alt='tet'/></div>
+                <div className='icon'><img src={Lmaster} alt='tet'/></div>
                 <div>
                   персональная награда <strong>WerWolf</strong>
                   <h3>Liquidpedia master</h3>
@@ -274,7 +276,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
           {
             (activePlayer ? activePlayer === 'tim' : true) && lang !== 'en' && (
               <div className='achievement personal'>
-                <div className='icon'><img src={Q2} alt='tet'/></div>
+                <div className='icon'><img src={Qhero} alt='tet'/></div>
                 <div>
                   персональная награда <strong>TIM</strong>
                   <h3>Qualification hero</h3>
