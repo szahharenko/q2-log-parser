@@ -71,13 +71,13 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
     }, [playerStats, weaponStats]);
 
     useEffect(() => {
-      const hasTet = Object.keys(playerStats).some(name => name.toLowerCase().includes('tet'));
+      const hasTet = Object.keys(playerStats).some(name => name.toLowerCase().includes('spacer'));
       if (hasTet) {
         const tetKillers = Object.entries(playerStats).map(([player, stats]) => ({
-          player, killsOnTet: stats.killBreakdown['tet'] || 0
+          player, killsOnTet: stats.killBreakdown['Spacer'] || 0
         }));
-        ;
-        setTetSuicides(playerStats['tet']?.suicides || 0);
+        console.log('tetKillers', tetKillers);
+        setTetSuicides(playerStats['Spacer']?.suicides || 0);
         setTetKiller(tetKillers);
       }
     }, [playerStats]);
