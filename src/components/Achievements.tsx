@@ -285,7 +285,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
               <div className='achievement personal'>
                 <div className='icon'><img src={Dartagnan} alt='tet'/></div>
                 <div>
-                  персональная награда <strong>Spacer</strong>
+                  персональная награда <strong>Spacer-а</strong>
                   <h3>Д`Артаньян</h3>
 
                   <p>Читеры замешанные в деле</p>
@@ -294,7 +294,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                     tetKillers.sort((a, b) => b.killsOnTet - a.killsOnTet).map(({ player, killsOnTet }, index) => {
                       const epitet = ['нечестно', 'гнусно', 'подло', 'вероломно', 'коварно', 'хитрожопо', 'мерзко', 'гадко', 'грязно', 'низменно', 'предательски'];
                       return killsOnTet === 0 ? null : <li key={player} style={{ fontSize: '80%' }}>
-                        <strong>{player}</strong> {epitet[index]} убил tet-а <strong>{killsOnTet}</strong> раз(а)
+                        <strong>{player}</strong> {epitet[index]} убил Spacer-а <strong>{killsOnTet}</strong> раз(а)
                       </li>
                     })
                   }
@@ -311,7 +311,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                 <div>
                   персональная награда <strong>Q</strong>
                   <h3>Спонсор Шрёдингера</h3>
-                  <p>Квантовая неопределенность приносит Q 666 бонусных очков.</p>
+                  <p>Квантовая неопределенность приносит <strong>q</strong> 666 бонусных очков.</p>
                 </div>
               </div>
             )
