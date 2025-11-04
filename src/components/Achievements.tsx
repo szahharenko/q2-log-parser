@@ -100,14 +100,14 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
 
           <AchievementItem title={'Best Frag'} achievement={bestFrag} image={Best_frag}
             text={{
-              en: <div>
+              en: <>
                 <strong>{bestFrag?.achievers.join(' & ')}</strong> catches the moment your crosshair and destiny had perfect chemistry.
                 { formatSubtitle('Viewer’s Choice: Best Tournament Frag.')}
-              </div>,
-              ru: <div>
+              </>,
+              ru: <>
                 <strong>{bestFrag?.achievers.join(' & ')}</strong> поймал момент, когда прицел и судьба идеально сошлись.
                 { formatSubtitle('Самый зрелищный фраг турнира по мнению аудитории.')}
-              </div>
+              </>
             }}
           />
 
