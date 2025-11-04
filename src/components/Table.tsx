@@ -75,7 +75,7 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
     }
 
 
-    return (<div className='page' style={{ marginBottom: '20px' }}>
+    return (<div className='wide-data page' style={{ marginBottom: '20px' }}>
         {
             activePlayer ?
             <>
