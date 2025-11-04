@@ -5,8 +5,8 @@
    * @param url - The URL of your save_log.php script.
    * @returns A promise that resolves to the server's JSON response.
    */
-// Define a cache expiration time (e.g., 5 minutes in milliseconds)
-const CACHE_EXPIRATION_MS = 5 * 60 * 1000;
+// Define a cache expiration time (e.g., year in milliseconds)
+const CACHE_EXPIRATION_MS = 366 * 24 * 60 * 60 * 1000;
 
 /**
  * Fetches logs, utilizing localStorage for caching.
