@@ -1,10 +1,11 @@
+import { Weapon } from "../utils/functions";
 
 export interface KillBreakdown {
     [victimName: string]: number;
   }
-export interface WeaponKillsBreakdown {
-    [weaponName: string]: number
-};
+export type WeaponKillsBreakdown = {
+    [weaponName in Weapon]: number;
+};;
 export interface PlayerStats {
     kills: number;
     deaths: number;

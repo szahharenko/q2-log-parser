@@ -164,7 +164,7 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
     return { achievers, count: maxEventStreak };
   };
 
-  export const calculateSpecialist = (leastUsedWeapon: string | null, playerStats: AllPlayerStats) => {
+  export const calculateSpecialist = (leastUsedWeapon: Weapon | null, playerStats: AllPlayerStats) => {
     if (!leastUsedWeapon) return null;
     let topPlayer = '';
     let topKills = 0;
@@ -229,12 +229,12 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
     return { achievers, count: maxChats };
   };
 
-  export const getLeastUsedWeapon = (weaponStats: Record<string, number> | null ) => {
+  export const getLeastUsedWeapon = (weaponStats: Record<Weapon, number> | null ) => {
     if (!weaponStats) return null;
     const entries = Object.entries(weaponStats).filter(([, count]) => count > 0);
     if (entries.length === 0) return null;
     entries.sort((a, b) => a[1] - b[1]);
-    return { weapon: entries[0][0], count: entries[0][1] };
+    return { weapon: entries[0][0], count: entries[0][1] } as { weapon: Weapon, count: number };
 }
 
 export const filterGameLines = (lines: string[]): string[] => {
@@ -346,7 +346,19 @@ export const parseGameEvents = (lines: string[], nonGameLines: string[]): { stat
           grenadeKills: 0,
           headHunter: 0,
           looseHunter: 0,
-          weaponKillsBreakdown: {},
+          weaponKillsBreakdown: {
+            'Railgun': 0,
+            'Rocket Launcher': 0,
+            'Machinegun': 0,
+            'Chaingun': 0,
+            'Super Shotgun': 0,
+            'Hyperblaster': 0,
+            'BFG': 0,
+            'Grenade': 0,
+            'Telefrag': 0,
+            'Shotgun': 0,
+            'Blaster': 0,
+          },
           blasterKills: 0,
           chats: [],
           chatCount: 0,

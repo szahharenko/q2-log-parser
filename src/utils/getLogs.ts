@@ -6,7 +6,7 @@
    * @returns A promise that resolves to the server's JSON response.
    */
 // Define a cache expiration time (e.g., 5 hours milliseconds)
-const CACHE_EXPIRATION_MS = 5 * 60 * 60 * 1000;
+const CACHE_EXPIRATION_MS = 5 * 60 * 1000;
 
 /**
  * Fetches logs, utilizing localStorage for caching.

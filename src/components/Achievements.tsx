@@ -85,7 +85,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
     useEffect(() => {
         const leastUsedWeapon = getLeastUsedWeapon(weaponStats);
         setLeastUsedWeapon(leastUsedWeapon);
-        playerStats && leastUsedWeapon && setSpecialist(calculateSpecialist(leastUsedWeapon?.weapon, playerStats));
+        playerStats && leastUsedWeapon && setSpecialist(calculateSpecialist(leastUsedWeapon?.weapon || null, playerStats));
     }, [playerStats, weaponStats]);
 
     const formatSubtitle = (text: string) => {

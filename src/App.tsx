@@ -9,6 +9,8 @@ import { sendLogs } from './utils/sendLogs';
 import { getLogs } from './utils/getLogs';
 import { Chats } from './components/Chats';
 import { getLanguage } from './utils/getLanguage';
+import { DownloadButton } from './components/DownloadZip';
+import { WeaponTable } from './components/WeaponTable';
 
 const LogParser: React.FC = () => {
   const [message, setMessage] = useState<string>('Please select a log file to view its content.');
@@ -162,16 +164,20 @@ const LogParser: React.FC = () => {
       { Object.keys(playerStats).length > 0 &&
         <>
           <PlayerTable playerStats={playerStats}/>
+          <WeaponTable playerStats={playerStats}/>
           <Weapons weaponStats={weaponStats}/>
           <Achievements  playerStats={playerStats} weaponStats={weaponStats} nonGameEvents={nonGameEvents}/>
           <PlayerStats playerStats={playerStats} />
         </>
       }
       <Chats nonGameEvents={nonGameEvents}/>
+      <DownloadButton zipUrl={`${API_URL}/${reportId}.7z`} />
+
       <hr style={{margin: '30px 0'}}/>
       <p style={{textAlign:'center', padding: '10px'}}>
         { lang === 'en' ? 'This tool is designed & developed by' : 'Авторы '} <a href="https://t.me/Acrashik" target="_blank" rel="noopener noreferrer">Acrashik</a> and <a href="https://t.me/exeshe4ki">Exeshe4ki</a>
       </p>
+
     </div>
   );
 };
