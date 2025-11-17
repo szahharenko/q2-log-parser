@@ -93,7 +93,6 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                     <th className='sortable' onClick={() => setOrderBy('kills')}>{ lang === 'en' ? 'Kills' : 'Убийств'} {orderBy === 'kills' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('kdr')}>KDR {orderBy === 'kdr' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('deaths')}>{ lang === 'en' ? 'Deaths' : 'Смерти'} {orderBy === 'deaths' ? '▼' : ''}</th>
-                    <th className='sortable' onClick={() => setOrderBy('quadsPicked')}>{ lang === 'en' ? 'Quads' : 'Квады'} {orderBy === 'quadsPicked' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('headHunter')}>Head Hunter {orderBy === 'headHunter' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('suicides')}>Wrong turn {orderBy === 'suicides' ? '▼' : ''}</th>
                     <th className='sortable' onClick={() => setOrderBy('telefrags')}>Respawn Hero {orderBy === 'telefrags' ? '▼' : ''}</th>
@@ -112,7 +111,6 @@ export const PlayerTable = ({playerStats}: PlayerTableProps) => {
                         <td className={getLeadClass(stats, 'kills')}>{stats.kills}</td>
                         <td className={getLeadClass(stats, 'kdr')}>{stats.kdr}</td>
                         <td className={getLeadClass(stats, 'deaths')}>{stats.deaths}</td>
-                        <td className={getLeadClass(stats, 'quadsPicked')}>{stats.quadsPicked}</td>
                         <td className={getLeadClass(stats, 'headHunter')}>{stats.headHunter}</td>
                         <td className={getLeadClass(stats, 'suicides')}>{stats.suicides}</td>
                         <td className={getLeadClass(stats, 'telefrags')}>{stats.telefrags}</td>

@@ -147,6 +147,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
               ru: <>
                 <strong>{mostQuads?.achievers.join(' & ')}</strong> урвал Quad <strong>{mostQuads?.count}</strong> раз и матч превратился в казнь.
                  { formatSubtitle('Больше всех утащил Quad Damage.') }
+                 { formatSubtitle('в зачет идёт только статистика раунда квалификаций.') }
               </>
             }}
           />
@@ -160,6 +161,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
               ru: <>
                 <strong>{headHunter?.hunter}</strong> — охотник за головами, убивший лидера группы (<strong>{headHunter?.leader}</strong>) убив его {headHunter?.killsOnLeader} раз!
                 { formatSubtitle('Больше всех завалил лидера группы.') }
+                 { formatSubtitle('в зачет идёт только статистика раунда квалификаций.') }
               </>
             }}
           />
@@ -173,6 +175,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
               ru: <>
                 <strong>{mostTelefrags?.achievers.join(' & ')}</strong> {mostTelefrags?.achievers.length || 0> 1 ? 'делят награду' : 'получает награду'} с <strong>{mostTelefrags?.count}</strong> телефрагами!
                 { formatSubtitle('Наибольшее количество телефрагов.') }
+                 { formatSubtitle('в зачет идёт только статистика раунда квалификаций.') }
               </>
             }}
           />
@@ -186,6 +189,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
               ru: <>
                 Чтобы получить эту награду, <strong>{wrongTurn?.achievers.join(' & ')}</strong> {wrongTurn?.count} раз свернул не туда.
                 { formatSubtitle('Наибольшее количество смертей в кислоте и лаве.') }
+                 { formatSubtitle('в зачет идёт только статистика раунда квалификаций.') }
               </>
             }}
           />
@@ -199,6 +203,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
               ru: <>
                 <strong>{mostGrenades?.achievers.join(' & ')}</strong> занял первое место, совершив <strong>{mostGrenades?.count}</strong> убийств(а) гранатами!
                 { formatSubtitle('Наибольшее количество фрагов  ручными гранатами и из гранатомёта.') }
+                 { formatSubtitle('в зачет идёт только статистика раунда квалификаций.') }
               </>
             }}
           />
@@ -212,6 +217,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
               ru: <>
                 <strong>{mostEventStreak?.achievers.join(' & ')}</strong> вызвал хаос с серией событий длинной в <strong>{mostEventStreak?.count}</strong>!
                 { formatSubtitle('Самая длинная серия упоминаний игрока в консоли.') }
+                 { formatSubtitle('в зачет идёт только статистика раунда квалификаций.') }
               </>
             }}
           />
@@ -225,6 +231,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
               ru: <>
                 <strong>{willPower?.achievers.join(' & ')}</strong> продемонстрировал непоколебимую силу воли перед лицом невзгод.
                 { formatSubtitle('Наибольшее количество последних мест в турнире.') }
+                { formatSubtitle('в зачет идёт только статистика раунда квалификаций.') }
               </>
             }}
           />
@@ -236,14 +243,14 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
           <AchievementItem cssClass={'bonus'} title={'Zero tolerance'} achievement={mostBully} image={Zero_tolerance}
             text={{
               en: <><strong>{mostBully?.hunter}</strong> Has no mercy for weakest by killing <strong>{mostBully?.leader}</strong> {mostBully?.killsOnLeader} {mostBully?.killsOnLeader || 0 > 1 ? 'times' : 'time'}!</>,
-              ru: <><strong>{mostBully?.hunter}</strong> не щадит самых слабых, убив <strong>{mostBully?.leader}</strong> {mostBully?.killsOnLeader} раз!</>
+              ru: <><strong>{mostBully?.hunter}</strong> не щадит самых слабых, убив <strong>{mostBully?.leader}</strong> {mostBully?.killsOnLeader} раз! { formatSubtitle('в зачет идёт только статистика раунда квалификаций.') }</>
             }}
           />
 
           <AchievementItem cssClass={'bonus'} title={'Optimist'} achievement={mostBlaster} image={Optimist}
             text={{
               en: <><strong>{mostBlaster?.achievers.join(' & ')}</strong> tops the charts with <strong>{mostBlaster?.count}</strong> blaster kills!</>,
-              ru: <><strong>{mostBlaster?.achievers.join(' & ')}</strong> возглавляет чарты, убив <strong>{mostBlaster?.count}</strong> противников из бластера!</>
+              ru: <><strong>{mostBlaster?.achievers.join(' & ')}</strong> возглавляет чарты, убив <strong>{mostBlaster?.count}</strong> противников из бластера! { formatSubtitle('в зачет идёт только статистика раунда квалификаций.') }</>
             }}
           />
 
@@ -260,7 +267,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
                     </div>
                     :
                     <div>
-                      <strong>{specialist.player}</strong> в совершенстве освоил <strong>{specialist.weapon}</strong>, совершив <strong>{specialist.kills}</strong> убийств(а) — это наименее используемое оружие, с которым было совершено всего <strong>{leastUsedWeapon.count}</strong> убийств(а)!
+                      <strong>{specialist.player}</strong> в совершенстве освоил <strong>{specialist.weapon}</strong>, совершив <strong>{specialist.kills}</strong> убийств(а) — это наименее используемое оружие, с которым было совершено всего <strong>{leastUsedWeapon.count}</strong> убийств(а)! { formatSubtitle('в зачет идёт только статистика раунда квалификаций.') }
                     </div>
                   }
                 </div>
@@ -271,7 +278,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
           <AchievementItem cssClass={'bonus'} title={'Chat lord'} achievement={mostChats} image={Chat_lord}
             text={{
               en: <><strong>{mostChats?.achievers.join(' & ')}</strong> leads the chatter with <strong>{mostChats?.count}</strong> chat messages!</>,
-              ru: <><strong>{mostChats?.achievers.join(' & ')}</strong> лидирует в чате с <strong>{mostChats?.count}</strong> сообщениями!</>
+              ru: <><strong>{mostChats?.achievers.join(' & ')}</strong> лидирует в чате с <strong>{mostChats?.count}</strong> сообщениями! { formatSubtitle('в зачет идёт только статистика раунда квалификаций.') }</>
             }}
           />
 
