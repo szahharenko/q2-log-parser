@@ -7,7 +7,7 @@ export type WeaponKillsBreakdown = {
     [weaponName in Weapon]: number;
 };
 
-type AchievementName =  'quadManiac' | 'headHunter' | 'respawnHero' | 'wrongTurn' | 'grenadier' | 'troublemaker' | 'zeroTolerance' | 'optimist' | 'boomstickBaron' | 'chatLord';
+type AchievementName =  'quadManiac' | 'headHunter' | 'respawnHero'  | 'respawnHeroName' | 'wrongTurn' | 'grenadier' | 'troublemaker' | 'zeroTolerance' | 'optimist' | 'boomstickBaron' | 'chatLord';
 
 export interface PlayerStats {
     kills: number;

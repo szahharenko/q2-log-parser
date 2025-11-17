@@ -6,7 +6,6 @@ export const calculateHeadHunter = (stats: AllPlayerStats): HeadHunterAchievemen
       const playerStats = stats[playerName];
       const {customAchievements} = playerStats;
       if (customAchievements?.headHunter !== undefined) {
-        console.log("Found pre-calculated headHunter achievement for", playerName, customAchievements);
         return {
           hunter: playerName,
           killsOnLeader: customAchievements.headHunter,
@@ -118,7 +117,7 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
       const {customAchievements} = playerStats;
       if (customAchievements?.respawnHero !== undefined) {
         return {
-          achievers: [playerName],
+          achievers: [customAchievements?.respawnHeroName as unknown as string],
           count: customAchievements.respawnHero,
         }
       }
@@ -567,7 +566,8 @@ export const parseGameEvents = (lines: string[], nonGameLines: string[]): { stat
           for (const pattern of customPatterns) {
               const match = line.match(pattern);
               if (match) {
-                  const player = match[1].trim();
+                  const playerString = match[1];
+                  const player = playerString.split('&')[0].trim();
                   const count = parseInt(line.replace(/\D/g,'')) || 0;
                   ensurePlayer(player);
                   if (pattern.source.includes('picked quad')) {
@@ -597,6 +597,7 @@ export const parseGameEvents = (lines: string[], nonGameLines: string[]): { stat
                   }
                   if(pattern.source.includes('gets a Respawn Hero')) {
                     stats[player]['customAchievements']!['respawnHero'] = count;
+                    stats[player]['customAchievements']!['respawnHeroName'] = playerString as unknown as number;
                   }
                   if(pattern.source.includes('gets a Wrong turn')) {
                     stats[player]['customAchievements']!['wrongTurn'] = count;
