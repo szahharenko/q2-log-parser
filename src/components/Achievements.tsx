@@ -83,7 +83,7 @@ export const Achievements = ({playerStats, weaponStats, nonGameEvents}: Achievem
     }, [playerStats]);
 
     useEffect(() => {
-        const leastUsedWeapon = getLeastUsedWeapon(weaponStats);
+        const leastUsedWeapon = getLeastUsedWeapon(weaponStats, playerStats);
         setLeastUsedWeapon(leastUsedWeapon);
         playerStats && leastUsedWeapon && setSpecialist(calculateSpecialist(leastUsedWeapon?.weapon || null, playerStats));
     }, [playerStats, weaponStats]);

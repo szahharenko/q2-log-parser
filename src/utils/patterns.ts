@@ -47,5 +47,17 @@ export const customPatterns = [
     /(.+) gets a WFT achievement/,
     /(.+) picked quad (.+) times/,
     /(.+) gets a Dominator achievement/,
-    /(.+) gets a WillPower achievement/
+    /(.+) gets a WillPower achievement/,
+    // re-write custom achievements
+    /(.+) gets a Quad maniac with (.+?)/,
+    /(.+) gets a Head Hunter with (.+?) kills on (.+?)!/,
+    /(.+) gets a Respawn Hero with (.+?)/,
+    /(.+) gets a Wrong turn with (.+?)/,
+    /(.+) gets a Grenadier turn with (.+?)/,
+    /(.+) gets a Troublemaker with (.+?)/,
+    //
+    /(.+) gets a Zero tolerance with (.+?) kills on (.+?)!/,
+    /(.+) gets a Optimist with (.+?)/,
+    /(.+) gets Boomstick baron with (.+?) kills with (.+?) and (.+?) kills in total!/,
+    /(.+) gets a Chat lord with (.+?)/,
 ];

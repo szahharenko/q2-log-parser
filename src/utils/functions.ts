@@ -2,6 +2,19 @@ import { customPatterns, killPatterns, suicidePatterns } from "./patterns";
 import { AllPlayerStats, HeadHunterAchievement, Achievement } from "../types/types";
 
 export const calculateHeadHunter = (stats: AllPlayerStats): HeadHunterAchievement | null => {
+    for (const playerName in stats) {
+      const playerStats = stats[playerName];
+      const {customAchievements} = playerStats;
+      if (customAchievements?.headHunter !== undefined) {
+        console.log("Found pre-calculated headHunter achievement for", playerName, customAchievements);
+        return {
+          hunter: playerName,
+          killsOnLeader: customAchievements.headHunter,
+          leader: playerStats.groupLeader || '',
+        }
+      }
+    }
+
     const players = Object.keys(stats);
     if (players.length < 2) return null; // Not enough players for an achievement
 
@@ -50,6 +63,17 @@ export const calculateHeadHunter = (stats: AllPlayerStats): HeadHunterAchievemen
   };
 
 export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAchievement | null => {
+    for (const playerName in stats) {
+      const playerStats = stats[playerName];
+      const {customAchievements} = playerStats;
+      if (customAchievements?.zeroTolerance !== undefined) {
+        return {
+          hunter: playerName,
+          killsOnLeader: customAchievements.zeroTolerance,
+          leader: playerStats.weakestPlayer || '', // Handles ties gracefully
+        };
+      }
+    }
     const players = Object.keys(stats);
     if (players.length < 2) return null; // Not enough players for an achievement
     // 1. Find the player(s) with the most deaths
@@ -89,6 +113,16 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
 }
 
   export const calculateMostTelefrags = (stats: AllPlayerStats): Achievement | null => {
+    for (const playerName in stats) {
+      const playerStats = stats[playerName];
+      const {customAchievements} = playerStats;
+      if (customAchievements?.respawnHero !== undefined) {
+        return {
+          achievers: [playerName],
+          count: customAchievements.respawnHero,
+        }
+      }
+    }
     let maxTelefrags = 0;
     for (const playerName in stats) {
       if (stats[playerName].telefrags > maxTelefrags) {
@@ -109,6 +143,16 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
   };
 
   export  const calculateWrongTurn = (stats: AllPlayerStats): Achievement | null => {
+    for (const playerName in stats) {
+      const playerStats = stats[playerName];
+      const {customAchievements} = playerStats;
+      if (customAchievements?.wrongTurn !== undefined) {
+        return {
+          achievers: [playerName],
+          count: customAchievements.wrongTurn,
+        }
+      }
+    }
     let maxSuicides = 0;
     for (const playerName in stats) {
         if (stats[playerName].suicides > maxSuicides) {
@@ -123,6 +167,16 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
   };
 
   export const calculateMostGrenadeKills = (stats: AllPlayerStats): Achievement | null => {
+    for (const playerName in stats) {
+      const playerStats = stats[playerName];
+      const {customAchievements} = playerStats;
+      if (customAchievements?.grenadier !== undefined) {
+        return {
+          achievers: [playerName],
+          count: customAchievements.grenadier,
+        }
+      }
+    }
     let maxGrenadeKills = 0;
     for (const playerName in stats) {
         if (stats[playerName].grenadeKills > maxGrenadeKills) {
@@ -137,6 +191,16 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
   };
 
   export const calculateMostBlasterKills = (stats: AllPlayerStats): Achievement | null => {
+    for (const playerName in stats) {
+      const playerStats = stats[playerName];
+      const {customAchievements} = playerStats;
+      if (customAchievements?.optimist !== undefined) {
+        return {
+          achievers: [playerName],
+          count: customAchievements.optimist,
+        }
+      }
+    }
     let maxBlasterKills = 0;
     for (const playerName in stats) {
         if (stats[playerName].blasterKills > maxBlasterKills) {
@@ -151,6 +215,16 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
   }
 
   export const calculateMostEventStreak = (stats: AllPlayerStats): Achievement | null => {
+    for (const playerName in stats) {
+      const playerStats = stats[playerName];
+      const {customAchievements} = playerStats;
+      if (customAchievements?.troublemaker !== undefined) {
+        return {
+          achievers: [playerName],
+          count: customAchievements.troublemaker,
+        }
+      }
+    }
     let maxEventStreak = 0;
     for (const playerName in stats) {
         if (stats[playerName].eventStreak > maxEventStreak) {
@@ -164,12 +238,26 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
     return { achievers, count: maxEventStreak };
   };
 
-  export const calculateSpecialist = (leastUsedWeapon: Weapon | null, playerStats: AllPlayerStats) => {
+  export const calculateSpecialist = (leastUsedWeapon: Weapon | null, stats: AllPlayerStats) => {
+
+    for (const playerName in stats) {
+      const playerStats = stats[playerName];
+      const {customAchievements, specialistWeapon, specialistWeaponKills} = playerStats;
+      if (customAchievements?.boomstickBaron !== undefined) {
+        return {
+          player: playerName,
+          weapon: specialistWeapon || '',
+          weaponKills: customAchievements?.boomstickBaron || 0,
+          kills: specialistWeaponKills || 0,
+        }
+      }
+    }
+
     if (!leastUsedWeapon) return null;
     let topPlayer = '';
     let topKills = 0;
-    for (const [player, stats] of Object.entries(playerStats)) {
-        const killsWithWeapon = stats.weaponKillsBreakdown[leastUsedWeapon] || 0;
+    for (const [player, p_stats] of Object.entries(stats)) {
+        const killsWithWeapon = p_stats.weaponKillsBreakdown[leastUsedWeapon] || 0;
         if (killsWithWeapon > topKills) {
             topKills = killsWithWeapon;
             topPlayer = player;
@@ -178,15 +266,25 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
     return topPlayer ? { player: topPlayer, weapon: leastUsedWeapon, kills: topKills } : null;
   }
 
-  export const calculateMostQuads = (playerStats: AllPlayerStats): Achievement | null => {
+  export const calculateMostQuads = (stats: AllPlayerStats): Achievement | null => {
+    for (const playerName in stats) {
+      const playerStats = stats[playerName];
+      const {customAchievements} = playerStats;
+      if (customAchievements?.quadManiac !== undefined) {
+        return {
+          achievers: [playerName],
+          count: customAchievements.quadManiac,
+        }
+      }
+    }
     let maxQuads = 0;
-    for (const playerName in playerStats) {
-        if (playerStats[playerName].quadsPicked > maxQuads) {
-            maxQuads = playerStats[playerName].quadsPicked;
+    for (const playerName in stats) {
+        if (stats[playerName].quadsPicked > maxQuads) {
+            maxQuads = stats[playerName].quadsPicked;
         }
     }
     if (maxQuads === 0) return null;
-    const achievers = Object.keys(playerStats).filter(p => playerStats[p].quadsPicked === maxQuads);
+    const achievers = Object.keys(stats).filter(p => stats[p].quadsPicked === maxQuads);
     return { achievers, count: maxQuads };
   };
 
@@ -215,21 +313,42 @@ export const calculateNoMercyForMinions = (stats: AllPlayerStats): HeadHunterAch
   };
 
 
-  export const calculateMostChats = (playerStats: AllPlayerStats): Achievement | null => {
+  export const calculateMostChats = (stats: AllPlayerStats): Achievement | null => {
+    for (const playerName in stats) {
+      const playerStats = stats[playerName];
+      const {customAchievements} = playerStats;
+      if (customAchievements?.chatLord !== undefined) {
+        return {
+          achievers: [playerName],
+          count: customAchievements.chatLord,
+        }
+      }
+    }
+
     let maxChats = 0;
-    for (const playerName in playerStats) {
-        const chatCount = playerStats[playerName].chats.length;
+    for (const playerName in stats) {
+        const chatCount = stats[playerName].chats.length;
         if (chatCount > maxChats) {
             maxChats = chatCount;
         }
     }
 
     if (maxChats === 0) return null;
-    const achievers = Object.keys(playerStats).filter(p => playerStats[p].chats.length === maxChats);
+    const achievers = Object.keys(stats).filter(p => stats[p].chats.length === maxChats);
     return { achievers, count: maxChats };
   };
 
-  export const getLeastUsedWeapon = (weaponStats: Record<Weapon, number> | null ) => {
+  export const getLeastUsedWeapon = (weaponStats: Record<Weapon, number> | null, stats: AllPlayerStats) => {
+    for (const playerName in stats) {
+      const playerStats = stats[playerName];
+      const {customAchievements, specialistWeapon} = playerStats;
+      if (customAchievements?.boomstickBaron !== undefined) {
+        return {
+          weapon: specialistWeapon,
+          count: customAchievements?.boomstickBaron || 0
+        } as { weapon: Weapon, count: number };
+      }
+    }
     if (!weaponStats) return null;
     const entries = Object.entries(weaponStats).filter(([, count]) => count > 0);
     if (entries.length === 0) return null;
@@ -366,7 +485,8 @@ export const parseGameEvents = (lines: string[], nonGameLines: string[]): { stat
           bestFrag: false,
           wft: false,
           dominator: false,
-          willPower: false
+          willPower: false,
+          customAchievements: {}
         };
       }
     };
@@ -448,6 +568,7 @@ export const parseGameEvents = (lines: string[], nonGameLines: string[]): { stat
               const match = line.match(pattern);
               if (match) {
                   const player = match[1].trim();
+                  const count = parseInt(line.replace(/\D/g,'')) || 0;
                   ensurePlayer(player);
                   if (pattern.source.includes('picked quad')) {
                     const quadsCount = match[2].trim();
@@ -464,6 +585,45 @@ export const parseGameEvents = (lines: string[], nonGameLines: string[]): { stat
                   }
                   if(pattern.source.includes('gets a WillPower')) {
                     stats[player].willPower = true
+                  }
+
+                  if(pattern.source.includes('gets a Quad maniac')) {
+                    stats[player]['customAchievements']!['quadManiac'] = count;
+                  }
+                  if(pattern.source.includes('gets a Head Hunter')) {
+                    const leader = match[3].trim();
+                    stats[player]['groupLeader'] = leader;
+                    stats[player]['customAchievements']!['headHunter'] = parseInt(match[2].trim()) || 0;
+                  }
+                  if(pattern.source.includes('gets a Respawn Hero')) {
+                    stats[player]['customAchievements']!['respawnHero'] = count;
+                  }
+                  if(pattern.source.includes('gets a Wrong turn')) {
+                    stats[player]['customAchievements']!['wrongTurn'] = count;
+                  }
+                  if(pattern.source.includes('gets a Grenadier')) {
+                    stats[player]['customAchievements']!['grenadier'] = count;
+                  }
+                  if(pattern.source.includes('gets a Troublemaker')) {
+                    stats[player]['customAchievements']!['troublemaker'] = count;
+                  }
+                  if(pattern.source.includes('gets a Zero tolerance')) {
+                    const weakestPlayer = match[3].trim();
+                    stats[player]['weakestPlayer'] = weakestPlayer;
+                    stats[player]['customAchievements']!['zeroTolerance'] = count;
+                  }
+                  if(pattern.source.includes('gets a Optimist')) {
+                    stats[player]['customAchievements']!['optimist'] = count;
+                  }
+                  if(pattern.source.includes('gets Boomstick baron')) {
+                    //(.+) gets Boomstick baron with (.+?) kills with (.+?) and (.+?) kills in total!/,
+                    //Zm0rdecai_dood gets Boomstick baron with 41 kills with Shotgun and 111 kills in total!
+                    stats[player]['specialistWeapon'] = match[3].trim() || undefined;
+                    stats[player]['specialistWeaponKills'] = parseInt(match[2].trim()) || 0;
+                    stats[player]['customAchievements']!['boomstickBaron'] = parseInt(match[4].trim()) || 0;
+                  }
+                  if(pattern.source.includes('gets a Chat lord')) {
+                    stats[player]['customAchievements']!['chatLord'] = count;
                   }
                   eventFound = true;
                   break;

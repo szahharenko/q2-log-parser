@@ -5,7 +5,10 @@ export interface KillBreakdown {
   }
 export type WeaponKillsBreakdown = {
     [weaponName in Weapon]: number;
-};;
+};
+
+type AchievementName =  'quadManiac' | 'headHunter' | 'respawnHero' | 'wrongTurn' | 'grenadier' | 'troublemaker' | 'zeroTolerance' | 'optimist' | 'boomstickBaron' | 'chatLord';
+
 export interface PlayerStats {
     kills: number;
     deaths: number;
@@ -26,6 +29,13 @@ export interface PlayerStats {
     wft: boolean;
     dominator: boolean;
     willPower: boolean;
+    groupLeader?: string;
+    specialistWeapon?: string;
+    specialistWeaponKills?: number;
+    weakestPlayer?: string;
+    customAchievements?: {
+        [K in AchievementName]?: number;
+    };
 }
 
 export type AllPlayerStats = {
